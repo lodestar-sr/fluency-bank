@@ -1,4 +1,4 @@
-# next_digital_banking_unicorn
+# Next Digital Banking Unicorn
 
 Flutter Banking Application
 
