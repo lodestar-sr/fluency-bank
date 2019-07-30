@@ -1,6 +1,6 @@
-# Next Digital Banking Unicorn
+# Wealthpal App
 
-Flutter Banking Application
+Wealthpal Application
 
 ## Getting Started
 

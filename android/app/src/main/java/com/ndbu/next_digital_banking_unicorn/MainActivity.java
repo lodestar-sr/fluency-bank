@@ -1,4 +1,4 @@
-package com.ndbu.next_digital_banking_unicorn;
+package com.ndbu.wealthpal;
 
 import android.content.Intent;
 import android.os.Bundle;
