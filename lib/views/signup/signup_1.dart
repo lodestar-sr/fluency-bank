@@ -1,8 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:wealthpal/components/country_picker/country_code.dart';
+import 'package:wealthpal/components/country_picker/country_code_picker.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
-import 'package:wealthpal/country_picker/country_code.dart';
-import 'package:wealthpal/country_picker/country_code_picker.dart';
 
 import '../theme.dart';
 
@@ -37,7 +37,9 @@ class _Signup1State extends State<Signup1> {
     String phone = phoneController.text;
     String email = emailController.text;
 
-    Navigator.of(context).pushNamed('signup_2');
+    Navigator.of(context).pushNamed('signup_2', arguments: <String, String>{
+      "phone": _code + phone,
+    });
   }
 
   validateForm() {
@@ -90,7 +92,7 @@ class _Signup1State extends State<Signup1> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: AppColors.underlineColor))),
+                  decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: AppColors.cBDBDBD))),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,8 +120,8 @@ class _Signup1State extends State<Signup1> {
                           cursorWidth: 1,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(bottom: 8, top: 12.5),
-                            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.activeUnderlineColor)),
-                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.underlineColor)),
+                            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.c8B42FF)),
+                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.cBDBDBD)),
                           ),
                         ),
                       ],
@@ -144,8 +146,8 @@ class _Signup1State extends State<Signup1> {
                   cursorWidth: 1,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(bottom: 8, top: 8,),
-                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.activeUnderlineColor)),
-                    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.underlineColor)),
+                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.c8B42FF)),
+                    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.cBDBDBD)),
                   ),
                 ),
               ],
@@ -159,13 +161,33 @@ class _Signup1State extends State<Signup1> {
                   margin: EdgeInsets.only(left: 16, right: 16, bottom: 16),
                   child: RaisedGradientButton(
                     child: Text("Continue", style: AppStyles.buttonTextStyle,),
-                    gradient: canContinue ? LinearGradient(
-                      colors: [Color(0xFF9100F7), Color(0xFF7427F2)],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ) : null,
-//              gradient: null,
-//              onPressed: null,
+                    gradient: canContinue ?
+                      LinearGradient(
+                        colors: [AppColors.c9100F7, AppColors.c7427F2],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      )
+                      :
+                      LinearGradient(
+                        colors: [AppColors.cBDBDBD, AppColors.cBDBDBD],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                    shadows: canContinue ? [
+                      BoxShadow(
+                        color: Color.fromARGB(64, 145, 0, 247),
+                        offset: Offset(0, 4),
+                        blurRadius: 10,
+                      )
+                    ]
+                    :
+                    [
+                      BoxShadow(
+                        color: AppColors.cBDBDBD,
+                        offset: Offset(0, 4),
+                        blurRadius: 10,
+                      )
+                    ],
                     onPressed: canContinue ? submitSignup : null,
                   ),
                 ),

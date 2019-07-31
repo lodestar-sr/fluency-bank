@@ -1,36 +1,38 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const textColor = Color(0xFF212121);
-  static const grayColor = Color(0xFF828282);
-  static const purpleColor = Color(0xFF9100F7);
-  static const underlineColor = Color(0xFFBDBDBD);
-  static const activeUnderlineColor = Color(0xFF8B42FF);
+  static const c212121 = Color(0xFF212121);
+  static const c828282 = Color(0xFF828282);
+  static const c9100F7 = Color(0xFF9100F7);
+  static const cBDBDBD = Color(0xFFBDBDBD);
+  static const c8B42FF = Color(0xFF8B42FF);
+  static const cF9F9F9 = Color(0xFFEEEEEE);
+  static const c7427F2 = Color(0xFF7427F2);
 }
 
 class AppStyles {
 
   static const stepTextStyle = TextStyle(
     fontSize: 12,
-    color: AppColors.grayColor,
+    color: AppColors.c828282,
     fontFamily: 'Gilroy',
   );
 
   static const titleGrayStyle = TextStyle(
     fontSize: 15,
-    color: AppColors.grayColor,
+    color: AppColors.c828282,
     fontFamily: 'Gilroy',
   );
 
   static const inputLabelStyle = TextStyle(
     fontSize: 10,
-    color: AppColors.purpleColor,
+    color: AppColors.c9100F7,
     fontFamily: 'Gilroy',
   );
 
   static const inputTextStyle = TextStyle(
     fontSize: 14,
-    color: AppColors.textColor,
+    color: AppColors.c212121,
     fontFamily: 'Gilroy',
   );
 
@@ -51,6 +53,6 @@ ThemeData appTheme(BuildContext context) {
   final theme = Theme.of(context);
   return ThemeData(
     primarySwatch: Colors.blue,
-    cursorColor: AppColors.textColor,
+    cursorColor: AppColors.c212121,
   );
 }
