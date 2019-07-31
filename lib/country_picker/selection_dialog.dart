@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wealthpal/components/circular_image.dart';
+import 'package:wealthpal/views/theme.dart';
 
 import 'country_code.dart';
 
@@ -36,12 +38,32 @@ class _SelectionDialogState extends State<SelectionDialog> {
 
   @override
   Widget build(BuildContext context) => SimpleDialog(
-      title: Column(
+//      title: Column(
+//        children: <Widget>[
+//          TextField(
+//            style: widget.searchStyle,
+//            decoration: widget.searchDecoration,
+//            onChanged: _filterElements,
+//          ),
+//        ],
+//      ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          TextField(
-            style: widget.searchStyle,
-            decoration: widget.searchDecoration,
-            onChanged: _filterElements,
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Image.asset("assets/images/arrow_back.png", width: 24, height: 24,),
+          ),
+          Expanded(
+            child: Text("Countries", textAlign: TextAlign.center, style: AppStyles.dialogTitleStyle,),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Image.asset("assets/images/search.png", width: 24, height: 24,),
           ),
         ],
       ),
@@ -91,9 +113,10 @@ class _SelectionDialogState extends State<SelectionDialog> {
           widget.showFlag ? Flexible(
             child: Padding(
               padding: const EdgeInsets.only(right: 16.0),
-              child: Image.asset(
-                e.flagUri,
-                width: 32.0,
+              child: new CircularImage(
+                image: new AssetImage(e.flagUri),
+                width: 24,
+                height: 24,
               ),
             ),
           ) : Container(),
@@ -104,6 +127,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
                   ? e.toCountryStringOnly()
                   : e.toLongString(),
               overflow: TextOverflow.fade,
+              style: AppStyles.inputTextStyle,
             ),
           ),
         ],

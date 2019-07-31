@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wealthpal/components/circular_image.dart';
 import 'package:wealthpal/views/theme.dart';
 
 import 'country_code.dart';
@@ -89,15 +90,10 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
                     fit: widget.alignLeft ? FlexFit.tight : FlexFit.loose,
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                      child: Container(
-                        width: 13,
-                        height: 13,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: new AssetImage(selectedItem.flagUri)),
-                        ),
+                      child: CircularImage(
+                        image: AssetImage(selectedItem.flagUri),
+                        width: 14,
+                        height: 14,
                       ),
                     ),
                   )

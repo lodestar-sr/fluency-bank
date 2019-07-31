@@ -39,6 +39,12 @@ class AppStyles {
     color: Colors.white,
     fontFamily: 'Gilroy',
   );
+
+  static const dialogTitleStyle = TextStyle(
+    fontSize: 16,
+    color: Colors.black,
+    fontFamily: 'Gilroy',
+  );
 }
 
 ThemeData appTheme(BuildContext context) {
