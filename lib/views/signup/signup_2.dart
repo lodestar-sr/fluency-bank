@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
 import 'package:wealthpal/components/verification_code_input.dart';
 import 'package:wealthpal/utils/utils.dart';
+import 'package:wealthpal/views/theme.dart';
 
-import '../theme.dart';
 
 class Signup2 extends StatefulWidget {
   @override
@@ -80,6 +80,9 @@ class _Signup2State extends State<Signup2> {
   }
 
   submitVerificationCode() {
+
+    Navigator.of(context).pushNamed('signup_3');
+
     return showDialog(
       context: context,
       builder: (context) {

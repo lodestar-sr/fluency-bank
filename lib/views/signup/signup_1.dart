@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wealthpal/components/country_picker/country_code.dart';
 import 'package:wealthpal/components/country_picker/country_code_picker.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
-
-import '../theme.dart';
+import 'package:wealthpal/views/theme.dart';
 
 class Signup1 extends StatefulWidget {
   @override
@@ -144,6 +143,7 @@ class _Signup1State extends State<Signup1> {
                   keyboardType: TextInputType.emailAddress,
                   style: AppStyles.inputTextStyle,
                   cursorWidth: 1,
+                  cursorColor: AppColors.c212121,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(bottom: 8, top: 8,),
                     focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.c8B42FF)),
