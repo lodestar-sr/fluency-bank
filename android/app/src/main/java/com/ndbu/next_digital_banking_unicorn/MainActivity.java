@@ -35,7 +35,6 @@ public class MainActivity extends FlutterActivity {
   private static final String MOBILE_TOKEN= "test_E9h6jzJThf21ZjGJZHcDuXtgNEMb7mf0";
 
   private final FlowStep[] flowSteps = new FlowStep[] {
-          new MessageScreenStep("Welcome", "In the following steps you will be asked to perform a verification check", "Start"),
           FlowStep.CAPTURE_DOCUMENT,
           FlowStep.CAPTURE_FACE,
           new MessageScreenStep("Thank you", "We will use your captured document and face to perform a verification check", "Start Check")

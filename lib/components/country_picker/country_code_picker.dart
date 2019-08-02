@@ -70,35 +70,43 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
 
   @override
   Widget build(BuildContext context) => FlatButton(
+        padding: EdgeInsets.all(0),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        child: Flex(
-          direction: Axis.horizontal,
-          mainAxisSize: MainAxisSize.min,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Flexible(
-              fit: widget.alignLeft ? FlexFit.tight : FlexFit.loose,
-              child: Text(
-                widget.showOnlyCountryWhenClosed
-                    ? selectedItem.toCountryStringOnly()
-                    : selectedItem.toString(),
-                style: AppStyles.inputTextStyle,
-              ),
-            ),
-            widget.showFlag
-                ? Flexible(
-                    flex: widget.alignLeft ? 0 : 1,
-                    fit: widget.alignLeft ? FlexFit.tight : FlexFit.loose,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                      child: CircularImage(
-                        image: AssetImage(selectedItem.flagUri),
-                        width: 14,
-                        height: 14,
-                      ),
+            Container(
+              child: Row(
+                children: <Widget>[
+                  !widget.showOnlyCountryWhenClosed
+                      ? Container(
+                    padding: EdgeInsets.only(right: 8),
+                    child: Text(selectedItem.toString(),
+                        style: AppStyles.inputTextStyle),
+                  )
+                      : Container(),
+                  widget.showFlag
+                      ? Container(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: CircularImage(
+                      image: AssetImage(selectedItem.flagUri),
+                      width: 14,
+                      height: 14,
                     ),
                   )
-                : Container(),
-            Image.asset("assets/images/arrow_down.png", width: 8),
+                      : Container(),
+                  widget.showOnlyCountryWhenClosed
+                      ? Container(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Text(selectedItem.toCountryStringOnly(),
+                        style: AppStyles.inputTextStyle),
+                  )
+                      : Container(),
+                ],
+              ),
+            ),
+            Image.asset("assets/images/arrow_down.png", width: 16, height: 16,),
           ],
         ),
         onPressed: _showSelectionDialog,

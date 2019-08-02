@@ -8,6 +8,8 @@ class AppColors {
   static const c8B42FF = Color(0xFF8B42FF);
   static const cF9F9F9 = Color(0xFFEEEEEE);
   static const c7427F2 = Color(0xFF7427F2);
+  static const cE0E0E0 = Color(0xFFE0E0E0);
+  static const c2F80ED = Color(0xFF2F80ED);
 }
 
 class AppStyles {
@@ -46,6 +48,12 @@ class AppStyles {
     fontSize: 16,
     color: Colors.black,
     fontFamily: 'Gilroy',
+  );
+
+  static const inputBorderDecoration = InputDecoration(
+    contentPadding: EdgeInsets.only(bottom: 8, top: 8,),
+    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.c8B42FF)),
+    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.cBDBDBD)),
   );
 }
 
