@@ -83,7 +83,7 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
                       ? Container(
                     padding: EdgeInsets.only(right: 8),
                     child: Text(selectedItem.toString(),
-                        style: AppStyles.inputTextStyle),
+                        style: AppStyles.font14),
                   )
                       : Container(),
                   widget.showFlag
@@ -100,7 +100,7 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
                       ? Container(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(selectedItem.toCountryStringOnly(),
-                        style: AppStyles.inputTextStyle),
+                        style: AppStyles.font14),
                   )
                       : Container(),
                 ],

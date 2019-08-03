@@ -81,14 +81,14 @@ class _Signup3State extends State<Signup3> {
                                 height: 24,
                               ),
                             ),
-                            Text("Step 3 of 4", style: AppStyles.stepTextStyle),
+                            Text("Step 3 of 4", style: AppStyles.font12),
                           ],
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 20),
                         child: Text("What are your personal details?",
-                            style: AppStyles.dialogTitleStyle),
+                            style: AppStyles.font16),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 44, left: 16, right: 16),
@@ -100,7 +100,7 @@ class _Signup3State extends State<Signup3> {
                           decoration: AppStyles.inputBorderDecoration.copyWith(
                             hintText: "First name",
                           ),
-                          style: AppStyles.inputTextStyle,
+                          style: AppStyles.font14,
                         ),
                       ),
                       Container(
@@ -113,7 +113,7 @@ class _Signup3State extends State<Signup3> {
                           decoration: AppStyles.inputBorderDecoration.copyWith(
                             hintText: "Last name",
                           ),
-                          style: AppStyles.inputTextStyle,
+                          style: AppStyles.font14,
                         ),
                       ),
                       Container(
@@ -122,7 +122,7 @@ class _Signup3State extends State<Signup3> {
                         child: DateTimeField(
                           controller: dobController,
                           format: DateFormat('dd/MM/yyyy'),
-                          style: AppStyles.inputTextStyle,
+                          style: AppStyles.font14,
                           cursorWidth: 1,
                           cursorColor: AppColors.c212121,
                           decoration: AppStyles.inputBorderDecoration.copyWith(

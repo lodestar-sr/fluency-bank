@@ -38,7 +38,7 @@ class _TopupState extends State<Topup> {
                           alignment: Alignment.centerRight,
                           padding: EdgeInsets.fromLTRB(16, 24, 16, 0),
                           child: GestureDetector(
-                            child: Text("Not now", style: AppStyles.titleGrayStyle.copyWith(fontSize: 16),),
+                            child: Text("Not now", style: AppStyles.font15.copyWith(fontSize: 16),),
                             onTap: onNotNow,
                           )
                         ),
@@ -50,7 +50,7 @@ class _TopupState extends State<Topup> {
                                 padding: EdgeInsets.only(top: 24, left: 24, right: 24),
                                 child: Text(
                                   "Top up your account \nwith £10 or more",
-                                  style: AppStyles.dialogTitleStyle.copyWith(fontSize: 24),
+                                  style: AppStyles.font16.copyWith(fontSize: 24),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -58,7 +58,7 @@ class _TopupState extends State<Topup> {
                                 padding: EdgeInsets.only(top: 16, left: 24, right: 24),
                                 child: Text(
                                   "Before we hook you up with an acoount, you need to top up. You can spend or withdrow this money later.",
-                                  style: AppStyles.inputTextStyle,
+                                  style: AppStyles.font14,
                                   textAlign: TextAlign.center,
                                 ),
                               ),

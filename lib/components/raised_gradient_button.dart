@@ -10,6 +10,7 @@ class RaisedGradientButton extends StatelessWidget {
   final double height;
   final Function onPressed;
   final List<BoxShadow> shadows;
+  final double radius;
 
   const RaisedGradientButton({
     Key key,
@@ -19,13 +20,15 @@ class RaisedGradientButton extends StatelessWidget {
     this.height = 40,
     this.onPressed,
     this.shadows,
+    this.radius = 30,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      disabledColor: AppColors.cBDBDBD,
+    return RawMaterialButton(
+      constraints: BoxConstraints(),
       padding: EdgeInsets.all(0),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       child: Container(
         alignment: Alignment.center,
         child: child,
@@ -34,11 +37,11 @@ class RaisedGradientButton extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: gradient,
           boxShadow: shadows,
-          borderRadius: BorderRadius.all(Radius.circular(30)),
+          borderRadius: BorderRadius.all(Radius.circular(radius)),
         ),
-        padding: EdgeInsets.fromLTRB(20, 12, 20, 12),
+        padding: EdgeInsets.all(0),
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
       onPressed: onPressed,
     );
   }

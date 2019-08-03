@@ -2,18 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
 import 'package:wealthpal/views/theme.dart';
 
-class SignupEnd extends StatefulWidget {
+class VCardDone extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _SignupEndState();
+    return _VCardDoneState();
   }
 }
 
-class _SignupEndState extends State<SignupEnd> {
-
-  onDone() {
-    Navigator.of(context).pushNamed("topup");
-  }
+class _VCardDoneState extends State<VCardDone> {
+  onDashboard() {}
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +21,8 @@ class _SignupEndState extends State<SignupEnd> {
             onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
             child: SingleChildScrollView(
               child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                constraints:
+                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
                 child: IntrinsicHeight(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -34,19 +32,20 @@ class _SignupEndState extends State<SignupEnd> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Image.asset("assets/images/success.png", width: 40, height: 40),
                             Padding(
-                              padding: EdgeInsets.only(top: 24),
+                              padding:
+                                  EdgeInsets.only(top: 24, left: 24, right: 24),
                               child: Text(
-                                "Congratulations!",
+                                "Virtual card \nis successfully added \nto your account!",
                                 style: AppStyles.font16.copyWith(fontSize: 24),
                                 textAlign: TextAlign.center,
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 16, left: 48, right: 48),
+                              padding:
+                                  EdgeInsets.only(top: 24, left: 24, right: 24),
                               child: Text(
-                                "Your Wealthpal account has been created",
+                                "Now you can use.",
                                 style: AppStyles.font14,
                                 textAlign: TextAlign.center,
                               ),
@@ -61,9 +60,13 @@ class _SignupEndState extends State<SignupEnd> {
                             Container(
                               margin: EdgeInsets.all(16),
                               child: RaisedGradientButton(
-                                child: Text("Done", style: AppStyles.buttonTextStyle),
+                                child: Text("Go to Dashboard",
+                                    style: AppStyles.buttonTextStyle),
                                 gradient: LinearGradient(
-                                  colors: [AppColors.c9100F7, AppColors.c7427F2],
+                                  colors: [
+                                    AppColors.c9100F7,
+                                    AppColors.c7427F2
+                                  ],
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                 ),
@@ -74,14 +77,14 @@ class _SignupEndState extends State<SignupEnd> {
                                     blurRadius: 10,
                                   )
                                 ],
-                                onPressed: onDone,
+                                onPressed: onDashboard,
                               ),
                             ),
                           ],
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ),
               ),
             ),

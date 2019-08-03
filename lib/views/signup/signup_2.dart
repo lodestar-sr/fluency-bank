@@ -125,30 +125,21 @@ class _Signup2State extends State<Signup2> {
                               onTap: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Image.asset(
-                                "assets/images/arrow_back.png",
-                                width: 24,
-                                height: 24,
-                              ),
+                              child: Image.asset("assets/images/arrow_back.png", width: 24, height: 24),
                             ),
-                            Text("Step 2 of 4", style: AppStyles.stepTextStyle),
+                            Text("Step 2 of 4", style: AppStyles.font12),
                           ],
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 20),
-                        child: Text("Enter 6-digit sms code",
-                            style: AppStyles.dialogTitleStyle),
+                        child: Text("Enter 6-digit sms code", style: AppStyles.font16),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 8),
                         child: Text(
                           "We’ve sent it to ${phoneNumber}",
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Color.fromARGB(179, 34, 34, 56),
-                            fontFamily: 'Gilroy',
-                          ),
+                          style: TextStyle(fontSize: 12, color: Color.fromARGB(179, 34, 34, 56), fontFamily: 'Gilroy'),
                         ),
                       ),
                       Container(

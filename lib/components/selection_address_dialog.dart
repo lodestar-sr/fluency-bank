@@ -34,7 +34,7 @@ class _SelectionAddressDialogState extends State<SelectionAddressDialog> {
               child: Text(
                 "Select address",
                 textAlign: TextAlign.center,
-                style: AppStyles.dialogTitleStyle,
+                style: AppStyles.font16,
               ),
             ),
           ],
@@ -95,7 +95,7 @@ class _SelectionAddressDialogState extends State<SelectionAddressDialog> {
             child: Text(
               e,
               overflow: TextOverflow.fade,
-              style: AppStyles.inputTextStyle,
+              style: AppStyles.font14,
             ),
           ),
         ],

@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
 import 'package:wealthpal/views/theme.dart';
 
-class Verify1 extends StatefulWidget {
+class Verify3 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _Verify1State();
+    return _Verify3State();
   }
 }
 
-class _Verify1State extends State<Verify1> {
+class _Verify3State extends State<Verify3> {
+
+  final String successEye = "assets/images/eye.png";
+  final String failedEye = "assets/images/uneye.png";
 
   onVerify() {
-    Navigator.of(context).pushNamed('verify_3');
-  }
-
-  onNotNow() {
-    Navigator.of(context).pushNamed('verify_3');
+    Navigator.of(context).pushNamed("verify_4");
   }
 
   @override
@@ -34,22 +33,15 @@ class _Verify1State extends State<Verify1> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        Container(
-                            alignment: Alignment.centerRight,
-                            padding: EdgeInsets.fromLTRB(16, 24, 16, 0),
-                            child: GestureDetector(
-                              child: Text("Not now", style: AppStyles.font15.copyWith(fontSize: 16),),
-                              onTap: onNotNow,
-                            )
-                        ),
                         Expanded(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
+                              Image.asset("assets/images/eye.png", width: 48, height: 36),
                               Padding(
-                                padding: EdgeInsets.only(top: 24, left: 24, right: 24),
+                                padding: EdgeInsets.only(top: 16, left: 24, right: 24),
                                 child: Text(
-                                  "Alex, prove that is \nreally you",
+                                  "Thanks! We’ll review your \ndocuments within \n10 minutes.",
                                   style: AppStyles.font16.copyWith(fontSize: 24),
                                   textAlign: TextAlign.center,
                                 ),
@@ -57,7 +49,7 @@ class _Verify1State extends State<Verify1> {
                               Padding(
                                 padding: EdgeInsets.only(top: 16, left: 24, right: 24),
                                 child: Text(
-                                  "We just need to verify your identity to protect our community against financial crimes. You need to take max 3 photos.",
+                                  "We’ll send you notification shortly.",
                                   style: AppStyles.font14,
                                   textAlign: TextAlign.center,
                                 ),
@@ -72,7 +64,7 @@ class _Verify1State extends State<Verify1> {
                               Container(
                                 margin: EdgeInsets.all(16),
                                 child: RaisedGradientButton(
-                                  child: Text("Verify identity", style: AppStyles.buttonTextStyle),
+                                  child: Text("Got it", style: AppStyles.buttonTextStyle),
                                   gradient: LinearGradient(
                                     colors: [AppColors.c9100F7, AppColors.c7427F2],
                                     begin: Alignment.topCenter,

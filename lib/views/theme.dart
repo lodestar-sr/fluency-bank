@@ -10,29 +10,30 @@ class AppColors {
   static const c7427F2 = Color(0xFF7427F2);
   static const cE0E0E0 = Color(0xFFE0E0E0);
   static const c2F80ED = Color(0xFF2F80ED);
+  static const cF2F2F2 = Color(0xFFF2F2F2);
 }
 
 class AppStyles {
 
-  static const stepTextStyle = TextStyle(
+  static const font12 = TextStyle(
     fontSize: 12,
     color: AppColors.c828282,
     fontFamily: 'Gilroy',
   );
 
-  static const titleGrayStyle = TextStyle(
+  static const font15 = TextStyle(
     fontSize: 15,
     color: AppColors.c828282,
     fontFamily: 'Gilroy',
   );
 
-  static const inputLabelStyle = TextStyle(
+  static const font10 = TextStyle(
     fontSize: 10,
     color: AppColors.c9100F7,
     fontFamily: 'Gilroy',
   );
 
-  static const inputTextStyle = TextStyle(
+  static const font14 = TextStyle(
     fontSize: 14,
     color: AppColors.c212121,
     fontFamily: 'Gilroy',
@@ -44,7 +45,7 @@ class AppStyles {
     fontFamily: 'Gilroy',
   );
 
-  static const dialogTitleStyle = TextStyle(
+  static const font16 = TextStyle(
     fontSize: 16,
     color: Colors.black,
     fontFamily: 'Gilroy',

@@ -57,7 +57,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
             child: Image.asset("assets/images/arrow_back.png", width: 24, height: 24,),
           ),
           Expanded(
-            child: Text("Countries", textAlign: TextAlign.center, style: AppStyles.dialogTitleStyle,),
+            child: Text("Countries", textAlign: TextAlign.center, style: AppStyles.font16,),
           ),
           GestureDetector(
             onTap: () {
@@ -127,7 +127,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
                   ? e.toCountryStringOnly()
                   : e.toLongString(),
               overflow: TextOverflow.fade,
-              style: AppStyles.inputTextStyle,
+              style: AppStyles.font14,
             ),
           ),
         ],

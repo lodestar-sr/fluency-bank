@@ -85,7 +85,7 @@ class _Signup1State extends State<Signup1> {
                         alignment: Alignment.centerRight,
                         height: 16,
                         child:
-                            Text("Step 1 of 4", style: AppStyles.stepTextStyle),
+                            Text("Step 1 of 4", style: AppStyles.font12),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 12),
@@ -97,7 +97,7 @@ class _Signup1State extends State<Signup1> {
                       Container(
                         margin: EdgeInsets.only(top: 54),
                         child: Text("Create a free account",
-                            style: AppStyles.titleGrayStyle),
+                            style: AppStyles.font15),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 34, right: 16, left: 16),
@@ -113,7 +113,7 @@ class _Signup1State extends State<Signup1> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text("Country",
-                                      style: AppStyles.inputLabelStyle),
+                                      style: AppStyles.font10),
                                   Container(
                                     width: 84,
                                     child: CountryCodePicker(
@@ -132,11 +132,11 @@ class _Signup1State extends State<Signup1> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text("Phone number",
-                                        style: AppStyles.inputLabelStyle),
+                                        style: AppStyles.font10),
                                     TextField(
                                       controller: phoneController,
                                       keyboardType: TextInputType.phone,
-                                      style: AppStyles.inputTextStyle,
+                                      style: AppStyles.font14,
                                       cursorWidth: 1,
                                       cursorColor: AppColors.c212121,
                                       decoration: InputDecoration(
@@ -164,11 +164,11 @@ class _Signup1State extends State<Signup1> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Email", style: AppStyles.inputLabelStyle),
+                            Text("Email", style: AppStyles.font10),
                             TextField(
                               controller: emailController,
                               keyboardType: TextInputType.emailAddress,
-                              style: AppStyles.inputTextStyle,
+                              style: AppStyles.font14,
                               cursorWidth: 1,
                               cursorColor: AppColors.c212121,
                               decoration: AppStyles.inputBorderDecoration,

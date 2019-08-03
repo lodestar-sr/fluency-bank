@@ -109,13 +109,13 @@ class _Signup4State extends State<Signup4> {
                                 height: 24,
                               ),
                             ),
-                            Text("Step 4 of 4", style: AppStyles.stepTextStyle),
+                            Text("Step 4 of 4", style: AppStyles.font12),
                           ],
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 20),
-                        child: Text("What’s your home address?", style: AppStyles.dialogTitleStyle),
+                        child: Text("What’s your home address?", style: AppStyles.font16),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 44, left: 16, right: 16),
@@ -134,7 +134,7 @@ class _Signup4State extends State<Signup4> {
                         child: TextField(
                           controller: postCodeController,
                           keyboardType: TextInputType.number,
-                          style: AppStyles.inputTextStyle,
+                          style: AppStyles.font14,
                           cursorWidth: 1,
                           cursorColor: AppColors.c212121,
                           decoration: AppStyles.inputBorderDecoration.copyWith(
@@ -147,7 +147,7 @@ class _Signup4State extends State<Signup4> {
                         width: double.infinity,
                         child: TextField(
                           controller: addressController,
-                          style: AppStyles.inputTextStyle,
+                          style: AppStyles.font14,
                           cursorWidth: 1,
                           cursorColor: AppColors.c212121,
                           decoration: AppStyles.inputBorderDecoration.copyWith(
