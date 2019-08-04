@@ -4,28 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
 import 'package:wealthpal/views/theme.dart';
 
-class VCardDone extends StatefulWidget {
+class DeliveryDone extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _VCardDoneState();
+    return _DeliveryDoneState();
   }
 }
 
-class _VCardDoneState extends State<VCardDone> {
+class _DeliveryDoneState extends State<DeliveryDone> {
 
   onDashboard() {
 
   }
 
-  onContinue() {
-    Navigator.of(context).pushNamed("confirm_delivery_address");
-  }
-
   @override
   Widget build(BuildContext context) {
-
-    final LinkedHashMap<String, bool> args = ModalRoute.of(context).settings.arguments;
-    final finalScreen = args["final"];
 
     return Scaffold(
       body: LayoutBuilder(
@@ -34,8 +27,7 @@ class _VCardDoneState extends State<VCardDone> {
             onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
             child: SingleChildScrollView(
               child: ConstrainedBox(
-                constraints:
-                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
                 child: IntrinsicHeight(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -46,19 +38,17 @@ class _VCardDoneState extends State<VCardDone> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Padding(
-                              padding:
-                                  EdgeInsets.only(top: 24, left: 24, right: 24),
+                              padding: EdgeInsets.only(top: 24, left: 24, right: 24),
                               child: Text(
-                                "Virtual card \nis successfully added \nto your account!",
+                                "Great! \nYour card be with \nyou in 5 days!",
                                 style: AppStyles.font16.copyWith(fontSize: 24),
                                 textAlign: TextAlign.center,
                               ),
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(top: 24, left: 24, right: 24),
+                              padding: EdgeInsets.only(top: 24, left: 24, right: 24),
                               child: Text(
-                                finalScreen ? "Now you can use." : "Now add pick up the delivery address for a physical card.",
+                                "If you'll have any trouble with delivery please contact our support.",
                                 style: AppStyles.font14,
                                 textAlign: TextAlign.center,
                               ),
@@ -74,7 +64,7 @@ class _VCardDoneState extends State<VCardDone> {
                               margin: EdgeInsets.all(16),
                               child: RaisedGradientButton(
                                 child: Text(
-                                  finalScreen ? "Go to Dashboard" : "Continue",
+                                  "Go to Dashboard",
                                   style: AppStyles.buttonTextStyle,
                                 ),
                                 gradient: LinearGradient(
@@ -89,7 +79,7 @@ class _VCardDoneState extends State<VCardDone> {
                                     blurRadius: 10,
                                   )
                                 ],
-                                onPressed: finalScreen ? onDashboard : onContinue,
+                                onPressed: onDashboard,
                               ),
                             ),
                           ],

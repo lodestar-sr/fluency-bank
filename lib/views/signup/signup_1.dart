@@ -20,6 +20,7 @@ class _Signup1State extends State<Signup1> {
   @override
   void dispose() {
     phoneController.dispose();
+    emailController.dispose();
     super.dispose();
   }
 
@@ -33,7 +34,6 @@ class _Signup1State extends State<Signup1> {
 
   submitSignup() {
     String phone = phoneController.text;
-    String email = emailController.text;
 
     Navigator.of(context).pushNamed('signup_2', arguments: <String, String>{
       "phone": _code + phone,
@@ -83,7 +83,6 @@ class _Signup1State extends State<Signup1> {
                       Container(
                         margin: EdgeInsets.only(top: 28, right: 16),
                         alignment: Alignment.centerRight,
-                        height: 16,
                         child:
                             Text("Step 1 of 4", style: AppStyles.font12),
                       ),

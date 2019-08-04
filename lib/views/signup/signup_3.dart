@@ -25,6 +25,15 @@ class _Signup3State extends State<Signup3> {
     dobController.addListener(validateForm);
   }
 
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    dobController.dispose();
+
+    super.dispose();
+  }
+
   validateForm() {
     String firstName = firstNameController.text;
     String lastName = lastNameController.text;
@@ -67,7 +76,6 @@ class _Signup3State extends State<Signup3> {
                       Container(
                         margin: EdgeInsets.only(top: 28, right: 16, left: 16),
                         alignment: Alignment.centerRight,
-                        height: 16,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[

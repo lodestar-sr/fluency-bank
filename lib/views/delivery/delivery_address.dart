@@ -5,18 +5,18 @@ import 'package:wealthpal/components/raised_gradient_button.dart';
 import 'package:wealthpal/components/selection_address_dialog.dart';
 import 'package:wealthpal/views/theme.dart';
 
-class Signup4 extends StatefulWidget {
+class DeliveryAddress extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _Signup4State();
+    return _DeliveryAddressState();
   }
 }
 
-class _Signup4State extends State<Signup4> {
+class _DeliveryAddressState extends State<DeliveryAddress> {
   final postCodeController = TextEditingController();
   final addressController = TextEditingController();
 
-  String _country = "";
+  String _country = "United Kingdom";
   String _address = "";
   bool canContinue = false;
   bool manualInput = false;
@@ -76,12 +76,16 @@ class _Signup4State extends State<Signup4> {
   }
 
   onContinue() {
-    Navigator.of(context).pushNamed('signup_end');
+    Navigator.of(context).pushNamed('confirm_delivery_address', arguments: <String, String>{
+      'country': _country,
+      'postCode': postCodeController.text,
+      'address': addressController.text,
+    });
   }
 
   onCountryCodeChange(CountryCode countryCode) {
     setState(() {
-      _country = countryCode.code;
+      _country = countryCode.name;
     });
   }
 
@@ -101,10 +105,8 @@ class _Signup4State extends State<Signup4> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(top: 28, right: 16, left: 16),
-                        alignment: Alignment.centerRight,
+                        margin: EdgeInsets.only(top: 28, right: 16, left: 8),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             GestureDetector(
                               onTap: () {
@@ -116,13 +118,15 @@ class _Signup4State extends State<Signup4> {
                                 height: 24,
                               ),
                             ),
-                            Text("Step 4 of 4", style: AppStyles.font12),
+                            Expanded(
+                              child: Text(
+                                "Add pick up \nthe delivery address",
+                                style: AppStyles.font16.copyWith(color: Colors.black),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 20),
-                        child: Text("What’s your home address?", style: AppStyles.font16),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 44, left: 16, right: 16),
@@ -173,30 +177,30 @@ class _Signup4State extends State<Signup4> {
                                 child: Text("Continue", style: AppStyles.buttonTextStyle),
                                 gradient: canContinue
                                     ? LinearGradient(
-                                        colors: [AppColors.c9100F7, AppColors.c7427F2],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                      )
+                                  colors: [AppColors.c9100F7, AppColors.c7427F2],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                )
                                     : LinearGradient(
-                                        colors: [AppColors.cBDBDBD, AppColors.cBDBDBD],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                      ),
+                                  colors: [AppColors.cBDBDBD, AppColors.cBDBDBD],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
                                 shadows: canContinue
                                     ? [
-                                        BoxShadow(
-                                          color: Color.fromARGB(64, 145, 0, 247),
-                                          offset: Offset(0, 4),
-                                          blurRadius: 10,
-                                        )
-                                      ]
+                                  BoxShadow(
+                                    color: Color.fromARGB(64, 145, 0, 247),
+                                    offset: Offset(0, 4),
+                                    blurRadius: 10,
+                                  )
+                                ]
                                     : [
-                                        BoxShadow(
-                                          color: AppColors.cBDBDBD,
-                                          offset: Offset(0, 4),
-                                          blurRadius: 10,
-                                        )
-                                      ],
+                                  BoxShadow(
+                                    color: AppColors.cBDBDBD,
+                                    offset: Offset(0, 4),
+                                    blurRadius: 10,
+                                  )
+                                ],
                                 onPressed: canContinue ? onContinue : null,
                               ),
                             ),

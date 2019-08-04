@@ -18,7 +18,7 @@ class _Verify4State extends State<Verify4> {
   }
 
   onPhysicalCard() {
-
+    Navigator.of(context).pushNamed("confirm_delivery_address");
   }
 
   onVirtualCard() {
@@ -34,7 +34,7 @@ class _Verify4State extends State<Verify4> {
   }
 
   onAlreadyHaveCard() {
-
+    Navigator.of(context).pushNamed("add_card");
   }
 
   @override
@@ -55,7 +55,6 @@ class _Verify4State extends State<Verify4> {
                       Container(
                         margin: EdgeInsets.only(top: 28, right: 16, left: 16),
                         alignment: Alignment.centerLeft,
-                        height: 16,
                         child: GestureDetector(
                           onTap: onClose,
                           child: Image.asset("assets/images/close.png", width: 24, height: 24),
@@ -120,7 +119,7 @@ class _Verify4State extends State<Verify4> {
                           child: Text("Already have a card?", style: AppStyles.font14.copyWith(color: AppColors.c9100F7),),
                           onPressed: onAlreadyHaveCard,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
