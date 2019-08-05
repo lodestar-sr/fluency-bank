@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
 import 'package:wealthpal/components/verification_code_input.dart';
@@ -81,16 +82,19 @@ class _Signup2State extends State<Signup2> {
   submitVerificationCode() {
     Navigator.of(context).pushNamed('signup_3');
 
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          // Retrieve the text the user has typed in using our
-          // TextEditingController
-          content: Text("The verification code you entered is incorrect."),
-        );
-      },
-    );
+//    return showDialog(
+//      context: context,
+//      builder: (context) {
+//        return CupertinoAlertDialog(
+//          content: Text("The verification code you entered is incorrect."),
+//          actions: [
+//            CupertinoDialogAction(
+//                isDefaultAction: true, child: new Text("Ok")
+//            ),
+//          ],
+//        );
+//      },
+//    );
   }
 
   @override

@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
 import 'package:wealthpal/views/theme.dart';
@@ -45,7 +43,7 @@ class _DeliveryOptionState extends State<DeliveryOption> {
   }
 
   onDeliveryCard() {
-
+    Navigator.of(context).pushNamed('delivery_payment');
   }
 
   @override

@@ -84,7 +84,10 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
         ),
         enabled: _currentIdex == index,
         counterText: "",
-        contentPadding: EdgeInsets.all(((widget.itemWidth * 2) / 10)),
+        contentPadding: EdgeInsets.only(
+          top: (widget.itemHeight - widget.itemWidth),
+          bottom: (widget.itemHeight - widget.itemWidth),
+        ),
         errorMaxLines: 1,
         fillColor: AppColors.cF9F9F9,
         filled: true,

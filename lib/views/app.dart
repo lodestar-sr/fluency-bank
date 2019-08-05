@@ -3,6 +3,7 @@ import 'package:wealthpal/views/delivery/confirm_delivery_address.dart';
 import 'package:wealthpal/views/delivery/delivery_address.dart';
 import 'package:wealthpal/views/delivery/delivery_done.dart';
 import 'package:wealthpal/views/delivery/delivery_option.dart';
+import 'package:wealthpal/views/delivery/delivery_payment.dart';
 import 'package:wealthpal/views/signup/signup_1.dart';
 import 'package:wealthpal/views/signup/signup_2.dart';
 import 'package:wealthpal/views/signup/signup_3.dart';
@@ -23,7 +24,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: appTheme(context),
-      home: ConfirmDeliveryAddress(),
+      home: Signup1(),
       routes: {
         'signup_1': (_) => Signup1(),
         'signup_2': (_) => Signup2(),
@@ -42,6 +43,7 @@ class App extends StatelessWidget {
         'delivery_address': (_) => DeliveryAddress(),
         'delivery_option': (_) => DeliveryOption(),
         'delivery_done': (_) => DeliveryDone(),
+        'delivery_payment': (_) => DeliveryPayment(),
       },
     );
   }

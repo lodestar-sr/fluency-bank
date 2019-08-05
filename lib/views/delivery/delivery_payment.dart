@@ -3,37 +3,46 @@ import 'package:wealthpal/components/masked_textinput_formatter.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
 import 'package:wealthpal/views/theme.dart';
 
-class AddCard extends StatefulWidget {
+class DeliveryPayment extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _AddCardState();
+    return _DeliveryPaymentState();
   }
 }
 
-class _AddCardState extends State<AddCard> {
+class _DeliveryPaymentState extends State<DeliveryPayment> {
 
   final cardNumberController = TextEditingController();
+  final expireDateController = TextEditingController();
+  final cvvController = TextEditingController();
 
   bool canContinue = false;
+  bool addCard = false;
 
   @override
   void initState() {
     super.initState();
 
     cardNumberController.addListener(checkCanContinue);
+    expireDateController.addListener(checkCanContinue);
+    cvvController.addListener(checkCanContinue);
   }
 
   @override
   void dispose() {
     cardNumberController.dispose();
+    expireDateController.dispose();
+    cvvController.dispose();
 
     super.dispose();
   }
 
   checkCanContinue() {
     String cardNumber = cardNumberController.text;
+    String expireDate = expireDateController.text;
+    String cvv = cvvController.text;
 
-    if (cardNumber.length == 19) {
+    if (cardNumber.length == 19 && expireDate.length == 5 && cvv.length == 3) {
       setState(() {
         canContinue = true;
       });
@@ -44,14 +53,18 @@ class _AddCardState extends State<AddCard> {
     }
   }
 
-  onBack() {
-    Navigator.of(context).pushNamed('verify_4');
+  onChangeAddCard(bool changed) {
+    setState(() {
+      addCard = changed;
+    });
   }
 
-  onAddCard() {
-    Navigator.of(context).pushNamed('vcard_done', arguments: <String, bool>{
-      'final': false,
-    });
+  onBack() {
+    Navigator.of(context).pushNamed('delivery_option');
+  }
+
+  onPay() {
+    Navigator.of(context).pushNamed('delivery_done');
   }
 
   @override
@@ -113,11 +126,7 @@ class _AddCardState extends State<AddCard> {
                           child: Column(
                             children: <Widget>[
                               Container(
-                                margin: EdgeInsets.only(top: 24, bottom: 32),
-                                child: Image.asset("assets/images/title.png", width: 115, height: 24),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(16, 0, 16, 28),
+                                margin: EdgeInsets.fromLTRB(16, 20, 16, 16),
                                 padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4),
@@ -162,8 +171,104 @@ class _AddCardState extends State<AddCard> {
                                   ],
                                 ),
                               ),
+                              Container(
+                                margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
+                                child: Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Container(
+                                        padding: EdgeInsets.all(8),
+                                        margin: EdgeInsets.only(right: 8),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(4),
+                                          border: Border.all(color: AppColors.cE0E0E0),
+                                          color: Colors.white,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("Expire date", style: AppStyles.font12.copyWith(color: AppColors.cBDBDBD)),
+                                            TextField(
+                                              controller: expireDateController,
+                                              inputFormatters: [
+                                                MaskedTextInputFormatter(
+                                                  mask: 'xx/xx',
+                                                  separator: '/',
+                                                ),
+                                              ],
+                                              style: AppStyles.font14,
+                                              cursorWidth: 1,
+                                              cursorColor: AppColors.c212121,
+                                              keyboardType: TextInputType.number,
+                                              decoration: InputDecoration(
+                                                  hintText: 'MM/YY',
+                                                  border: InputBorder.none,
+                                                  contentPadding: EdgeInsets.only(bottom: 4, top: 8)
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        padding: EdgeInsets.all(8),
+                                        margin: EdgeInsets.only(left: 8),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(4),
+                                          border: Border.all(color: AppColors.cE0E0E0),
+                                          color: Colors.white,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("CVV", style: AppStyles.font12.copyWith(color: AppColors.cBDBDBD)),
+                                            TextField(
+                                              controller: cvvController,
+                                              inputFormatters: [
+                                                MaskedTextInputFormatter(
+                                                  mask: '***',
+                                                  separator: ''
+                                                ),
+                                              ],
+                                              style: AppStyles.font14,
+                                              cursorWidth: 1,
+                                              cursorColor: AppColors.c212121,
+                                              keyboardType: TextInputType.number,
+                                              obscureText: true,
+                                              decoration: InputDecoration(
+                                                  hintText: '***',
+                                                  border: InputBorder.none,
+                                                  contentPadding: EdgeInsets.only(bottom: 4, top: 8)
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 24, left: 16, right: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              "Add this card in Wealthpal account",
+                              style: AppStyles.font12.copyWith(color: Color.fromARGB(180, 34, 34, 56),),
+                            ),
+                            Switch(
+                              value: addCard,
+                              onChanged: onChangeAddCard,
+                              activeTrackColor: AppColors.c6CCA51.withOpacity(0.5),
+                              activeColor: AppColors.c6CCA51,
+                            ),
+                          ],
                         ),
                       ),
                       Expanded(
@@ -174,7 +279,7 @@ class _AddCardState extends State<AddCard> {
                               margin: EdgeInsets.all(16),
                               child: RaisedGradientButton(
                                 child: Text(
-                                  "Continue",
+                                  "Pay £11.99",
                                   style: AppStyles.buttonTextStyle,
                                 ),
                                 gradient: canContinue
@@ -210,7 +315,7 @@ class _AddCardState extends State<AddCard> {
                                     blurRadius: 10,
                                   )
                                 ],
-                                onPressed: canContinue ? onAddCard : null,
+                                onPressed: canContinue ? onPay : null,
                               ),
                             ),
                           ],
