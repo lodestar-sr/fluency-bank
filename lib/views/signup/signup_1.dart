@@ -1,8 +1,10 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wealthpal/components/country_picker/country_code.dart';
 import 'package:wealthpal/components/country_picker/country_code_picker.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
+import 'package:wealthpal/utils/utils.dart';
 import 'package:wealthpal/views/theme.dart';
 
 class Signup1 extends StatefulWidget {
@@ -35,8 +37,13 @@ class _Signup1State extends State<Signup1> {
   submitSignup() {
     String phone = phoneController.text;
 
-    Navigator.of(context).pushNamed('signup_2', arguments: <String, String>{
-      "phone": _code + phone,
+    getVerificationCode(_code + phone).then((code) {
+      Navigator.of(context).pushNamed('signup_2', arguments: <String, String>{
+        "phone": _code + phone,
+        "code": code.toString(),
+      });
+    }).catchError((_) {
+      return showSimpleAlert(context: context, title: 'Please input valid phone number: +[code][phonenumber]');
     });
   }
 

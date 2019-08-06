@@ -16,9 +16,11 @@ class Signup2 extends StatefulWidget {
 }
 
 class _Signup2State extends State<Signup2> {
+
   static const int INITIALTIME = 60;
 
-  String phoneNumber = "";
+  String phoneNumber = '';
+  String vServerCode = '';
   bool canContinue = false;
   String verificationCode = '';
 
@@ -73,35 +75,40 @@ class _Signup2State extends State<Signup2> {
   }
 
   resendSMS() {
-    setState(() {
-      _countSec = INITIALTIME;
+    getVerificationCode(phoneNumber).then((code) {
+      setState(() {
+        _countSec = INITIALTIME;
+        vServerCode = code.toString();
+      });
+      startTimer();
+    }).catchError((_) {
+      return showSimpleAlert(context: context, title: 'The verification code can not be sent again.');
     });
-    startTimer();
   }
 
   submitVerificationCode() {
-    Navigator.of(context).pushNamed('signup_3');
-
-//    return showDialog(
-//      context: context,
-//      builder: (context) {
-//        return CupertinoAlertDialog(
-//          content: Text("The verification code you entered is incorrect."),
-//          actions: [
-//            CupertinoDialogAction(
-//                isDefaultAction: true, child: new Text("Ok")
-//            ),
-//          ],
-//        );
-//      },
-//    );
+    if (verificationCode == vServerCode) {
+      Navigator.of(context).pushNamed('signup_3');
+    } else {
+      return showSimpleAlert(
+        context: context,
+        title: 'The verification code you entered is incorrect',
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final LinkedHashMap<String, String> args =
-        ModalRoute.of(context).settings.arguments;
-    final phoneNumber = args["phone"];
+    if (phoneNumber == '') {
+      final LinkedHashMap<String, String> args = ModalRoute
+          .of(context)
+          .settings
+          .arguments;
+      setState(() {
+        phoneNumber = args['phone'];
+        vServerCode = args['code'];
+      });
+    }
 
     return Scaffold(
       body: LayoutBuilder(

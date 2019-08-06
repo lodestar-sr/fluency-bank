@@ -33,8 +33,10 @@ class SelectionDialog extends StatefulWidget {
 }
 
 class _SelectionDialogState extends State<SelectionDialog> {
+
   /// this is useful for filtering purpose
   List<CountryCode> filteredElements;
+  bool isSearchable = false;
 
   @override
   Widget build(BuildContext context) => SimpleDialog(
@@ -61,13 +63,23 @@ class _SelectionDialogState extends State<SelectionDialog> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.pop(context);
+              setState(() {
+                isSearchable = !isSearchable;
+              });
             },
             child: Image.asset("assets/images/search.png", width: 24, height: 24,),
           ),
         ],
       ),
       children: [
+        isSearchable ? Container(
+          margin: EdgeInsets.only(left: 16, right: 16),
+          child: TextField(
+            style: widget.searchStyle,
+            decoration: widget.searchDecoration,
+            onChanged: _filterElements,
+          ),
+        ) : Container(),
         Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
