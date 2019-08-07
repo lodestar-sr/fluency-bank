@@ -41,6 +41,7 @@ public class MainActivity extends FlutterActivity {
   };
 
   private Onfido client;
+  private MethodChannel.Result _result;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +55,25 @@ public class MainActivity extends FlutterActivity {
       public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
         if (methodCall.method.equals("startKYC")) {
           startKYC();
-          result.success("Ok, success");
+          _result = result;
+//          result.success("Ok, success");
+//        } else if (methodCall.method.equals("showAlert")) {
+//          String title = methodCall.argument("title");
+//          String message = methodCall.argument("message");
+//          String button = methodCall.argument("button");
+//          showAlert(title, message, button);
         }
       }
     });
   }
+
+//  private void showAlert(String title, String message, String button) {
+//    new AlertDialog.Builder(context)
+//            .setTitle(title)
+//            .setMessage(message)
+//            .setPositiveButton(button, null)
+//            .show();
+//  }
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -135,7 +150,7 @@ public class MainActivity extends FlutterActivity {
   }
 
   private void completedCheck() {
-    //
+    _result.success("Ok, success");
   }
 
   private void showToast(String message) {

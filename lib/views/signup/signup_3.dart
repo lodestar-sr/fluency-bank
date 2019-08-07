@@ -2,6 +2,7 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
+import 'package:wealthpal/utils/globals.dart';
 import 'package:wealthpal/views/theme.dart';
 
 class Signup3 extends StatefulWidget {
@@ -53,6 +54,10 @@ class _Signup3State extends State<Signup3> {
   }
 
   onContinue() {
+    Globals.firstName = firstNameController.text;
+    Globals.lastName = lastNameController.text;
+    Globals.dob = dobController.text;
+
     Navigator.of(context).pushNamed('signup_4');
   }
 

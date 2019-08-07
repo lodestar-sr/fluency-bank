@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
 import 'package:wealthpal/views/theme.dart';
 
@@ -11,12 +12,23 @@ class Verify1 extends StatefulWidget {
 
 class _Verify1State extends State<Verify1> {
 
-  onVerify() {
-    Navigator.of(context).pushNamed('verify_3');
-  }
+  static const platform = const MethodChannel('flutter.native/helper');
 
-  onNotNow() {
-    Navigator.of(context).pushNamed('verify_3');
+  Future<void> startOnfidoKYC() async {
+
+    String response = "";
+    try {
+      final String result = await platform.invokeMethod('startKYC', <String, String>{
+        'first_name': 'First',
+        'last_name': 'Last',
+        'email': 'flmail@mail.com',
+      });
+
+      response = result;
+      Navigator.of(context).pushNamed('verify_3');
+    } on PlatformException catch(e) {
+      response = "Failed to invoke: '${e.message}'.";
+    }
   }
 
   @override
@@ -39,7 +51,7 @@ class _Verify1State extends State<Verify1> {
                             padding: EdgeInsets.fromLTRB(16, 24, 16, 0),
                             child: GestureDetector(
                               child: Text("Not now", style: AppStyles.font15.copyWith(fontSize: 16),),
-                              onTap: onNotNow,
+                              onTap: startOnfidoKYC,
                             )
                         ),
                         Expanded(
@@ -85,7 +97,7 @@ class _Verify1State extends State<Verify1> {
                                       blurRadius: 10,
                                     )
                                   ],
-                                  onPressed: onVerify,
+                                  onPressed: startOnfidoKYC,
                                 ),
                               ),
                             ],

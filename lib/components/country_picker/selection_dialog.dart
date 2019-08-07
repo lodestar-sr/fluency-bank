@@ -73,10 +73,17 @@ class _SelectionDialogState extends State<SelectionDialog> {
       ),
       children: [
         isSearchable ? Container(
-          margin: EdgeInsets.only(left: 16, right: 16),
+          margin: EdgeInsets.only(left: 24, right: 24),
           child: TextField(
-            style: widget.searchStyle,
-            decoration: widget.searchDecoration,
+            style: AppStyles.font14,
+            cursorWidth: 1,
+            cursorColor: AppColors.c212121,
+            decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.c8B42FF)),
+              enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.cBDBDBD)),
+//              prefixIcon: Icon(Icons.search),
+            contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 16)
+            ),
             onChanged: _filterElements,
           ),
         ) : Container(),

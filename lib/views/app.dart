@@ -24,7 +24,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: appTheme(context),
-      home: Signup1(),
+      home: Verify1(),
       routes: {
         'signup_1': (_) => Signup1(),
         'signup_2': (_) => Signup2(),

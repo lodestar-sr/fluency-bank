@@ -3,6 +3,7 @@ import 'package:wealthpal/components/country_picker/country_code.dart';
 import 'package:wealthpal/components/country_picker/country_code_picker.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
 import 'package:wealthpal/components/selection_address_dialog.dart';
+import 'package:wealthpal/utils/globals.dart';
 import 'package:wealthpal/views/theme.dart';
 
 class Signup4 extends StatefulWidget {
@@ -76,11 +77,15 @@ class _Signup4State extends State<Signup4> {
   }
 
   onContinue() {
+    Globals.postCode = postCodeController.text;
+    Globals.address = addressController.text;
+
     Navigator.of(context).pushNamed('signup_end');
   }
 
   onCountryCodeChange(CountryCode countryCode) {
     setState(() {
+      Globals.country = countryCode;
       _country = countryCode.code;
     });
   }
