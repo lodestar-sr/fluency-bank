@@ -126,7 +126,7 @@ class _Signup2State extends State<Signup2> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(top: 28, right: 16, left: 16),
+                        margin: EdgeInsets.only(top: 40, right: 16, left: 16),
                         alignment: Alignment.centerRight,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -38,7 +38,7 @@ class _DeliveryDoneState extends State<DeliveryDone> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.only(top: 24, left: 24, right: 24),
+                              padding: EdgeInsets.only(top: 40, left: 24, right: 24),
                               child: Text(
                                 "Great! \nYour card be with \nyou in 5 days!",
                                 style: AppStyles.font16.copyWith(fontSize: 24),

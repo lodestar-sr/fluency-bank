@@ -53,7 +53,7 @@ class _Verify4State extends State<Verify4> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(top: 28, right: 16, left: 16),
+                        margin: EdgeInsets.only(top: 40, right: 16, left: 16),
                         alignment: Alignment.centerLeft,
                         child: GestureDetector(
                           onTap: onClose,

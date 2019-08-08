@@ -105,7 +105,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(top: 28, right: 16, left: 8),
+                        margin: EdgeInsets.only(top: 40, right: 16, left: 8),
                         child: Row(
                           children: <Widget>[
                             GestureDetector(

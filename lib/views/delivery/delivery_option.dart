@@ -16,12 +16,6 @@ class _DeliveryOptionState extends State<DeliveryOption> {
   int _option = 0;
 
   @override
-  void initState() {
-    super.initState();
-
-  }
-
-  @override
   void dispose() {
     cardNumberController.dispose();
 
@@ -63,7 +57,7 @@ class _DeliveryOptionState extends State<DeliveryOption> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Container(
-                          margin: EdgeInsets.only(top: 28, right: 16, left: 16, bottom: 48),
+                          margin: EdgeInsets.only(top: 40, right: 16, left: 16, bottom: 48),
                           alignment: Alignment.centerLeft,
                           child: Row(
                             children: <Widget>[

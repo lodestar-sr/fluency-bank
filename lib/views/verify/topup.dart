@@ -36,7 +36,7 @@ class _TopupState extends State<Topup> {
                       children: <Widget>[
                         Container(
                           alignment: Alignment.centerRight,
-                          padding: EdgeInsets.fromLTRB(16, 24, 16, 0),
+                          padding: EdgeInsets.fromLTRB(16, 40, 16, 0),
                           child: GestureDetector(
                             child: Text("Not now", style: AppStyles.font15.copyWith(fontSize: 16),),
                             onTap: onNotNow,

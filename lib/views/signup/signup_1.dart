@@ -109,7 +109,7 @@ class _Signup1State extends State<Signup1> {
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(top: 28, right: 16),
+                          margin: EdgeInsets.only(top: 40, right: 16),
                           alignment: Alignment.centerRight,
                           child:
                           Text("Step 1 of 4", style: AppStyles.font12),

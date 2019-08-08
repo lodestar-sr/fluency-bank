@@ -62,7 +62,7 @@ class _ConfirmDeliveryAddressState extends State<ConfirmDeliveryAddress> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Container(
-                          margin: EdgeInsets.only(top: 28, right: 16, left: 16),
+                          margin: EdgeInsets.only(top: 40, right: 16, left: 16),
                           alignment: Alignment.centerLeft,
                           child: Row(
                             children: <Widget>[

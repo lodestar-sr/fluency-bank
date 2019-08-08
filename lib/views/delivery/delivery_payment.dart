@@ -83,7 +83,7 @@ class _DeliveryPaymentState extends State<DeliveryPayment> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(top: 28, right: 16, left: 16),
+                        margin: EdgeInsets.only(top: 40, right: 16, left: 16),
                         alignment: Alignment.centerLeft,
                         height: 16,
                         child: Row(
