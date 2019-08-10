@@ -2,7 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:location/location.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:wealthpal/components/country_picker/country_code.dart';
 import 'package:wealthpal/components/country_picker/country_code_picker.dart';
@@ -24,7 +24,7 @@ class _Signup1State extends State<Signup1> {
   bool canContinue = false;
   String _code = "+44";
   bool isLoading = false;
-  LocationData currentLocation;
+  Position currentLocation;
 
   @override
   void dispose() {
@@ -40,7 +40,13 @@ class _Signup1State extends State<Signup1> {
     phoneController.addListener(validateForm);
     emailController.addListener(validateForm);
 
-    getCurrentLocation();
+    getCurrentLocation().then((pos) {
+      setState(() {
+        currentLocation = pos;
+        print(pos);
+      });
+    });
+
   }
 
   submitSignup() {
@@ -91,15 +97,16 @@ class _Signup1State extends State<Signup1> {
     });
   }
 
-  void getCurrentLocation() async {
-    LocationData currentLoc;
-    Location location = Location();
-
+  Future<Position> getCurrentLocation() async {
+    Position position;
     try {
-      currentLoc = await location.getLocation();
-    } on Exception catch(e) {
-      currentLoc = null;
+      position = await Geolocator().getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+    } on Exception catch (e) {
+      position = null;
     }
+
+    return position;
   }
 
   @override
