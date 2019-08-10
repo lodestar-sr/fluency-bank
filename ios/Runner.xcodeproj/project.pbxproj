@@ -13,6 +13,7 @@
 		3B80C3941E831B6300D905FE /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B80C3931E831B6300D905FE /* App.framework */; };
 		3B80C3951E831B6300D905FE /* App.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B80C3931E831B6300D905FE /* App.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		547814C122FA1D3D0011E545 /* OnfidoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 547814C022FA1D3D0011E545 /* OnfidoViewController.m */; };
+		548895E922FE31800069417A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 548895E822FE31800069417A /* CoreLocation.framework */; };
 		54CB199C22FA0B9300D16AA9 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54CB199B22FA0B9300D16AA9 /* AFNetworking.framework */; };
 		9705A1C61CF904A100538489 /* Flutter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9740EEBA1CF902C7004384FC /* Flutter.framework */; };
 		9705A1C71CF904A300538489 /* Flutter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9740EEBA1CF902C7004384FC /* Flutter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -48,6 +49,7 @@
 		40059FA238EEB79A4123B3E9 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		547814BF22FA1D3D0011E545 /* OnfidoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnfidoViewController.h; sourceTree = "<group>"; };
 		547814C022FA1D3D0011E545 /* OnfidoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OnfidoViewController.m; sourceTree = "<group>"; };
+		548895E822FE31800069417A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		54CB199B22FA0B9300D16AA9 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		7AFFD8ED1D35381100E5BB4D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				548895E922FE31800069417A /* CoreLocation.framework in Frameworks */,
 				54CB199C22FA0B9300D16AA9 /* AFNetworking.framework in Frameworks */,
 				9705A1C61CF904A100538489 /* Flutter.framework in Frameworks */,
 				3B80C3941E831B6300D905FE /* App.framework in Frameworks */,
@@ -93,6 +96,7 @@
 		46BAEFF56C1A41D32F5145C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				548895E822FE31800069417A /* CoreLocation.framework */,
 				54CB199B22FA0B9300D16AA9 /* AFNetworking.framework */,
 				8E6ADBE9BE27437A78CA77A4 /* Pods_Runner.framework */,
 			);

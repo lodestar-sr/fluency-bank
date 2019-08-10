@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:location/location.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:wealthpal/components/country_picker/country_code.dart';
 import 'package:wealthpal/components/country_picker/country_code_picker.dart';
@@ -23,6 +24,7 @@ class _Signup1State extends State<Signup1> {
   bool canContinue = false;
   String _code = "+44";
   bool isLoading = false;
+  LocationData currentLocation;
 
   @override
   void dispose() {
@@ -37,6 +39,8 @@ class _Signup1State extends State<Signup1> {
 
     phoneController.addListener(validateForm);
     emailController.addListener(validateForm);
+
+    getCurrentLocation();
   }
 
   submitSignup() {
@@ -87,8 +91,20 @@ class _Signup1State extends State<Signup1> {
     });
   }
 
+  void getCurrentLocation() async {
+    LocationData currentLoc;
+    Location location = Location();
+
+    try {
+      currentLoc = await location.getLocation();
+    } on Exception catch(e) {
+      currentLoc = null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: ModalProgressHUD(
         inAsyncCall: isLoading,
