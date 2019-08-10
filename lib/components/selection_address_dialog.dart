@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wealthpal/components/circular_image.dart';
 import 'package:wealthpal/views/theme.dart';
 
 /// selection dialog used for selection of the country code
 class SelectionAddressDialog extends StatefulWidget {
   /// elements passed as favorite
-  final List<String> elements;
+  final List elements;
 
   SelectionAddressDialog(
     this.elements, {
@@ -68,10 +67,10 @@ class _SelectionAddressDialogState extends State<SelectionAddressDialog> {
                           children: <Widget>[]
                             ..addAll(widget.elements
                                 .map(
-                                  (f) => SimpleDialogOption(
-                                    child: _buildOption(f),
+                                  (ele) => SimpleDialogOption(
+                                    child: _buildOption(ele),
                                     onPressed: () {
-                                      _selectItem(f);
+                                      _selectItem(ele);
                                     },
                                   ),
                                 )
@@ -84,7 +83,7 @@ class _SelectionAddressDialogState extends State<SelectionAddressDialog> {
         ],
       );
 
-  Widget _buildOption(String e) {
+  Widget _buildOption(var element) {
     return Container(
       width: 400,
       child: Flex(
@@ -93,7 +92,7 @@ class _SelectionAddressDialogState extends State<SelectionAddressDialog> {
           Expanded(
             flex: 4,
             child: Text(
-              e,
+              element['formattedAddress'],
               overflow: TextOverflow.fade,
               style: AppStyles.font14,
             ),
@@ -103,7 +102,7 @@ class _SelectionAddressDialogState extends State<SelectionAddressDialog> {
     );
   }
 
-  void _selectItem(String e) {
-    Navigator.pop(context, e);
+  void _selectItem(var ele) {
+    Navigator.pop(context, ele);
   }
 }

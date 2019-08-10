@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:wealthpal/components/circular_image.dart';
+import 'package:wealthpal/utils/globals.dart';
+import 'package:wealthpal/utils/utils.dart';
 import 'package:wealthpal/views/theme.dart';
 
 import 'country_code.dart';
@@ -7,8 +12,9 @@ import 'country_codes.dart';
 import 'selection_dialog.dart';
 
 class CountryCodePicker extends StatefulWidget {
+
   final ValueChanged<CountryCode> onChanged;
-  final String initialSelection;
+  String initialSelection;
   final List<String> favorite;
   final TextStyle textStyle;
   final EdgeInsetsGeometry padding;
@@ -16,6 +22,7 @@ class CountryCodePicker extends StatefulWidget {
   final InputDecoration searchDecoration;
   final TextStyle searchStyle;
   final WidgetBuilder emptySearchBuilder;
+  final bool autoInitial;
 
   /// shows the name of the country instead of the dialcode
   final bool showOnlyCountryWhenClosed;
@@ -42,7 +49,8 @@ class CountryCodePicker extends StatefulWidget {
       this.emptySearchBuilder,
       this.showOnlyCountryWhenClosed = false,
       this.alignLeft = false,
-      this.showFlag = true});
+      this.showFlag = true,
+      this.autoInitial = false,});
 
   @override
   State<StatefulWidget> createState() {
@@ -62,6 +70,7 @@ class CountryCodePicker extends StatefulWidget {
 }
 
 class _CountryCodePickerState extends State<CountryCodePicker> {
+
   CountryCode selectedItem;
   List<CountryCode> elements = [];
   List<CountryCode> favoriteElements = [];
@@ -112,12 +121,47 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
         onPressed: _showSelectionDialog,
       );
 
+  Future<Position> getCurrentLocation() async {
+    Position position;
+    try {
+      position = await Geolocator().getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+    } on Exception catch (e) {
+      position = null;
+    }
+
+    return position;
+  }
+
   @override
   initState() {
+    if (widget.autoInitial) {
+
+      getCurrentLocation().then((Position pos) {
+        getAddressListByGeo(latitude: pos.latitude, longitude:pos.longitude).then((result) {
+          Globals.preAddresses = json.decode(result);
+          if (Globals.preAddresses.length > 0) {
+            setState(() {
+              widget.initialSelection = Globals.preAddresses[0]['countryCode'];
+              initComponent();
+              widget.onChanged(selectedItem);
+            });
+          }
+        });
+      });
+
+    }
+
+    initComponent();
+
+    super.initState();
+  }
+
+  initComponent() {
     if (widget.initialSelection != null) {
       selectedItem = elements.firstWhere(
-          (e) =>
-              (e.code.toUpperCase() == widget.initialSelection.toUpperCase()) ||
+              (e) =>
+          (e.code.toUpperCase() == widget.initialSelection.toUpperCase()) ||
               (e.dialCode == widget.initialSelection.toString()),
           orElse: () => elements[0]);
     } else {
@@ -126,12 +170,11 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
 
     favoriteElements = elements
         .where((e) =>
-            widget.favorite.firstWhere(
-                (f) => e.code == f.toUpperCase() || e.dialCode == f.toString(),
-                orElse: () => null) !=
-            null)
+    widget.favorite.firstWhere(
+            (f) => e.code == f.toUpperCase() || e.dialCode == f.toString(),
+        orElse: () => null) !=
+        null)
         .toList();
-    super.initState();
   }
 
   void _showSelectionDialog() {

@@ -30,6 +30,8 @@
 	<string>Required for location deetection</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Required for location deetection</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>This app needs access to location when open and in the background.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Required for video capture</string>
 	<key>UILaunchStoryboardName</key>

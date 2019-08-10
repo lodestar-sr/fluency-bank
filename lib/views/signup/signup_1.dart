@@ -1,8 +1,9 @@
+import 'dart:convert';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:wealthpal/components/country_picker/country_code.dart';
 import 'package:wealthpal/components/country_picker/country_code_picker.dart';
@@ -22,9 +23,8 @@ class _Signup1State extends State<Signup1> {
   final emailController = TextEditingController();
 
   bool canContinue = false;
-  String _code = "+44";
+  String phoneCode = "+93";
   bool isLoading = false;
-  Position currentLocation;
 
   @override
   void dispose() {
@@ -39,14 +39,6 @@ class _Signup1State extends State<Signup1> {
 
     phoneController.addListener(validateForm);
     emailController.addListener(validateForm);
-
-    getCurrentLocation().then((pos) {
-      setState(() {
-        currentLocation = pos;
-        print(pos);
-      });
-    });
-
   }
 
   submitSignup() {
@@ -57,12 +49,12 @@ class _Signup1State extends State<Signup1> {
     Globals.email = emailController.text;
     String phone = phoneController.text;
 
-    getVerificationCode(_code + phone).then((code) {
+    getVerificationCode(phoneCode + phone).then((code) {
       setState(() {
         isLoading = false;
       });
       Navigator.of(context).pushNamed('signup_2', arguments: <String, String>{
-        "phone": _code + phone,
+        "phone": phoneCode + phone,
         "code": code.toString(),
       });
     }).catchError((_) {
@@ -92,21 +84,9 @@ class _Signup1State extends State<Signup1> {
 
   onCountryCodeChange(CountryCode countryCode) {
     setState(() {
-      Globals.countryCode = countryCode;
-      _code = countryCode.dialCode;
+      Globals.countryInfo = countryCode;
+      phoneCode = countryCode.dialCode;
     });
-  }
-
-  Future<Position> getCurrentLocation() async {
-    Position position;
-    try {
-      position = await Geolocator().getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-    } on Exception catch (e) {
-      position = null;
-    }
-
-    return position;
   }
 
   @override
@@ -167,7 +147,7 @@ class _Signup1State extends State<Signup1> {
                                     Container(
                                       width: 84,
                                       child: CountryCodePicker(
-                                        initialSelection: 'GB',
+                                        autoInitial: true,
                                         onChanged: onCountryCodeChange,
                                       ),
                                     ),

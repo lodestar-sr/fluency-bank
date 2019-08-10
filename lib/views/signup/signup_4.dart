@@ -54,22 +54,17 @@ class _Signup4State extends State<Signup4> {
   }
 
   onTapAddress() {
-    List<String> elements = [
-      "3 Westferry Circus, London",
-      "4 St Martin-in-the-Fields Church Path , London",
-      "15 Westferry Circus, London",
-    ];
     showDialog(
       context: context,
-      builder: (_) => SelectionAddressDialog(elements),
+      builder: (_) => SelectionAddressDialog(Globals.preAddresses),
     ).then((ret) {
       if (ret != null) {
         setState(() {
           if (ret == "Manual Address Input") {
             manualInput = true;
           } else {
-            _address = ret;
-            addressController.text = ret;
+            addressController.text = "${ret['streetNumber']} ${ret['streetName']}";
+            postCodeController.text = ret['postalCode'];
           }
         });
       }
@@ -85,7 +80,7 @@ class _Signup4State extends State<Signup4> {
 
   onCountryCodeChange(CountryCode countryCode) {
     setState(() {
-      Globals.country = countryCode;
+      Globals.countryInfo = countryCode;
       _country = countryCode.code;
     });
   }
@@ -134,7 +129,7 @@ class _Signup4State extends State<Signup4> {
                         width: double.infinity,
                         decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: AppColors.cBDBDBD))),
                         child: CountryCodePicker(
-                          initialSelection: 'GB',
+                          initialSelection: Globals.countryInfo.code,
                           onChanged: onCountryCodeChange,
                           showCountryOnly: true,
                           showOnlyCountryWhenClosed: true,
@@ -152,6 +147,7 @@ class _Signup4State extends State<Signup4> {
                           decoration: AppStyles.inputBorderDecoration.copyWith(
                             hintText: "Post code",
                           ),
+                          onTap: manualInput ? null : onTapAddress,
                         ),
                       ),
                       Container(

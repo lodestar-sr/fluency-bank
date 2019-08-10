@@ -18,7 +18,22 @@ String printDuration(int sec) {
 
 Future getVerificationCode(String phone) async {
   var response = await http.get(
-      Constants.smsVerificationAPI + phone,
+      Constants.smsVerificationAPI + '/$phone',
+      headers: {
+        'X-Auth': Constants.apiKey,
+      }
+  );
+  if (response.statusCode == 200) {
+    String body = response.body;
+    return body;
+  } else {
+    throw Exception('Please input valid phone number: \n+[code][phonenumber]');
+  }
+}
+
+Future getAddressListByGeo({double latitude, double longitude}) async {
+  var response = await http.get(
+      Constants.getLocalizationAPI + "/$latitude/$longitude",
       headers: {
         'X-Auth': Constants.apiKey,
       }
