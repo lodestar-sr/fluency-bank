@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self->token = @"test_E9h6jzJThf21ZjGJZHcDuXtgNEMb7mf0";    
+    self->token = @"test_E9h6jzJThf21ZjGJZHcDuXtgNEMb7mf0";
     
     [self createApplicant:^(NSString *applicantId) {
         
@@ -98,8 +98,7 @@
                 } else {
                     NSLog(@"Config error %@", [[configError userInfo] valueForKey:@"message"]);
                 }
-            }
-            
+            }            
         }
     }];
 }

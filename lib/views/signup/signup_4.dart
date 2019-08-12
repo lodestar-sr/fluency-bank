@@ -73,7 +73,7 @@ class _Signup4State extends State<Signup4> {
 
   onContinue() {
     Globals.postCode = postCodeController.text;
-    Globals.address = addressController.text;
+    Globals.street = addressController.text;
 
     Navigator.of(context).pushNamed('signup_end');
   }

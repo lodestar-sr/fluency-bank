@@ -14,14 +14,19 @@
     __weak  typeof(self) weakSelf = self;
     [nativeChannel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
         if ([@"startKYC"  isEqualToString:call.method]) {
+            NSString * firstName = call.arguments[@"first_name"];
+            NSString * lastName = call.arguments[@"last_name"];
+            NSString * email = call.arguments[@"email"];
+            
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             OnfidoViewController *onfidoViewController = [storyboard instantiateViewControllerWithIdentifier:@"OnfidoViewController"];
             onfidoViewController.result = result;
+            onfidoViewController.firstName = firstName;
+            onfidoViewController.lastName = lastName;
+            onfidoViewController.email = email;
 
-            [controller presentViewController:onfidoViewController animated:YES completion:^() {
-//                result(@"success");
-            }];
-        } else if ([@"showAlert"  isEqualToString:call.method]) {
+            [controller presentViewController:onfidoViewController animated:YES completion:nil];
+        } else if ([@"showAlert" isEqualToString:call.method]) {
             NSString * title = call.arguments[@"title"];
             NSString * message = call.arguments[@"message"];
             NSString * button = call.arguments[@"button"];
@@ -70,7 +75,6 @@
                                  preferredStyle:UIAlertControllerStyleAlert];
 
     //Add Buttons
-
     UIAlertAction* yesButton = [UIAlertAction
                                 actionWithTitle:button
                                 style:UIAlertActionStyleDefault
@@ -78,17 +82,8 @@
                                     //Handle your yes please button action here
                                 }];
 
-//    UIAlertAction* noButton = [UIAlertAction
-//                               actionWithTitle:@"Cancel"
-//                               style:UIAlertActionStyleDefault
-//                               handler:^(UIAlertAction * action) {
-//                                   //Handle no, thanks button
-//                               }];
-
     //Add your buttons to alert controller
-
     [alert addAction:yesButton];
-//    [alert addAction:noButton];
 
     [controller presentViewController:alert animated:YES completion:nil];
 }

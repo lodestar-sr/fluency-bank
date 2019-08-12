@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wealthpal/components/raised_gradient_button.dart';
+import 'package:wealthpal/utils/globals.dart';
 import 'package:wealthpal/views/theme.dart';
 
 class Verify1 extends StatefulWidget {
@@ -19,9 +20,9 @@ class _Verify1State extends State<Verify1> {
     String response = "";
     try {
       final String result = await platform.invokeMethod('startKYC', <String, String>{
-        'first_name': 'First',
-        'last_name': 'Last',
-        'email': 'flmail@mail.com',
+        'first_name': Globals.firstName,
+        'last_name': Globals.lastName,
+        'email': Globals.email,
       });
 
       response = result;

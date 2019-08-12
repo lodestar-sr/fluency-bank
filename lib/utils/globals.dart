@@ -8,7 +8,7 @@ class Globals {
   static String lastName = "";
   static String dob = "";
   static String postCode = "";
-  static String address = "";
+  static String street = "";
 
   static var preAddresses = [];
 }

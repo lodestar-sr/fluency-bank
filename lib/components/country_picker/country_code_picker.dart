@@ -78,7 +78,8 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
   _CountryCodePickerState(this.elements);
 
   @override
-  Widget build(BuildContext context) => FlatButton(
+  Widget build(BuildContext context) =>
+      FlatButton(
         padding: EdgeInsets.all(0),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         child: Row(
