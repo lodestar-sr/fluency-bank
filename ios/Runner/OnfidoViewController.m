@@ -116,7 +116,7 @@
     MBProgressHUD *progressDisplay = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     progressDisplay.label.text = @"Creating applicant";
     
-    NSDictionary *parameters = @{@"first_name":@"Frank", @"last_name":@"Abagnale"};
+    NSDictionary *parameters = @{@"first_name":self.firstName, @"last_name":self.lastName, @"email":self.email};
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     NSString *tokenHeaderValue = [NSString stringWithFormat:@"Token token=%@", self->token];

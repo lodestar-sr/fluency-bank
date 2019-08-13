@@ -26,7 +26,9 @@ class _Verify1State extends State<Verify1> {
       });
 
       response = result;
-      Navigator.of(context).pushNamed('verify_3');
+      if (response == "Success") {
+        Navigator.of(context).pushNamed('verify_3');
+      }
     } on PlatformException catch(e) {
       response = "Failed to invoke: '${e.message}'.";
     }
