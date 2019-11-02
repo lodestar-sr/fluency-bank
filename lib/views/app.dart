@@ -4,6 +4,7 @@ import 'package:wealthpal/views/delivery/delivery_address.dart';
 import 'package:wealthpal/views/delivery/delivery_done.dart';
 import 'package:wealthpal/views/delivery/delivery_option.dart';
 import 'package:wealthpal/views/delivery/delivery_payment.dart';
+import 'package:wealthpal/views/splash.dart';
 import 'package:wealthpal/views/signup/signup_1.dart';
 import 'package:wealthpal/views/signup/signup_2.dart';
 import 'package:wealthpal/views/signup/signup_3.dart';
@@ -24,7 +25,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: appTheme(context),
-      home: Signup1(),
+      home: Splash(),
       routes: {
         'signup_1': (_) => Signup1(),
         'signup_2': (_) => Signup2(),

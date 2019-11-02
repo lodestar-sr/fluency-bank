@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wealthpal/views/theme.dart';
 
 class RaisedGradientButton extends StatelessWidget {
 
