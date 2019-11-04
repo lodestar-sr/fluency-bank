@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:splashscreen/splashscreen.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:wealthpal/views/theme.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -11,31 +12,44 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
 
-  @override
-  Widget build(BuildContext context) {
-    return new SplashScreen(
-      seconds: 2,
-      navigateAfterSeconds: new AfterSplash(),
-    );
-  }
-}
 
-class AfterSplash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Welcome In SplashScreen Package"),
-        automaticallyImplyLeading: false,
-      ),
-      body: new Center(
-        child: new Text("Succeeded!",
-          style: new TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 30.0
+
+    return Scaffold(
+        body: ModalProgressHUD(
+          color: AppColors.c8B42FF,
+          progressIndicator: CircularProgressIndicator(),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints viewportConstraints) {
+              return GestureDetector(
+                onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
+                child: SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: viewportConstraints.maxHeight,
+                    ),
+                    child: IntrinsicHeight(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.only(top: 12),
+                            child: Center(
+                              child: Image.asset("assets/images/logo_title.png",
+                                  width: 198),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
-        ),
-      ),
+        )
     );
   }
 }
