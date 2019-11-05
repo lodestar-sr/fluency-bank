@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wealthpal/views/app.dart';
+import 'package:fluencybank/views/app.dart';
 
 void main() => runApp(App());

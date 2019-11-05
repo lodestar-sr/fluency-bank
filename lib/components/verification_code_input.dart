@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class VerificationCodeInput extends StatefulWidget {
   final ValueChanged<String> onCompleted;

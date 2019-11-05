@@ -1,6 +1,6 @@
-# Wealthpal App
+# FluencyBank App
 
-Wealthpal Application
+FluencyBank Application
 
 ## Getting Started
 

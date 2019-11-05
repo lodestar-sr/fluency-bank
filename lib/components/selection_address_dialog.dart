@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/views/theme.dart';
 
 /// selection dialog used for selection of the country code
 class SelectionAddressDialog extends StatefulWidget {

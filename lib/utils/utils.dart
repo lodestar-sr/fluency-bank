@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:wealthpal/utils/constants.dart';
+import 'package:fluencybank/utils/constants.dart';
 
 String printDuration(int sec) {
   Duration duration = Duration(seconds: sec);

@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:wealthpal/components/circular_image.dart';
-import 'package:wealthpal/utils/globals.dart';
-import 'package:wealthpal/utils/utils.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/components/circular_image.dart';
+import 'package:fluencybank/utils/globals.dart';
+import 'package:fluencybank/utils/utils.dart';
+import 'package:fluencybank/views/theme.dart';
 
 import 'country_code.dart';
 import 'country_codes.dart';

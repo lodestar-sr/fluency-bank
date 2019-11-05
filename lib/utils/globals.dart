@@ -1,4 +1,4 @@
-import 'package:wealthpal/components/country_picker/country_code.dart';
+import 'package:fluencybank/components/country_picker/country_code.dart';
 
 class Globals {
   static CountryCode countryInfo;

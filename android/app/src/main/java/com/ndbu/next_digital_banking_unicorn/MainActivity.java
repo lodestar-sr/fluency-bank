@@ -1,4 +1,4 @@
-package com.ndbu.wealthpal;
+package com.ndbu.fluencybank;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wealthpal/components/circular_image.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/components/circular_image.dart';
+import 'package:fluencybank/views/theme.dart';
 
 import 'country_code.dart';
 
