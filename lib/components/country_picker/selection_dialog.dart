@@ -16,24 +16,17 @@ class SelectionDialog extends StatefulWidget {
   /// elements passed as favorite
   final List<CountryCode> favoriteElements;
 
-  SelectionDialog(this.elements, this.favoriteElements, {
-    Key key,
-    this.showCountryOnly,
-    this.emptySearchBuilder,
-    InputDecoration searchDecoration = const InputDecoration(),
-    this.searchStyle,
-    this.showFlag
-  }) :
-    assert(searchDecoration != null, 'searchDecoration must not be null!'),
-    this.searchDecoration = searchDecoration.copyWith(prefixIcon: Icon(Icons.search)),
-    super(key: key);
+  SelectionDialog(this.elements, this.favoriteElements,
+      {Key key, this.showCountryOnly, this.emptySearchBuilder, InputDecoration searchDecoration = const InputDecoration(), this.searchStyle, this.showFlag})
+      : assert(searchDecoration != null, 'searchDecoration must not be null!'),
+        this.searchDecoration = searchDecoration.copyWith(prefixIcon: Icon(Icons.search)),
+        super(key: key);
 
   @override
   State<StatefulWidget> createState() => _SelectionDialogState();
 }
 
 class _SelectionDialogState extends State<SelectionDialog> {
-
   /// this is useful for filtering purpose
   List<CountryCode> filteredElements;
   bool isSearchable = false;
@@ -49,77 +42,87 @@ class _SelectionDialogState extends State<SelectionDialog> {
 //          ),
 //        ],
 //      ),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Image.asset("assets/images/arrow_back.png", width: 24, height: 24,),
-          ),
-          Expanded(
-            child: Text("Countries", textAlign: TextAlign.center, style: AppStyles.font16,),
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                isSearchable = !isSearchable;
-              });
-            },
-            child: Image.asset("assets/images/search.png", width: 24, height: 24,),
-          ),
-        ],
-      ),
-      children: [
-        isSearchable ? Container(
-          margin: EdgeInsets.only(left: 24, right: 24),
-          child: TextField(
-            style: AppStyles.font14,
-            cursorWidth: 1,
-            cursorColor: AppColors.c212121,
-            decoration: InputDecoration(
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.c8B42FF)),
-              enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.cBDBDBD)),
-//              prefixIcon: Icon(Icons.search),
-            contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 16)
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Image.asset(
+                "assets/images/arrow_back.png",
+                width: 24,
+                height: 24,
+              ),
             ),
-            onChanged: _filterElements,
-          ),
-        ) : Container(),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: ListView(
-            children: [
-              widget.favoriteElements.isEmpty
-                  ? const DecoratedBox(decoration: BoxDecoration())
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[]
-                        ..addAll(widget.favoriteElements
-                            .map(
-                              (f) => SimpleDialogOption(
-                                    child: _buildOption(f),
-                                    onPressed: () {
-                                      _selectItem(f);
-                                    },
-                                  ),
-                            )
-                            .toList())
-                        ..add(const Divider())),
-            ]..addAll(filteredElements.isEmpty
-                ? [_buildEmptySearchWidget(context)]
-                : filteredElements.map(
-                    (e) => SimpleDialogOption(
-                      key: Key(e.toLongString()),
-                      child: _buildOption(e),
-                      onPressed: () {
-                        _selectItem(e);
-                      },
-                    )))
-            )
-          ),
+            Expanded(
+              child: Text(
+                "Countries",
+                textAlign: TextAlign.center,
+                style: AppStyles.font16.copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  isSearchable = !isSearchable;
+                });
+              },
+              child: Image.asset(
+                "assets/images/search.png",
+                width: 24,
+                height: 24,
+              ),
+            ),
+          ],
+        ),
+        children: [
+          isSearchable
+              ? Container(
+                  margin: EdgeInsets.only(left: 24, right: 24),
+                  child: TextField(
+                    style: AppStyles.font14,
+                    cursorWidth: 1,
+                    cursorColor: AppColors.c212121,
+                    decoration: InputDecoration(
+                        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.c00B3DF)),
+                        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.cBDBDBD)),
+//              prefixIcon: Icon(Icons.search),
+                        contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 16)),
+                    onChanged: _filterElements,
+                  ),
+                )
+              : Container(),
+          Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: ListView(
+                  children: [
+                widget.favoriteElements.isEmpty
+                    ? const DecoratedBox(decoration: BoxDecoration())
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[]
+                          ..addAll(widget.favoriteElements
+                              .map(
+                                (f) => SimpleDialogOption(
+                                  child: _buildOption(f),
+                                  onPressed: () {
+                                    _selectItem(f);
+                                  },
+                                ),
+                              )
+                              .toList())
+                          ..add(const Divider())),
+              ]..addAll(filteredElements.isEmpty
+                      ? [_buildEmptySearchWidget(context)]
+                      : filteredElements.map((e) => SimpleDialogOption(
+                            key: Key(e.toLongString()),
+                            child: _buildOption(e),
+                            onPressed: () {
+                              _selectItem(e);
+                            },
+                          ))))),
         ],
       );
 
@@ -129,22 +132,22 @@ class _SelectionDialogState extends State<SelectionDialog> {
       child: Flex(
         direction: Axis.horizontal,
         children: <Widget>[
-          widget.showFlag ? Flexible(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: new CircularImage(
-                image: new AssetImage(e.flagUri),
-                width: 24,
-                height: 24,
-              ),
-            ),
-          ) : Container(),
+          widget.showFlag
+              ? Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: new CircularImage(
+                      image: new AssetImage(e.flagUri),
+                      width: 24,
+                      height: 24,
+                    ),
+                  ),
+                )
+              : Container(),
           Expanded(
             flex: 4,
             child: Text(
-              widget.showCountryOnly
-                  ? e.toCountryStringOnly()
-                  : e.toLongString(),
+              widget.showCountryOnly ? e.toCountryStringOnly() : e.toLongString(),
               overflow: TextOverflow.fade,
               style: AppStyles.font14,
             ),
@@ -171,12 +174,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
   void _filterElements(String s) {
     s = s.toUpperCase();
     setState(() {
-      filteredElements = widget.elements
-          .where((e) =>
-              e.code.contains(s) ||
-              e.dialCode.contains(s) ||
-              e.name.toUpperCase().contains(s))
-          .toList();
+      filteredElements = widget.elements.where((e) => e.code.contains(s) || e.dialCode.contains(s) || e.name.toUpperCase().contains(s)).toList();
     });
   }
 

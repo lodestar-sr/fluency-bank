@@ -3,10 +3,10 @@ import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wealthpal/components/raised_gradient_button.dart';
-import 'package:wealthpal/components/verification_code_input.dart';
-import 'package:wealthpal/utils/utils.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/components/verification_code_input.dart';
+import 'package:fluencybank/utils/utils.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class Signup2 extends StatefulWidget {
   @override
@@ -186,7 +186,7 @@ class _Signup2State extends State<Signup2> {
                                 child: Text(
                                   "Resend sms",
                                   style: TextStyle(
-                                      fontSize: 14, color: AppColors.c7427F2),
+                                      fontSize: 14, color: AppColors.c00B3DF),
                                 ),
                                 onTap: resendSMS,
                               ),
@@ -205,8 +205,8 @@ class _Signup2State extends State<Signup2> {
                                 gradient: canContinue
                                     ? LinearGradient(
                                         colors: [
-                                          AppColors.c9100F7,
-                                          AppColors.c7427F2
+                                          AppColors.c00B3DF,
+                                          AppColors.c00B3DF
                                         ],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,

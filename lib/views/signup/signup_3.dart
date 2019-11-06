@@ -1,9 +1,9 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:wealthpal/components/raised_gradient_button.dart';
-import 'package:wealthpal/utils/globals.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/utils/globals.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class Signup3 extends StatefulWidget {
   @override
@@ -166,8 +166,8 @@ class _Signup3State extends State<Signup3> {
                                 gradient: canContinue
                                     ? LinearGradient(
                                         colors: [
-                                          AppColors.c9100F7,
-                                          AppColors.c7427F2
+                                          AppColors.c00B3DF,
+                                          AppColors.c00B3DF
                                         ],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
