@@ -111,7 +111,7 @@ class _Signup1State extends State<Signup1> {
                       Container(
                         margin: EdgeInsets.only(top: 40, right: 16),
                         alignment: Alignment.centerRight,
-                        child: Text("Step 1 of 4", style: AppStyles.font12),
+                        child: Text("Step 1 of 5", style: AppStyles.font12),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 72, left: 16),

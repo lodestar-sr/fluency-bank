@@ -76,6 +76,7 @@ class _Signup3State extends State<Signup3> {
                 child: IntrinsicHeight(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Container(
@@ -94,43 +95,43 @@ class _Signup3State extends State<Signup3> {
                                 height: 24,
                               ),
                             ),
-                            Text("Step 3 of 4", style: AppStyles.font12),
+                            Text("Step 3 of 5", style: AppStyles.font12),
                           ],
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 20),
+                        margin: EdgeInsets.only(top: 20, left: 16, right: 16),
                         child: Text("What are your personal details?",
-                            style: AppStyles.font16),
+                            style: AppStyles.font24),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 44, left: 16, right: 16),
+                        margin: EdgeInsets.only(top: 24, left: 16, right: 16),
                         width: double.infinity,
                         child: TextField(
                           controller: firstNameController,
                           cursorWidth: 1,
                           cursorColor: AppColors.c212121,
                           decoration: AppStyles.inputBorderDecoration.copyWith(
-                            hintText: "First name",
+                            labelText: "First name",
                           ),
                           style: AppStyles.font14,
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 20, left: 16, right: 16),
+                        margin: EdgeInsets.only(top: 24, left: 16, right: 16),
                         width: double.infinity,
                         child: TextField(
                           controller: lastNameController,
                           cursorWidth: 1,
                           cursorColor: AppColors.c212121,
                           decoration: AppStyles.inputBorderDecoration.copyWith(
-                            hintText: "Last name",
+                            labelText: "Last name",
                           ),
                           style: AppStyles.font14,
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 4, left: 16, right: 16),
+                        margin: EdgeInsets.only(top: 24, left: 16, right: 16),
                         width: double.infinity,
                         child: DateTimeField(
                           controller: dobController,
@@ -139,8 +140,9 @@ class _Signup3State extends State<Signup3> {
                           cursorWidth: 1,
                           cursorColor: AppColors.c212121,
                           decoration: AppStyles.inputBorderDecoration.copyWith(
+                            labelText: "Date of birth",
                             hintText: "Date of birth (DD/MM/YYYY)",
-                            contentPadding: EdgeInsets.only(top: 24),
+                            contentPadding: EdgeInsets.only(top: 0),
                           ),
                           onShowPicker: (context, currentValue) {
                             return showDatePicker(
@@ -180,22 +182,6 @@ class _Signup3State extends State<Signup3> {
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                       ),
-                                shadows: canContinue
-                                    ? [
-                                        BoxShadow(
-                                          color:
-                                              Color.fromARGB(64, 145, 0, 247),
-                                          offset: Offset(0, 4),
-                                          blurRadius: 10,
-                                        )
-                                      ]
-                                    : [
-                                        BoxShadow(
-                                          color: AppColors.cBDBDBD,
-                                          offset: Offset(0, 4),
-                                          blurRadius: 10,
-                                        )
-                                      ],
                                 onPressed: canContinue ? onContinue : null,
                               ),
                             ),

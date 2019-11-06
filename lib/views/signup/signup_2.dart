@@ -16,7 +16,6 @@ class Signup2 extends StatefulWidget {
 }
 
 class _Signup2State extends State<Signup2> {
-
   static const int INITIALTIME = 60;
 
   String phoneNumber = '';
@@ -100,10 +99,7 @@ class _Signup2State extends State<Signup2> {
   @override
   Widget build(BuildContext context) {
     if (phoneNumber == '') {
-      final LinkedHashMap<String, String> args = ModalRoute
-          .of(context)
-          .settings
-          .arguments;
+      final LinkedHashMap<String, String> args = ModalRoute.of(context).settings.arguments;
       setState(() {
         phoneNumber = args['phone'];
         vServerCode = args['code'];
@@ -123,6 +119,7 @@ class _Signup2State extends State<Signup2> {
                 child: IntrinsicHeight(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Container(
@@ -137,16 +134,16 @@ class _Signup2State extends State<Signup2> {
                               },
                               child: Image.asset("assets/images/arrow_back.png", width: 24, height: 24),
                             ),
-                            Text("Step 2 of 4", style: AppStyles.font12),
+                            Text("Step 2 of 5", style: AppStyles.font12),
                           ],
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 20),
-                        child: Text("Enter 6-digit sms code", style: AppStyles.font16),
+                        margin: EdgeInsets.only(top: 20, left: 16),
+                        child: Text("Enter 6-digit sms code", style: AppStyles.font24),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 8),
+                        margin: EdgeInsets.only(top: 8, left: 16),
                         child: Text(
                           "We’ve sent it to ${phoneNumber}",
                           style: TextStyle(fontSize: 12, color: Color.fromARGB(179, 34, 34, 56), fontFamily: 'Gilroy'),
@@ -154,7 +151,7 @@ class _Signup2State extends State<Signup2> {
                       ),
                       Container(
                         width: double.infinity,
-                        margin: EdgeInsets.only(top: 40, left: 16, right: 16),
+                        margin: EdgeInsets.only(top: 140, left: 16, right: 16),
                         child: Column(
                           children: <Widget>[
                             VerificationCodeInput(
@@ -174,22 +171,22 @@ class _Signup2State extends State<Signup2> {
                           ],
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(top: 24, left: 16, right: 16),
-                        child: _countSec != 0
-                            ? Text(
-                                "You can resend sms code after ${printDuration(_countSec)}",
-                                style: TextStyle(
-                                    color: AppColors.cBDBDBD, fontSize: 12),
-                              )
-                            : GestureDetector(
-                                child: Text(
-                                  "Resend sms",
-                                  style: TextStyle(
-                                      fontSize: 14, color: AppColors.c00B3DF),
+                      Center(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 24, left: 16, right: 16),
+                          child: _countSec != 0
+                              ? Text(
+                                  "You can resend code after ${printDuration(_countSec)}",
+                                  style: TextStyle(color: AppColors.cBDBDBD, fontSize: 12),
+                                )
+                              : GestureDetector(
+                                  child: Text(
+                                    "Resend sms",
+                                    style: TextStyle(fontSize: 14, color: AppColors.c00B3DF),
+                                  ),
+                                  onTap: resendSMS,
                                 ),
-                                onTap: resendSMS,
-                              ),
+                        ),
                       ),
                       Expanded(
                         child: Column(
@@ -204,39 +201,16 @@ class _Signup2State extends State<Signup2> {
                                 ),
                                 gradient: canContinue
                                     ? LinearGradient(
-                                        colors: [
-                                          AppColors.c00B3DF,
-                                          AppColors.c00B3DF
-                                        ],
+                                        colors: [AppColors.c00B3DF, AppColors.c00B3DF],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                       )
                                     : LinearGradient(
-                                        colors: [
-                                          AppColors.cBDBDBD,
-                                          AppColors.cBDBDBD
-                                        ],
+                                        colors: [AppColors.cBDBDBD, AppColors.cBDBDBD],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                       ),
-                                shadows: canContinue
-                                    ? [
-                                        BoxShadow(
-                                          color:
-                                              Color.fromARGB(64, 145, 0, 247),
-                                          offset: Offset(0, 4),
-                                          blurRadius: 10,
-                                        )
-                                      ]
-                                    : [
-                                        BoxShadow(
-                                          color: AppColors.cBDBDBD,
-                                          offset: Offset(0, 4),
-                                          blurRadius: 10,
-                                        )
-                                      ],
-                                onPressed:
-                                    canContinue ? submitVerificationCode : null,
+                                onPressed: canContinue ? submitVerificationCode : null,
                               ),
                             ),
                           ],
