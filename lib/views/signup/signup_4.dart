@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wealthpal/components/country_picker/country_code.dart';
-import 'package:wealthpal/components/country_picker/country_code_picker.dart';
-import 'package:wealthpal/components/raised_gradient_button.dart';
-import 'package:wealthpal/components/selection_address_dialog.dart';
-import 'package:wealthpal/utils/globals.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/components/country_picker/country_code.dart';
+import 'package:fluencybank/components/country_picker/country_code_picker.dart';
+import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/components/selection_address_dialog.dart';
+import 'package:fluencybank/utils/globals.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class Signup4 extends StatefulWidget {
   @override
@@ -98,6 +98,7 @@ class _Signup4State extends State<Signup4> {
                 child: IntrinsicHeight(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Container(
@@ -121,22 +122,27 @@ class _Signup4State extends State<Signup4> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 20),
-                        child: Text("What’s your home address?", style: AppStyles.font16),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 44, left: 16, right: 16),
-                        width: double.infinity,
-                        decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: AppColors.cBDBDBD))),
-                        child: CountryCodePicker(
-                          initialSelection: Globals.countryInfo.code,
-                          onChanged: onCountryCodeChange,
-                          showCountryOnly: true,
-                          showOnlyCountryWhenClosed: true,
-                        ),
-                      ),
-                      Container(
                         margin: EdgeInsets.only(top: 20, left: 16, right: 16),
+                        child: Text("What’s your home address?", style: AppStyles.font24),
+                      ),
+                      Container(
+                          margin: EdgeInsets.only(top: 24, left: 16, right: 16),
+                          width: double.infinity,
+                          decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: AppColors.cBDBDBD))),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text("Country", style: AppStyles.font12),
+                              CountryCodePicker(
+                                initialSelection: Globals.countryInfo.code,
+                                onChanged: onCountryCodeChange,
+                                showCountryOnly: true,
+                                showOnlyCountryWhenClosed: true,
+                              ),
+                            ],
+                          )),
+                      Container(
+                        margin: EdgeInsets.only(top: 24, left: 16, right: 16),
                         width: double.infinity,
                         child: TextField(
                           controller: postCodeController,
@@ -145,13 +151,13 @@ class _Signup4State extends State<Signup4> {
                           cursorWidth: 1,
                           cursorColor: AppColors.c212121,
                           decoration: AppStyles.inputBorderDecoration.copyWith(
-                            hintText: "Post code",
+                            labelText: "Post code",
                           ),
                           onTap: manualInput ? null : onTapAddress,
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 20, left: 16, right: 16),
+                        margin: EdgeInsets.only(top: 24, left: 16, right: 16),
                         width: double.infinity,
                         child: TextField(
                           controller: addressController,
@@ -159,7 +165,7 @@ class _Signup4State extends State<Signup4> {
                           cursorWidth: 1,
                           cursorColor: AppColors.c212121,
                           decoration: AppStyles.inputBorderDecoration.copyWith(
-                            hintText: "Address",
+                            labelText: "Address",
                           ),
                           onTap: manualInput ? null : onTapAddress,
                         ),
@@ -174,7 +180,7 @@ class _Signup4State extends State<Signup4> {
                                 child: Text("Continue", style: AppStyles.buttonTextStyle),
                                 gradient: canContinue
                                     ? LinearGradient(
-                                        colors: [AppColors.c9100F7, AppColors.c7427F2],
+                                        colors: [AppColors.c00B3DF, AppColors.c00B3DF],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                       )
@@ -183,21 +189,6 @@ class _Signup4State extends State<Signup4> {
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                       ),
-                                shadows: canContinue
-                                    ? [
-                                        BoxShadow(
-                                          color: Color.fromARGB(64, 145, 0, 247),
-                                          offset: Offset(0, 4),
-                                          blurRadius: 10,
-                                        )
-                                      ]
-                                    : [
-                                        BoxShadow(
-                                          color: AppColors.cBDBDBD,
-                                          offset: Offset(0, 4),
-                                          blurRadius: 10,
-                                        )
-                                      ],
                                 onPressed: canContinue ? onContinue : null,
                               ),
                             ),

@@ -40,9 +40,7 @@ class _Signup3State extends State<Signup3> {
     String lastName = lastNameController.text;
     String dob = dobController.text;
 
-    if ((firstName?.isNotEmpty ?? true) &&
-        (lastName?.isNotEmpty ?? true) &&
-        (dob?.isNotEmpty ?? true)) {
+    if ((firstName?.isNotEmpty ?? true) && (lastName?.isNotEmpty ?? true) && (dob?.isNotEmpty ?? true)) {
       setState(() {
         canContinue = true;
       });
@@ -101,8 +99,7 @@ class _Signup3State extends State<Signup3> {
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 20, left: 16, right: 16),
-                        child: Text("What are your personal details?",
-                            style: AppStyles.font24),
+                        child: Text("What are your personal details?", style: AppStyles.font24),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 24, left: 16, right: 16),
@@ -167,18 +164,12 @@ class _Signup3State extends State<Signup3> {
                                 ),
                                 gradient: canContinue
                                     ? LinearGradient(
-                                        colors: [
-                                          AppColors.c00B3DF,
-                                          AppColors.c00B3DF
-                                        ],
+                                        colors: [AppColors.c00B3DF, AppColors.c00B3DF],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                       )
                                     : LinearGradient(
-                                        colors: [
-                                          AppColors.cBDBDBD,
-                                          AppColors.cBDBDBD
-                                        ],
+                                        colors: [AppColors.cBDBDBD, AppColors.cBDBDBD],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                       ),
