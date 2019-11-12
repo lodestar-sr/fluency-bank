@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wealthpal/components/country_picker/country_code.dart';
-import 'package:wealthpal/components/country_picker/country_code_picker.dart';
-import 'package:wealthpal/components/raised_gradient_button.dart';
-import 'package:wealthpal/components/selection_address_dialog.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/components/country_picker/country_code.dart';
+import 'package:fluencybank/components/country_picker/country_code_picker.dart';
+import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/components/selection_address_dialog.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class DeliveryAddress extends StatefulWidget {
   @override
@@ -177,7 +177,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                                 child: Text("Continue", style: AppStyles.buttonTextStyle),
                                 gradient: canContinue
                                     ? LinearGradient(
-                                  colors: [AppColors.c9100F7, AppColors.c7427F2],
+                                  colors: [AppColors.c00B3DF, AppColors.c00B3DF],
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                 )

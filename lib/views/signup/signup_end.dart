@@ -11,7 +11,7 @@ class SignupEnd extends StatefulWidget {
 
 class _SignupEndState extends State<SignupEnd> {
   onDone() {
-    Navigator.of(context).pushNamed("topup");
+    Navigator.of(context).pushNamed("verify_1");
   }
 
   @override

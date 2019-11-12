@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wealthpal/components/raised_gradient_button.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class DeliveryOption extends StatefulWidget {
   @override
@@ -102,8 +102,8 @@ class _DeliveryOptionState extends State<DeliveryOption> {
                                 ),
                                 gradient: LinearGradient(
                                   colors: [
-                                    AppColors.c9100F7,
-                                    AppColors.c7427F2
+                                    AppColors.c00B3DF,
+                                    AppColors.c00B3DF
                                   ],
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
@@ -142,7 +142,7 @@ class _DeliveryOptionState extends State<DeliveryOption> {
             value: value,
             groupValue: _option,
             onChanged: onChangeOption,
-            activeColor: AppColors.c7427F2,
+            activeColor: AppColors.c00B3DF,
           ),
           Expanded(
             child: Row(
@@ -164,11 +164,11 @@ class _DeliveryOptionState extends State<DeliveryOption> {
                   ),
                 ),
                 Container(
-                  child: Text(cost, style: AppStyles.font12.copyWith(color: AppColors.c7427F2),),
+                  child: Text(cost, style: AppStyles.font12.copyWith(color: AppColors.c00B3DF),),
                   padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: AppColors.c7427F2),
+                    border: Border.all(color: AppColors.c00B3DF),
                   ),
                 ),
               ],

@@ -1,9 +1,9 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:wealthpal/components/masked_textinput_formatter.dart';
-import 'package:wealthpal/components/raised_gradient_button.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/components/masked_textinput_formatter.dart';
+import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class ConfirmDeliveryAddress extends StatefulWidget {
   @override
@@ -94,7 +94,7 @@ class _ConfirmDeliveryAddressState extends State<ConfirmDeliveryAddress> {
                         child: RawMaterialButton(
                           constraints: BoxConstraints(),
                           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          child: Text("Change address", style: AppStyles.font12.copyWith(color: AppColors.c9100F7),),
+                          child: Text("Change address", style: AppStyles.font12.copyWith(color: AppColors.c00B3DF),),
                           onPressed: onChangeAddress,
                         ),
                       ),
@@ -111,8 +111,8 @@ class _ConfirmDeliveryAddressState extends State<ConfirmDeliveryAddress> {
                                 ),
                                 gradient: LinearGradient(
                                   colors: [
-                                    AppColors.c9100F7,
-                                    AppColors.c7427F2
+                                    AppColors.c00B3DF,
+                                    AppColors.c00B3DF
                                   ],
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
