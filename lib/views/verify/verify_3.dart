@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wealthpal/components/raised_gradient_button.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class Verify3 extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class _Verify3State extends State<Verify3> {
   final String failedEye = "assets/images/uneye.png";
 
   onVerify() {
-    Navigator.of(context).pushNamed("verify_4");
+    Navigator.of(context).pushNamed("topup");
   }
 
   @override
@@ -41,13 +41,13 @@ class _Verify3State extends State<Verify3> {
                               Padding(
                                 padding: EdgeInsets.only(top: 16, left: 24, right: 24),
                                 child: Text(
-                                  "Thanks! We’ll review your \ndocuments within \n10 minutes.",
-                                  style: AppStyles.font16.copyWith(fontSize: 24),
+                                  "Thanks! We’ll review your documents in a few minutes.",
+                                  style: AppStyles.font24.copyWith(fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 16, left: 24, right: 24),
+                                padding: EdgeInsets.only(top: 10, left: 24, right: 24),
                                 child: Text(
                                   "We’ll send you notification shortly.",
                                   style: AppStyles.font14,
@@ -66,17 +66,10 @@ class _Verify3State extends State<Verify3> {
                                 child: RaisedGradientButton(
                                   child: Text("Got it", style: AppStyles.buttonTextStyle),
                                   gradient: LinearGradient(
-                                    colors: [AppColors.c9100F7, AppColors.c7427F2],
+                                    colors: [AppColors.c00B3DF, AppColors.c00B3DF],
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                   ),
-                                  shadows: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(64, 145, 0, 247),
-                                      offset: Offset(0, 4),
-                                      blurRadius: 10,
-                                    )
-                                  ],
                                   onPressed: onVerify,
                                 ),
                               ),

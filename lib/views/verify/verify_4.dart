@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wealthpal/components/raised_gradient_button.dart';
-import 'package:wealthpal/views/theme.dart';
+import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class Verify4 extends StatefulWidget {
   @override
@@ -62,7 +62,7 @@ class _Verify4State extends State<Verify4> {
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 20),
-                        child: Text("Which Wealthpal card do you want ?", style: AppStyles.font16),
+                        child: Text("Which FluencyBank card do you want ?", style: AppStyles.font16),
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(16, 24, 16, 0),
@@ -116,7 +116,7 @@ class _Verify4State extends State<Verify4> {
                         child: RawMaterialButton(
                           constraints: BoxConstraints(),
                           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          child: Text("Already have a card?", style: AppStyles.font14.copyWith(color: AppColors.c9100F7),),
+                          child: Text("Already have a card?", style: AppStyles.font14.copyWith(color: AppColors.c00B3DF),),
                           onPressed: onAlreadyHaveCard,
                         ),
                       ),
@@ -165,7 +165,7 @@ class _Verify4State extends State<Verify4> {
                   width: 40,
                   height: 40,
                   gradient: LinearGradient(
-                    colors: [AppColors.c9100F7, AppColors.c7427F2],
+                    colors: [AppColors.c00B3DF, AppColors.c00B3DF],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
