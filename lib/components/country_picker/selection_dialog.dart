@@ -1,3 +1,4 @@
+import 'package:fluencybank/components/rounded_rect_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluencybank/components/circular_image.dart';
 import 'package:fluencybank/views/theme.dart';
@@ -136,10 +137,11 @@ class _SelectionDialogState extends State<SelectionDialog> {
               ? Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 16.0),
-                    child: new CircularImage(
+                    child: new RoundedRectImage(
                       image: new AssetImage(e.flagUri),
                       width: 24,
                       height: 24,
+                      radius: 8,
                     ),
                   ),
                 )

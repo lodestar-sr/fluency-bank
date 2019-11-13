@@ -12,6 +12,7 @@ class VerificationCodeInput extends StatefulWidget {
   final TextStyle textStyle;
   final bool autofocus;
   final bool separateMiddle;
+  final bool obscure;
 
   VerificationCodeInput(
       {Key key,
@@ -24,6 +25,7 @@ class VerificationCodeInput extends StatefulWidget {
       this.autofocus = true,
       this.itemGap = 8,
       this.separateMiddle = false,
+      this.obscure = false,
       this.onChanged,
       })
       : assert(length > 0),
@@ -131,6 +133,7 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
       textAlign: TextAlign.center,
       autofocus: widget.autofocus,
       style: widget.textStyle,
+      obscureText: widget.obscure,
     );
   }
 

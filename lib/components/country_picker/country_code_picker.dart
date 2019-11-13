@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fluencybank/components/rounded_rect_image.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:fluencybank/components/circular_image.dart';
@@ -99,10 +100,11 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
                   widget.showFlag
                       ? Container(
                     padding: const EdgeInsets.only(right: 8.0),
-                    child: CircularImage(
+                    child: RoundedRectImage(
                       image: AssetImage(selectedItem.flagUri),
                       width: 14,
                       height: 14,
+                      radius: 6,
                     ),
                   )
                       : Container(),
