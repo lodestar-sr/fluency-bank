@@ -1,4 +1,7 @@
 import 'package:fluencybank/views/home.dart';
+import 'package:fluencybank/views/topup/passcode.dart';
+import 'package:fluencybank/views/topup/topup_payment.dart';
+import 'package:fluencybank/views/topup/topup_success.dart';
 import 'package:flutter/material.dart';
 import 'package:fluencybank/views/delivery/confirm_delivery_address.dart';
 import 'package:fluencybank/views/delivery/delivery_address.dart';
@@ -13,7 +16,7 @@ import 'package:fluencybank/views/signup/signup_4.dart';
 import 'package:fluencybank/views/signup/signup_end.dart';
 import 'package:fluencybank/views/theme.dart';
 import 'package:fluencybank/views/verify/add_card.dart';
-import 'package:fluencybank/views/verify/topup.dart';
+import 'package:fluencybank/views/topup/topup.dart';
 import 'package:fluencybank/views/verify/vcard_done.dart';
 import 'package:fluencybank/views/verify/verify_1.dart';
 import 'package:fluencybank/views/verify/verify_3.dart';
@@ -26,7 +29,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: appTheme(context),
-      home: Verify3(),
+      home: Topup(),
       routes: {
         'home': (_) => Home(),
 
@@ -36,11 +39,16 @@ class App extends StatelessWidget {
         'signup_4': (_) => Signup4(),
         'signup_end': (_) => SignupEnd(),
 
-        'topup': (_) => Topup(),
         'verify_1': (_) => Verify1(),
         'verify_3': (_) => Verify3(),
         'verify_4': (_) => Verify4(),
         'vcard_done': (_) => VCardDone(),
+
+        'topup': (_) => Topup(),
+        'topup_payment': (_) => TopupPayment(),
+        'topup_success': (_) => TopupSuccess(),
+        'passcode': (_) => Passcode(),
+
         'add_card': (_) => AddCard(),
 
         'confirm_delivery_address': (_) => ConfirmDeliveryAddress(),
