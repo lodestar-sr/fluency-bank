@@ -1,7 +1,7 @@
+import 'package:fluencybank/components/masked_textinput_formatter.dart';
+import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/views/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:wealthpal/components/masked_textinput_formatter.dart';
-import 'package:wealthpal/components/raised_gradient_button.dart';
-import 'package:wealthpal/views/theme.dart';
 
 class DeliveryPayment extends StatefulWidget {
   @override
@@ -11,7 +11,6 @@ class DeliveryPayment extends StatefulWidget {
 }
 
 class _DeliveryPaymentState extends State<DeliveryPayment> {
-
   final cardNumberController = TextEditingController();
   final expireDateController = TextEditingController();
   final cvvController = TextEditingController();
@@ -83,27 +82,26 @@ class _DeliveryPaymentState extends State<DeliveryPayment> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(top: 40, right: 16, left: 16),
-                        alignment: Alignment.centerLeft,
-                        height: 16,
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              child: GestureDetector(
-                                onTap: onBack,
-                                child: Image.asset("assets/images/arrow_back.png", width: 24, height: 24),
+                          margin: EdgeInsets.only(top: 40, right: 16, left: 16),
+                          alignment: Alignment.centerLeft,
+                          height: 16,
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                child: GestureDetector(
+                                  onTap: onBack,
+                                  child: Image.asset("assets/images/arrow_back.png", width: 24, height: 24),
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                "Enter card number",
-                                textAlign: TextAlign.center,
-                                style: AppStyles.font16.copyWith(color: Colors.black),
-                              ),
-                            )
-                          ],
-                        )
-                      ),
+                              Expanded(
+                                child: Text(
+                                  "Enter card number",
+                                  textAlign: TextAlign.center,
+                                  style: AppStyles.font16.copyWith(color: Colors.black),
+                                ),
+                              )
+                            ],
+                          )),
                       Container(
                         margin: EdgeInsets.fromLTRB(16, 28, 16, 0),
                         width: double.infinity,
@@ -155,11 +153,8 @@ class _DeliveryPaymentState extends State<DeliveryPayment> {
                                             cursorWidth: 1,
                                             cursorColor: AppColors.c212121,
                                             keyboardType: TextInputType.number,
-                                            decoration: InputDecoration(
-                                              hintText: 'XXXX  XXXX  XXXX  XXXX',
-                                              border: InputBorder.none,
-                                              contentPadding: EdgeInsets.only(bottom: 4, top: 8)
-                                            ),
+                                            decoration:
+                                                InputDecoration(hintText: 'XXXX  XXXX  XXXX  XXXX', border: InputBorder.none, contentPadding: EdgeInsets.only(bottom: 4, top: 8)),
                                           ),
                                         ],
                                       ),
@@ -200,11 +195,7 @@ class _DeliveryPaymentState extends State<DeliveryPayment> {
                                               cursorWidth: 1,
                                               cursorColor: AppColors.c212121,
                                               keyboardType: TextInputType.number,
-                                              decoration: InputDecoration(
-                                                  hintText: 'MM/YY',
-                                                  border: InputBorder.none,
-                                                  contentPadding: EdgeInsets.only(bottom: 4, top: 8)
-                                              ),
+                                              decoration: InputDecoration(hintText: 'MM/YY', border: InputBorder.none, contentPadding: EdgeInsets.only(bottom: 4, top: 8)),
                                             ),
                                           ],
                                         ),
@@ -226,21 +217,14 @@ class _DeliveryPaymentState extends State<DeliveryPayment> {
                                             TextField(
                                               controller: cvvController,
                                               inputFormatters: [
-                                                MaskedTextInputFormatter(
-                                                  mask: '***',
-                                                  separator: ''
-                                                ),
+                                                MaskedTextInputFormatter(mask: '***', separator: ''),
                                               ],
                                               style: AppStyles.font14,
                                               cursorWidth: 1,
                                               cursorColor: AppColors.c212121,
                                               keyboardType: TextInputType.number,
                                               obscureText: true,
-                                              decoration: InputDecoration(
-                                                  hintText: '***',
-                                                  border: InputBorder.none,
-                                                  contentPadding: EdgeInsets.only(bottom: 4, top: 8)
-                                              ),
+                                              decoration: InputDecoration(hintText: '***', border: InputBorder.none, contentPadding: EdgeInsets.only(bottom: 4, top: 8)),
                                             ),
                                           ],
                                         ),
@@ -260,7 +244,9 @@ class _DeliveryPaymentState extends State<DeliveryPayment> {
                           children: <Widget>[
                             Text(
                               "Add this card in Wealthpal account",
-                              style: AppStyles.font12.copyWith(color: Color.fromARGB(180, 34, 34, 56),),
+                              style: AppStyles.font12.copyWith(
+                                color: Color.fromARGB(180, 34, 34, 56),
+                              ),
                             ),
                             Switch(
                               value: addCard,
@@ -284,37 +270,30 @@ class _DeliveryPaymentState extends State<DeliveryPayment> {
                                 ),
                                 gradient: canContinue
                                     ? LinearGradient(
-                                  colors: [
-                                    AppColors.c9100F7,
-                                    AppColors.c7427F2
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                )
+                                        colors: [AppColors.c00B3DF, AppColors.c00B3DF],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                      )
                                     : LinearGradient(
-                                  colors: [
-                                    AppColors.cBDBDBD,
-                                    AppColors.cBDBDBD
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                ),
+                                        colors: [AppColors.cBDBDBD, AppColors.cBDBDBD],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                      ),
                                 shadows: canContinue
                                     ? [
-                                  BoxShadow(
-                                    color:
-                                    Color.fromARGB(64, 145, 0, 247),
-                                    offset: Offset(0, 4),
-                                    blurRadius: 10,
-                                  )
-                                ]
+                                        BoxShadow(
+                                          color: Color.fromARGB(64, 145, 0, 247),
+                                          offset: Offset(0, 4),
+                                          blurRadius: 10,
+                                        )
+                                      ]
                                     : [
-                                  BoxShadow(
-                                    color: AppColors.cBDBDBD,
-                                    offset: Offset(0, 4),
-                                    blurRadius: 10,
-                                  )
-                                ],
+                                        BoxShadow(
+                                          color: AppColors.cBDBDBD,
+                                          offset: Offset(0, 4),
+                                          blurRadius: 10,
+                                        )
+                                      ],
                                 onPressed: canContinue ? onPay : null,
                               ),
                             ),
