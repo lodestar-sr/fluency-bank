@@ -50,7 +50,7 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
       for (var i = 0; i < widget.length; i++) {
         _listFocusNode.add(new FocusNode());
         _listControllerText.add(new TextEditingController());
-        _code.add(' ');
+        _code.add('');
       }
     }
     super.initState();
@@ -60,7 +60,7 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
     String verifycode = '';
     for (var i = 0; i < widget.length; i++) {
       for (var index = 0; index < _listControllerText[i].text.length; index++) {
-        if (_listControllerText[i].text[index] != ' ') {
+        if (_listControllerText[i].text[index] != '') {
           verifycode += _listControllerText[i].text[index];
         }
       }
@@ -72,7 +72,7 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
     return TextField(
       keyboardType: widget.keyboardType,
       maxLines: 1,
-      maxLength: 2,
+      maxLength: 1,
       focusNode: _listFocusNode[index],
       cursorColor: AppColors.c212121,
       decoration: InputDecoration(
@@ -84,7 +84,7 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
           borderSide: BorderSide(style: BorderStyle.none, width: 0),
           borderRadius: BorderRadius.all(Radius.circular(2)),
         ),
-        enabled: _currentIdex == index,
+        enabled: true,
         counterText: "",
         contentPadding: EdgeInsets.only(
           top: (widget.itemHeight - widget.itemWidth),
@@ -96,22 +96,17 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
       ),
       onChanged: (String value) {
         widget.onChanged(_getInputVerify());
-        if (value.length > 1 && index < widget.length || index == 0 && value.isNotEmpty) {
+        if (value.length > 0 && index < widget.length || index == 0 && value.isNotEmpty) {
           if (index == widget.length - 1) {
             widget.onCompleted(_getInputVerify());
             return;
           }
           if (_listControllerText[index + 1].value.text.isEmpty) {
-            _listControllerText[index + 1].value = new TextEditingValue(text: " ");
+            _listControllerText[index + 1].value = new TextEditingValue(text: "");
           }
-          if (value.length == 2) {
-            if (value[0] != _code[index]) {
-              _code[index] = value[0];
-            } else if (value[1] != _code[index]) {
-              _code[index] = value[1];
-            }
-            if (value[0] == " ") {
-              _code[index] = value[1];
+          if (value.length == 1) {
+            if (value != _code[index]) {
+              _code[index] = value;
             }
             _listControllerText[index].text = _code[index];
           }
@@ -121,8 +116,7 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
         }
         if (value.isEmpty && index >= 0) {
           if (_listControllerText[index - 1].value.text.isEmpty) {
-            _listControllerText[index - 1].value =
-                new TextEditingValue(text: " ");
+            _listControllerText[index - 1].value = new TextEditingValue(text: "");
           }
           _prev(index);
         }
@@ -149,9 +143,6 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
   void _prev(int index) {
     if (index > 0) {
       setState(() {
-        if (_listControllerText[index].text.isEmpty) {
-          _listControllerText[index - 1].text = ' ';
-        }
         _currentIdex = index - 1;
       });
       FocusScope.of(context).requestFocus(_listFocusNode[index - 1]);
