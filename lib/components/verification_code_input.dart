@@ -41,7 +41,6 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
   final List<FocusNode> _listFocusNode = <FocusNode>[];
   final List<TextEditingController> _listControllerText =
       <TextEditingController>[];
-  List<String> _code = List();
   int _currentIdex = 0;
 
   @override
@@ -50,7 +49,6 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
       for (var i = 0; i < widget.length; i++) {
         _listFocusNode.add(new FocusNode());
         _listControllerText.add(new TextEditingController());
-        _code.add('');
       }
     }
     super.initState();
@@ -103,12 +101,6 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
           }
           if (_listControllerText[index + 1].value.text.isEmpty) {
             _listControllerText[index + 1].value = new TextEditingValue(text: "");
-          }
-          if (value.length == 1) {
-            if (value != _code[index]) {
-              _code[index] = value;
-            }
-            _listControllerText[index].text = _code[index];
           }
           _next(index);
 

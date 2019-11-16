@@ -15,19 +15,26 @@ class Passcode extends StatefulWidget {
 }
 
 class _PasscodeState extends State<Passcode> {
-  String code = '';
-  bool canContinue = false;
 
-  completeInputCode(String code) {
-    setState(() {
-      this.code = code;
-    });
-  }
+  String code = '';
+  String repeatCode = '';
+  bool canContinue = false;
+  bool obscurePasscode = true;
+  bool showRepeat = false;
+
+  completeInputCode(String code) {}
 
   changeInputCode(String code) {
     if (code.length == 4) {
       setState(() {
-        canContinue = true;
+        this.code = code;
+        if (this.showRepeat && this.repeatCode == this.code && this.repeatCode.length == 4) {
+          canContinue = true;
+        } else if (this.repeatCode == '') {
+          canContinue = true;
+        } else {
+          canContinue = false;
+        }
       });
     } else {
       setState(() {
@@ -36,9 +43,42 @@ class _PasscodeState extends State<Passcode> {
     }
   }
 
-  onTogglePasscode() {}
+  // check Repeat Code
+  completeRepeatCode(String code) {}
 
-  submitVerificationCode() {}
+  changeRepeatCode(String code) {
+    if (code.length == 4) {
+      setState(() {
+        this.repeatCode = code;
+        if (this.repeatCode == this.code && this.code.length == 4) {
+          canContinue = true;
+        }
+      });
+    } else {
+      setState(() {
+        canContinue = false;
+      });
+    }
+  }
+
+  onTogglePasscode() {
+    setState(() {
+      obscurePasscode = !obscurePasscode;
+    });
+  }
+
+  submitPassCode() {
+    if (!this.showRepeat && this.code != '') {
+      // First Step
+      setState(() {
+        canContinue = false;
+        obscurePasscode = true;
+        showRepeat = true;
+      });
+    } else if (this.repeatCode == this.code && this.code.length == 4) {
+      // Final Step
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +114,7 @@ class _PasscodeState extends State<Passcode> {
                               itemHeight: 56,
                               itemGap: 8,
                               separateMiddle: false,
-                              obscure: false,
+                              obscure: obscurePasscode,
                               textStyle: TextStyle(
                                 color: Colors.black,
                                 fontSize: 24,
@@ -86,7 +126,7 @@ class _PasscodeState extends State<Passcode> {
                               margin: EdgeInsets.only(left: 24),
                               child: GestureDetector(
                                 child: Image.asset(
-                                  'assets/images/eye-gray.png',
+                                  obscurePasscode ? 'assets/images/eye-gray.png' : 'assets/images/eye-black.png',
                                   width: 26,
                                 ),
                                 onTap: onTogglePasscode,
@@ -95,7 +135,7 @@ class _PasscodeState extends State<Passcode> {
                           ],
                         ),
                       ),
-                      Center(
+                      showRepeat ? Center(
                         child: Container(
                           margin: EdgeInsets.only(top: 32, right: 32),
                           child: Text(
@@ -103,8 +143,8 @@ class _PasscodeState extends State<Passcode> {
                             style: AppStyles.font12.copyWith(color: Colors.black),
                           ),
                         ),
-                      ),
-                      Container(
+                      ) : Container(),
+                      showRepeat ? Container(
                         width: double.infinity,
                         margin: EdgeInsets.only(top: 16, left: 16, right: 16),
                         child: Row(
@@ -116,18 +156,18 @@ class _PasscodeState extends State<Passcode> {
                               itemHeight: 56,
                               itemGap: 8,
                               separateMiddle: false,
-                              obscure: false,
+                              obscure: obscurePasscode,
                               textStyle: TextStyle(
                                 color: Colors.black,
                                 fontSize: 24,
                               ),
-                              onCompleted: completeInputCode,
-                              onChanged: changeInputCode,
+                              onCompleted: completeRepeatCode,
+                              onChanged: changeRepeatCode,
                             ),
                             Container(width: 48),
                           ],
                         ),
-                      ),
+                      ) : Container(),
                       Expanded(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -150,7 +190,7 @@ class _PasscodeState extends State<Passcode> {
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                       ),
-                                onPressed: canContinue ? submitVerificationCode : null,
+                                onPressed: canContinue ? submitPassCode : null,
                               ),
                             ),
                           ],
