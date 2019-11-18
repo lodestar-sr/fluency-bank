@@ -10,16 +10,18 @@ class RaisedGradientButton extends StatelessWidget {
   final Function onPressed;
   final List<BoxShadow> shadows;
   final double radius;
+  final Border border;
 
   const RaisedGradientButton({
     Key key,
     @required this.child,
     this.gradient,
     this.width = double.infinity,
-    this.height = 40,
+    this.height = 48,
     this.onPressed,
     this.shadows,
     this.radius = 30,
+    this.border,
   }) : super(key: key);
 
   @override
@@ -37,6 +39,7 @@ class RaisedGradientButton extends StatelessWidget {
           gradient: gradient,
           boxShadow: shadows,
           borderRadius: BorderRadius.all(Radius.circular(radius)),
+          border: border,
         ),
         padding: EdgeInsets.all(0),
       ),

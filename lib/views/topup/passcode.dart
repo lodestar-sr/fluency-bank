@@ -52,6 +52,8 @@ class _PasscodeState extends State<Passcode> {
         this.repeatCode = code;
         if (this.repeatCode == this.code && this.code.length == 4) {
           canContinue = true;
+        } else {
+          canContinue = false;
         }
       });
     } else {
@@ -77,6 +79,7 @@ class _PasscodeState extends State<Passcode> {
       });
     } else if (this.repeatCode == this.code && this.code.length == 4) {
       // Final Step
+      Navigator.of(context).pushNamed('dashboard');
     }
   }
 
