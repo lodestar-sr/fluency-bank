@@ -1,3 +1,4 @@
+import 'package:fluencybank/views/dashboard/dashboard.dart';
 import 'package:fluencybank/views/home.dart';
 import 'package:fluencybank/views/topup/passcode.dart';
 import 'package:fluencybank/views/topup/topup_payment.dart';
@@ -29,8 +30,9 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: appTheme(context),
-      home: Topup(),
+      home: Splash(),
       routes: {
+        'splash': (_) => Splash(),
         'home': (_) => Home(),
 
         'signup_1': (_) => Signup1(),
@@ -56,6 +58,8 @@ class App extends StatelessWidget {
         'delivery_option': (_) => DeliveryOption(),
         'delivery_done': (_) => DeliveryDone(),
         'delivery_payment': (_) => DeliveryPayment(),
+
+        'dashboard': (_) => Dashboard(),
       },
     );
   }

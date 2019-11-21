@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:fluencybank/components/raised_gradient_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
+import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:fluencybank/views/theme.dart';
 
@@ -143,42 +145,186 @@ class _AccountsState extends State<Accounts> {
                         ),
                         Container(
                           padding: EdgeInsets.all(16),
+                          margin: EdgeInsets.only(left: 16, right: 16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(48, 36, 32, 55),
+                                offset: Offset(0, 2),
+                                blurRadius: 20,
+                              ),
+                            ],
+                          ),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Row(
-                                children: <Widget>[Text('Free CRYPTO-FIAT\nexchange limit', style: AppStyles.font16.copyWith(fontWeight: FontWeight.bold))],
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text('Free CRYPTO-FIAT\nexchange limit', style: AppStyles.font16.copyWith(fontWeight: FontWeight.bold)),
+                                  RaisedGradientButton(
+                                    child: Text('Increase', style: AppStyles.font14.copyWith(color: AppColors.c00B3DF)),
+                                    width: 104,
+                                    height: 40,
+                                    border: Border.all(color: AppColors.c00B3DF, width: 1),
+                                    gradient: LinearGradient(
+                                      colors: [Colors.white, Colors.white],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    ),
+                                    onPressed: null,
+                                  ),
+                                ],
                               ),
                               Container(
-                                padding: EdgeInsets.only(left: 16, right: 16),
+                                margin: EdgeInsets.only(top: 24, bottom: 8),
+                                child: RoundedProgressBar(
+                                  height: 8,
+                                  style: RoundedProgressBarStyle(
+                                    borderWidth: 0,
+                                    widthShadow: 0,
+                                    colorProgress: AppColors.c24E343,
+                                    backgroundProgress: AppColors.cF9F9F9,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                  percent: 60,
+                                ),
+                              ),
+                              Text('£5,000.00 out of £5,000.00 remaining', style: AppStyles.font12.copyWith(color: AppColors.c131113))
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                child: RaisedGradientButton(
+                                  child: Container(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Image.asset('assets/images/shuffle.png', width: 24),
+                                        Text(' Exchange', style: AppStyles.font14.copyWith(color: Colors.white))
+                                      ],
+                                    ),
+                                  ),
+                                  gradient: LinearGradient(
+                                    colors: [AppColors.c00B3DF, AppColors.c00B3DF],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                  ),
+                                  onPressed: goSignUp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 16, right: 16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(48, 36, 32, 55),
+                                offset: Offset(0, 2),
+                                blurRadius: 20,
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.fromLTRB(16, 24, 16, 24),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Container(
-                                      margin: EdgeInsets.only(top: 56),
-                                      child: RaisedGradientButton(
-                                        child: Container(
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              Image.asset('assets/images/shuffle.png', width: 24),
-                                              Text(' Exchange', style: AppStyles.font14.copyWith(color: Colors.white))
-                                            ],
+                                      margin: EdgeInsets.only(bottom: 16),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Text('Last actions', style: AppStyles.font16.copyWith(fontWeight: FontWeight.bold)),
+                                          GestureDetector(
+                                            child: Text('See all', style: AppStyles.font14.copyWith(color: AppColors.c00B3DF)),
+                                            onTap: null,
                                           ),
-                                        ),
-                                        gradient: LinearGradient(
-                                          colors: [AppColors.c00B3DF, AppColors.c00B3DF],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                        ),
-                                        onPressed: goSignUp,
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 8),
+                                      child: Text('This month', style: AppStyles.font12.copyWith(color: AppColors.c131113)),
+                                    ),
+                                    Container(
+                                      child: Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            flex: 5,
+                                            child: Row(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Container(
+                                                  margin: EdgeInsets.only(right: 8),
+                                                  child: Image.asset('assets/images/minus.png', width: 32),
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text('£0.00', style: AppStyles.font14.copyWith(color: AppColors.c212121, fontWeight: FontWeight.bold)),
+                                                    Text('Spent', style: AppStyles.font14.copyWith(color: AppColors.c131113)),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 5,
+                                            child: Row(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Container(
+                                                  margin: EdgeInsets.only(right: 8),
+                                                  child: Image.asset('assets/images/plus.png', width: 32),
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text('£1,0000.00', style: AppStyles.font14.copyWith(color: AppColors.c212121, fontWeight: FontWeight.bold)),
+                                                    Text('Received', style: AppStyles.font14.copyWith(color: AppColors.c131113)),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
+                              Divider(
+                                height: 1,
+                                color: AppColors.cF9F9F9,
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top: 16, bottom: 16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    actionRow(title: 'GBP -> BTC', time: '10:43 PM', amount1: '+B1.00', amount2: '+B1.00'),
+                                    actionRow(title: 'from Jerry Simpson', time: '7:45 PM', amount1: '+£4,342.12'),
+                                    actionRow(title: 'Starbucks', time: '7:45 PM', amount2: '-£3.99'),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ]),
@@ -187,6 +333,48 @@ class _AccountsState extends State<Accounts> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  actionRow({
+    String title = '',
+    String time = '',
+    String amount1 = '',
+    String amount2 = '',
+  }) {
+    return Container(
+      margin: EdgeInsets.only(top: 8, bottom: 8),
+      padding: EdgeInsets.all(8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(right: 8),
+                child: Image.asset('assets/images/minus.png', width: 32),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(title, style: AppStyles.font14.copyWith(color: AppColors.c212121, fontWeight: FontWeight.bold)),
+                  Text(time, style: AppStyles.font14.copyWith(color: AppColors.c131113)),
+                ],
+              )
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              amount1 != '' ? Text(amount1, style: AppStyles.font14.copyWith(color: AppColors.c24E343, fontWeight: FontWeight.bold)) : Container(),
+              amount2 != ''
+                  ? Text(amount2, style: amount1 == '' ? AppStyles.font14.copyWith(color: AppColors.c131113) : AppStyles.font12.copyWith(color: AppColors.c131113))
+                  : Container(),
+            ],
+          )
+        ],
       ),
     );
   }
