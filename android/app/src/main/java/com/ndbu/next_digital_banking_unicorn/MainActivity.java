@@ -150,7 +150,7 @@ public class MainActivity extends FlutterActivity {
   }
 
   private void completedCheck() {
-    _result.success("Ok, success");
+    _result.success("Success");
   }
 
   private void showToast(String message) {

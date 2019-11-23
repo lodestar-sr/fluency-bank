@@ -30,7 +30,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: appTheme(context),
-      home: Splash(),
+      home: Dashboard(),
       routes: {
         'splash': (_) => Splash(),
         'home': (_) => Home(),

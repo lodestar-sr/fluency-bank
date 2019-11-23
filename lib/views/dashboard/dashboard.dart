@@ -59,7 +59,7 @@ class _DashboardState extends State<Dashboard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     MaterialButton(
-                      minWidth: 75,
+                      minWidth: 72,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
@@ -80,7 +80,7 @@ class _DashboardState extends State<Dashboard> {
                       },
                     ),
                     MaterialButton(
-                      minWidth: 75,
+                      minWidth: 72,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
@@ -110,7 +110,7 @@ class _DashboardState extends State<Dashboard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     MaterialButton(
-                      minWidth: 75,
+                      minWidth: 72,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
@@ -131,7 +131,7 @@ class _DashboardState extends State<Dashboard> {
                       },
                     ),
                     MaterialButton(
-                      minWidth: 75,
+                      minWidth: 72,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
