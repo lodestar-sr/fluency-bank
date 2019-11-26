@@ -3,10 +3,9 @@ import 'dart:async';
 import 'package:fluencybank/components/raised_gradient_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
-import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:fluencybank/views/theme.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class Accounts extends StatefulWidget {
   @override
@@ -180,16 +179,11 @@ class _AccountsState extends State<Accounts> {
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 24, bottom: 8),
-                                child: RoundedProgressBar(
-                                  height: 8,
-                                  style: RoundedProgressBarStyle(
-                                    borderWidth: 0,
-                                    widthShadow: 0,
-                                    colorProgress: AppColors.c24E343,
-                                    backgroundProgress: AppColors.cF9F9F9,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                  percent: 60,
+                                child: LinearPercentIndicator(
+                                  lineHeight: 8,
+                                  percent: 0.6,
+                                  backgroundColor: AppColors.cF9F9F9,
+                                  progressColor: AppColors.c24E343,
                                 ),
                               ),
                               Text('£5,000.00 out of £5,000.00 remaining', style: AppStyles.font12.copyWith(color: AppColors.c131113))

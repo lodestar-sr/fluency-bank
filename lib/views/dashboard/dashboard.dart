@@ -18,12 +18,6 @@ class _DashboardState extends State<Dashboard> {
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = Accounts();
 
-  goSignUp() {
-    Navigator.of(context).pushNamed('signup_1');
-  }
-
-  goSignIn() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
