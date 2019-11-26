@@ -22,6 +22,7 @@ dependencies:
   geolocator: ^5.1.1
   flutter_masked_text:
   percent_indicator: ^2.1.1
+  share:
 
 dev_dependencies:
   flutter_launcher_icons: "^0.7.0"
