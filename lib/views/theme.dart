@@ -14,6 +14,7 @@ class AppColors {
   static const cFF7477 = Color(0xFFFF7477);
   static const c00B3DF = Color(0xFF00B3DF);
   static const c131113 = Color(0xFF131113);
+  static const c8E8E93 = Color(0x8E8E93);
 }
 
 class AppStyles {
@@ -47,9 +48,24 @@ class AppStyles {
     color: Colors.black,
     fontFamily: 'Gilroy',
   );
-
+  static const font18 = TextStyle(
+    fontSize: 18,
+    color: Colors.black,
+    fontFamily: 'Gilroy',
+  );
+  
+  static const font18grey = TextStyle(
+    fontSize: 18,
+    color: AppColors.c8E8E93,
+    fontFamily: 'Gilroy',
+  );
   static const font24 = TextStyle(
     fontSize: 24,
+    color: Colors.black,
+    fontFamily: 'Gilroy',
+  );
+  static const font22 = TextStyle(
+    fontSize: 22,
     color: Colors.black,
     fontFamily: 'Gilroy',
   );

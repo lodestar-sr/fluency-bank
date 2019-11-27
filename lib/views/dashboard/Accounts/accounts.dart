@@ -13,21 +13,55 @@ class Accounts extends StatefulWidget {
   State<StatefulWidget> createState() => _AccountsState();
 }
 
-class _AccountsState extends State<Accounts> {
+class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
   int currentTab = 0;
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = Accounts();
-  var flag = [false,false];
+  var flag = [false, false];
+  double _scale;
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    //
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200),
+      lowerBound: 0.0,
+      upperBound: 0.1,
+    )..addListener(() {
+        setState(() {});
+      });
+  }
+
+  void _onTapDown(TapDownDetails details) {
+    _controller.forward();
+  }
+
+  void _onTapUp(TapUpDetails details) {
+    _controller.reverse();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   goSignUp() {
     Navigator.of(context).pushNamed('signup_1');
   }
-
+  gotoAddaccount()
+  {
+    Navigator.of(context).pushNamed('add_acount');
+  }
   goSignIn() {}
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    _scale = 1 - _controller.value;
     return ModalProgressHUD(
       inAsyncCall: false,
       color: AppColors.c00B3DF,
@@ -135,6 +169,7 @@ class _AccountsState extends State<Accounts> {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: <Widget>[
+                              addcurrencycard(),
                               currencyCard(
                                 currencyText: 'GBP',
                                 currencySymbol: '£',
@@ -480,6 +515,41 @@ class _AccountsState extends State<Accounts> {
     );
   }
 
+  Widget addcurrencycard() {
+    return Padding(
+      padding: const EdgeInsets.only(top :46.0 , bottom: 66.0),
+      
+      child: Center(
+        child: GestureDetector(
+          onTapDown: _onTapDown,
+          onTapUp: _onTapUp,
+          onTap: (){
+            gotoAddaccount();
+          },
+          child: Transform.scale(
+            scale: _scale,
+            child: Container(
+              margin: EdgeInsets.only(right: 8, left: 8),
+              height: 80.0,
+              width: 80.0,
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(48, 36, 32, 55),
+                  offset: Offset(0, 2),
+                  blurRadius: 20,
+                ),
+              ], color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
+              child: Icon(
+                Icons.add,
+                color: AppColors.c00B3DF,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   currencyCard({
     String currencyText = '',
     String currencySymbol = '',
@@ -491,7 +561,12 @@ class _AccountsState extends State<Accounts> {
   }) {
     return GestureDetector(
       onTap: () {
-        ModalBottomSheet(context, currencyText);
+      
+        Navigator.of(context).pushNamed('account_details',
+                                    arguments: <String, String>{
+                                      "currencyText": currencyText,
+                                      "amount" : amount,
+                                    });
       },
       child: Container(
         child: Stack(
@@ -572,23 +647,30 @@ class _AccountsState extends State<Accounts> {
                 ],
               ),
             ),
-            Container(
-              width: 40,
-              height: 40,
-              margin: EdgeInsets.only(top: 140, left: 120),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(48, 36, 32, 55),
-                    offset: Offset(0, 2),
-                    blurRadius: 20,
-                  ),
-                ],
-              ),
-              child: Center(
-                child: extraImage,
+            GestureDetector(
+              onTap: (){
+                setState(() {
+                  ModalBottomSheet(context , currencyText);
+                });
+              },
+                          child: Container(
+                width: 40,
+                height: 40,
+                margin: EdgeInsets.only(top: 140, left: 120),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(48, 36, 32, 55),
+                      offset: Offset(0, 2),
+                      blurRadius: 20,
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: extraImage,
+                ),
               ),
             ),
           ],
@@ -597,202 +679,230 @@ class _AccountsState extends State<Accounts> {
     );
   }
 
-  //Bottom sheet
+
+   //Bottom sheet
   void ModalBottomSheet(context, String accounttype) {
     showModalBottomSheet(
         context: context,
-        builder: (BuildContext bc ) {
-         return  StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState /*You can rename this!*/)
-          {
-          return Container(
-            
-            child: new Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      height: 5.0,
-                      width: 50.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey[350],
+        builder: (BuildContext bc) {
+          return StatefulBuilder(builder: (BuildContext context,
+              StateSetter setState /*You can rename this!*/) {
+            return Container(
+              child: new Column(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        height: 5.0,
+                        width: 50.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.grey[350],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.0, left: 12.0),
-                      child: Text("Your $accounttype account details",
-                          style: AppStyles.font24
-                              .copyWith(fontWeight: FontWeight.bold)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 25.0, left: 12.0),
-                      child: Text("Account number",
-                          style: AppStyles.font16.copyWith()),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                      child: Text("25443658",
-                          style: AppStyles.font24.copyWith(
-                              fontWeight: FontWeight.bold, fontSize: 18.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 23.0, left: 12.0),
-                      child:
-                          Text("Sort code", style: AppStyles.font16.copyWith()),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                      child: Text("08-90-90",
-                          style: AppStyles.font24.copyWith(
-                              fontWeight: FontWeight.bold, fontSize: 18.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 23.0, left: 12.0),
-                      child: Text("IBAN", style: AppStyles.font16.copyWith()),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                      child: Text("GB29 NWBK 6016 1331 9268 19",
-                          style: AppStyles.font24.copyWith(
-                              fontWeight: FontWeight.bold, fontSize: 18.0)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 23.0, left: 12.0),
-                      child:
-                          Text("SWIFT/BIC", style: AppStyles.font16.copyWith()),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                      child: Text("SREDF344G",
-                          style: AppStyles.font24.copyWith(
-                              fontWeight: FontWeight.bold, fontSize: 18.0)),
-                    ),
-                  ],
-                ),
-                //button 
-                
-                Padding(
-                  padding: const EdgeInsets.only(top : 8.0),
-                  child: Row(
+                  Row(
                     children: <Widget>[
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: (){
-                            setState(() {
-                              print("OBject1 tapped");
-                              flag[0] = true;
-                              flag[1] = false;
-                              print(flag);
-                              Share.share('check out my website https://example.com', subject: 'Look what I made!');
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(left:10.0),
-                            child: Container(
-                              height: 50,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                Icon(CupertinoIcons.share_up,size: 25.0,color: flag[0] == true ?  Colors.white:AppColors.c00B3DF ,),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10.0),
-                                  child: Text("Share",style:AppStyles.font16.copyWith(
-                              fontWeight: FontWeight.bold,color: flag[0] == true ? Colors.white:AppColors.c00B3DF  ,)),
-                                )
-                              ],),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  color: flag[0] == true ? AppColors.c00B3DF : Colors.white,
-                                  border: Border.all(
-                                    color: AppColors.c00B3DF, width: 2),
-                                  ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      
-                      Expanded(
-                        
-                        child: GestureDetector(
-                          onTap: (){
-                            setState(() {
-                              flag[1] = true;
-                              flag[0] = false;
-                              print(flag);
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(left:10.0 ,right: 10.0),
-                            child: Container(
-                              height: 50,
-                             child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                Icon(Icons.content_copy,size: 25.0,color: flag[1] == true ?  Colors.white:AppColors.c00B3DF ,),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10.0),
-                                  child: Text("copy",style:AppStyles.font16.copyWith(
-                              fontWeight: FontWeight.bold,color: flag[1] == true ? Colors.white:AppColors.c00B3DF ,)),
-                                )
-                              ],),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  color: flag[1] == true ? AppColors.c00B3DF :Colors.white,
-                                  border: Border.all(
-                                    color: AppColors.c00B3DF, width: 2),
-                                    ),
-                                  
-                            ),
-                          ),
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15.0, left: 12.0),
+                        child: Text("Your $accounttype account details",
+                            style: AppStyles.font24
+                                .copyWith(fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          );
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 25.0, left: 12.0),
+                        child: Text("Account number",
+                            style: AppStyles.font16.copyWith()),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+                        child: Text("25443658",
+                            style: AppStyles.font24.copyWith(
+                                fontWeight: FontWeight.bold, fontSize: 18.0)),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 23.0, left: 12.0),
+                        child: Text("Sort code",
+                            style: AppStyles.font16.copyWith()),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+                        child: Text("08-90-90",
+                            style: AppStyles.font24.copyWith(
+                                fontWeight: FontWeight.bold, fontSize: 18.0)),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 23.0, left: 12.0),
+                        child: Text("IBAN", style: AppStyles.font16.copyWith()),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+                        child: Text("GB29 NWBK 6016 1331 9268 19",
+                            style: AppStyles.font24.copyWith(
+                                fontWeight: FontWeight.bold, fontSize: 18.0)),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 23.0, left: 12.0),
+                        child: Text("SWIFT/BIC",
+                            style: AppStyles.font16.copyWith()),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+                        child: Text("SREDF344G",
+                            style: AppStyles.font24.copyWith(
+                                fontWeight: FontWeight.bold, fontSize: 18.0)),
+                      ),
+                    ],
+                  ),
+                  //button
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                print("OBject1 tapped");
+                                flag[0] = true;
+                                flag[1] = false;
+                                print(flag);
+                                Share.share(
+                                    'check out my website https://example.com',
+                                    subject: 'Look what I made!');
+                              });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Container(
+                                height: 50,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Icon(
+                                      CupertinoIcons.share_up,
+                                      size: 25.0,
+                                      color: flag[0] == true
+                                          ? Colors.white
+                                          : AppColors.c00B3DF,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 10.0),
+                                      child: Text("Share",
+                                          style: AppStyles.font16.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: flag[0] == true
+                                                ? Colors.white
+                                                : AppColors.c00B3DF,
+                                          )),
+                                    )
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  color: flag[0] == true
+                                      ? AppColors.c00B3DF
+                                      : Colors.white,
+                                  border: Border.all(
+                                      color: AppColors.c00B3DF, width: 2),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                flag[1] = true;
+                                flag[0] = false;
+                                print(flag);
+                              });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, right: 10.0),
+                              child: Container(
+                                height: 50,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.content_copy,
+                                      size: 25.0,
+                                      color: flag[1] == true
+                                          ? Colors.white
+                                          : AppColors.c00B3DF,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 10.0),
+                                      child: Text("copy",
+                                          style: AppStyles.font16.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: flag[1] == true
+                                                ? Colors.white
+                                                : AppColors.c00B3DF,
+                                          )),
+                                    )
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  color: flag[1] == true
+                                      ? AppColors.c00B3DF
+                                      : Colors.white,
+                                  border: Border.all(
+                                      color: AppColors.c00B3DF, width: 2),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
           });
         });
   }
+
 }

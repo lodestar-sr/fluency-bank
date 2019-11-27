@@ -1,3 +1,7 @@
+import 'package:fluencybank/views/dashboard/Accounts/account_details.dart';
+import 'package:fluencybank/views/dashboard/Accounts/accountcreated.dart';
+import 'package:fluencybank/views/dashboard/Accounts/accounts.dart';
+import 'package:fluencybank/views/dashboard/Accounts/addacount.dart';
 import 'package:fluencybank/views/dashboard/dashboard.dart';
 import 'package:fluencybank/views/home.dart';
 import 'package:fluencybank/views/topup/passcode.dart';
@@ -60,6 +64,10 @@ class App extends StatelessWidget {
         'delivery_payment': (_) => DeliveryPayment(),
 
         'dashboard': (_) => Dashboard(),
+        'accounts' : (_) => Accounts(),
+        'add_acount': (_) => Addaccount(),
+        'account_details': (_) => Account_details(),
+        'account_created': (_) => Accountcreated(),
       },
     );
   }

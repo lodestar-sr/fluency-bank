@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:fluencybank/components/raised_gradient_button.dart';
-import 'package:fluencybank/views/dashboard/accounts.dart';
+import 'package:fluencybank/views/dashboard/Accounts/accounts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
