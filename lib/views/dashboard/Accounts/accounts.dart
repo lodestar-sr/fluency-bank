@@ -75,170 +75,84 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                 constraints: BoxConstraints(
                   minHeight: viewportConstraints.maxHeight,
                 ),
-                child: IntrinsicHeight(
-                  child: Stack(children: [
-                    Image.asset(
-                      "assets/images/dashboard-bg.png",
-                      width: size.width,
-                      fit: BoxFit.fitWidth,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          padding:
-                              EdgeInsets.only(top: 64, left: 16, right: 16),
-                          child: Row(
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text('Total balance',
-                                      style: AppStyles.font14
-                                          .copyWith(color: Colors.white)),
-                                  Container(
-                                    padding: EdgeInsets.only(top: 8),
-                                    child: Text('£1,000.00',
-                                        style: AppStyles.font36),
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Text('+£0.00',
-                                          style: AppStyles.font14.copyWith(
-                                              color: AppColors.cbfffca)),
-                                      Text(' today',
-                                          style: AppStyles.font14
-                                              .copyWith(color: Colors.white)),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+
+                //Removed Intrinsic height
+                child: Stack(children: [
+                  Image.asset(
+                    "assets/images/dashboard-bg.png",
+                    width: size.width,
+                    fit: BoxFit.fitWidth,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        padding:
+                            EdgeInsets.only(top: 64, left: 16, right: 16),
+                        child: Row(
+                          children: <Widget>[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text('Total balance',
+                                    style: AppStyles.font14
+                                        .copyWith(color: Colors.white)),
+                                Container(
+                                  padding: EdgeInsets.only(top: 8),
+                                  child: Text('£1,000.00',
+                                      style: AppStyles.font36),
+                                ),
+                                Row(
                                   children: <Widget>[
-                                    Container(
-                                      margin: EdgeInsets.only(bottom: 18),
-                                      child: GestureDetector(
-                                        child: Image.asset(
-                                            'assets/images/search-white.png',
-                                            width: 24),
-                                        onTap: null,
-                                      ),
-                                    ),
-                                    RaisedGradientButton(
-                                      child: Container(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Image.asset(
-                                                'assets/images/arrow-up-right.png',
-                                                width: 24),
-                                            Text(' Top Up',
-                                                style: AppStyles.font14
-                                                    .copyWith(
-                                                        color: Colors.white))
-                                          ],
-                                        ),
-                                      ),
-                                      width: 120,
-                                      height: 40,
-                                      border: Border.all(
-                                          color: Colors.white, width: 1),
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          AppColors.c00B3DF,
-                                          AppColors.c00B3DF
-                                        ],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                      ),
-                                      onPressed: null,
-                                    ),
+                                    Text('+£0.00',
+                                        style: AppStyles.font14.copyWith(
+                                            color: AppColors.cbfffca)),
+                                    Text(' today',
+                                        style: AppStyles.font14
+                                            .copyWith(color: Colors.white)),
                                   ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: 22),
-                          height: 220,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: <Widget>[
-                              addcurrencycard(),
-                              currencyCard(
-                                currencyText: 'GBP',
-                                currencySymbol: '£',
-                                amount: '16,560.40',
-                                additionalAmount: '',
-                                currencyName: 'British Pound',
-                                enabledCard: true,
-                                extraImage: Image.asset(
-                                    'assets/images/text-file.png',
-                                    width: 24),
-                              ),
-                              currencyCard(
-                                currencyText: 'BTC',
-                                currencySymbol: 'B',
-                                amount: '0.403442',
-                                additionalAmount: '+£234.43 (10%)',
-                                currencyName: 'Bitcoin',
-                                extraImage: Image.asset(
-                                    'assets/images/barcode-qr.png',
-                                    width: 24),
-                              ),
-                              currencyCard(
-                                currencyText: 'ETH',
-                                currencySymbol: '£',
-                                amount: '16,560.40',
-                                additionalAmount: '+£234.43 (10%)',
-                                currencyName: 'British Pound',
-                                enabledCard: true,
-                                extraImage: Image.asset(
-                                    'assets/images/barcode-qr.png',
-                                    width: 24),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(16),
-                          margin: EdgeInsets.only(left: 16, right: 16),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(48, 36, 32, 55),
-                                offset: Offset(0, 2),
-                                blurRadius: 20,
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                              ],
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: <Widget>[
-                                  Text('Free CRYPTO-FIAT\nexchange limit',
-                                      style: AppStyles.font16.copyWith(
-                                          fontWeight: FontWeight.bold)),
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 18),
+                                    child: GestureDetector(
+                                      child: Image.asset(
+                                          'assets/images/search-white.png',
+                                          width: 24),
+                                      onTap: null,
+                                    ),
+                                  ),
                                   RaisedGradientButton(
-                                    child: Text('Increase',
-                                        style: AppStyles.font14.copyWith(
-                                            color: AppColors.c00B3DF)),
-                                    width: 104,
+                                    child: Container(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Image.asset(
+                                              'assets/images/arrow-up-right.png',
+                                              width: 24),
+                                          Text(' Top Up',
+                                              style: AppStyles.font14
+                                                  .copyWith(
+                                                      color: Colors.white))
+                                        ],
+                                      ),
+                                    ),
+                                    width: 120,
                                     height: 40,
                                     border: Border.all(
-                                        color: AppColors.c00B3DF, width: 1),
+                                        color: Colors.white, width: 1),
                                     gradient: LinearGradient(
-                                      colors: [Colors.white, Colors.white],
+                                      colors: [
+                                        AppColors.c00B3DF,
+                                        AppColors.c00B3DF
+                                      ],
                                       begin: Alignment.topCenter,
                                       end: Alignment.bottomCenter,
                                     ),
@@ -246,56 +160,145 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                                   ),
                                 ],
                               ),
-                              Container(
-                                margin: EdgeInsets.only(top: 24, bottom: 8),
-                                child: LinearPercentIndicator(
-                                  lineHeight: 8,
-                                  percent: 0.6,
-                                  backgroundColor: AppColors.cF9F9F9,
-                                  progressColor: AppColors.c24E343,
-                                ),
-                              ),
-                              Text('£5,000.00 out of £5,000.00 remaining',
-                                  style: AppStyles.font12
-                                      .copyWith(color: AppColors.c131113))
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Container(
-                          margin: EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                child: RaisedGradientButton(
-                                  child: Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Image.asset('assets/images/shuffle.png',
-                                            width: 24),
-                                        Text(' Exchange',
-                                            style: AppStyles.font14
-                                                .copyWith(color: Colors.white))
-                                      ],
-                                    ),
-                                  ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: 22),
+                        height: 220,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: <Widget>[
+                            addcurrencycard(),
+                            currencyCard(
+                              currencyText: 'GBP',
+                              currencySymbol: '£',
+                              amount: '16,560.40',
+                              additionalAmount: '',
+                              currencyName: 'British Pound',
+                              enabledCard: true,
+                              extraImage: Image.asset(
+                                  'assets/images/text-file.png',
+                                  width: 24),
+                            ),
+                            currencyCard(
+                              currencyText: 'BTC',
+                              currencySymbol: 'B',
+                              amount: '0.403442',
+                              additionalAmount: '+£234.43 (10%)',
+                              currencyName: 'Bitcoin',
+                              extraImage: Image.asset(
+                                  'assets/images/barcode-qr.png',
+                                  width: 24),
+                            ),
+                            currencyCard(
+                              currencyText: 'ETH',
+                              currencySymbol: '£',
+                              amount: '16,560.40',
+                              additionalAmount: '+£234.43 (10%)',
+                              currencyName: 'British Pound',
+                              enabledCard: true,
+                              extraImage: Image.asset(
+                                  'assets/images/barcode-qr.png',
+                                  width: 24),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(16),
+                        margin: EdgeInsets.only(left: 16, right: 16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(48, 36, 32, 55),
+                              offset: Offset(0, 2),
+                              blurRadius: 20,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text('Free CRYPTO-FIAT\nexchange limit',
+                                    style: AppStyles.font16.copyWith(
+                                        fontWeight: FontWeight.bold)),
+                                RaisedGradientButton(
+                                  child: Text('Increase',
+                                      style: AppStyles.font14.copyWith(
+                                          color: AppColors.c00B3DF)),
+                                  width: 104,
+                                  height: 40,
+                                  border: Border.all(
+                                      color: AppColors.c00B3DF, width: 1),
                                   gradient: LinearGradient(
-                                    colors: [
-                                      AppColors.c00B3DF,
-                                      AppColors.c00B3DF
-                                    ],
+                                    colors: [Colors.white, Colors.white],
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                   ),
-                                  onPressed: goSignUp,
+                                  onPressed: null,
                                 ),
+                              ],
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 24, bottom: 8),
+                              child: LinearPercentIndicator(
+                                lineHeight: 8,
+                                percent: 0.6,
+                                backgroundColor: AppColors.cF9F9F9,
+                                progressColor: AppColors.c24E343,
                               ),
-                            ],
-                          ),
+                            ),
+                            Text('£5,000.00 out of £5,000.00 remaining',
+                                style: AppStyles.font12
+                                    .copyWith(color: AppColors.c131113))
+                          ],
                         ),
-                        Container(
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              child: RaisedGradientButton(
+                                child: Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.asset('assets/images/shuffle.png',
+                                          width: 24),
+                                      Text(' Exchange',
+                                          style: AppStyles.font14
+                                              .copyWith(color: Colors.white))
+                                    ],
+                                  ),
+                                ),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    AppColors.c00B3DF,
+                                    AppColors.c00B3DF
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+                                onPressed: goSignUp,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top :8.0 , bottom: 8.0   ),
+                        child: Container(
                           margin: EdgeInsets.only(left: 16, right: 16),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
@@ -448,10 +451,10 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  ]),
-                ),
+                      ),
+                    ],
+                  ),
+                ]),
               ),
             ),
           );
@@ -684,23 +687,29 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
   void ModalBottomSheet(context, String accounttype) {
     showModalBottomSheet(
         context: context,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      
         builder: (BuildContext bc) {
           return StatefulBuilder(builder: (BuildContext context,
               StateSetter setState /*You can rename this!*/) {
+                
             return Container(
-              child: new Column(
+              
+              child: new ListView(
                 //mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Align(
                       alignment: Alignment.topCenter,
-                      child: Container(
-                        height: 5.0,
-                        width: 50.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.grey[350],
+                      child: SingleChildScrollView(
+                                              child: Container(
+                          height: 5.0,
+                          width: 50.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.grey[350],
+                          ),
                         ),
                       ),
                     ),
@@ -708,7 +717,7 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(top: 15.0, left: 12.0),
+                        padding: const EdgeInsets.only(top: 12.0, left: 12.0),
                         child: Text("Your $accounttype account details",
                             style: AppStyles.font24
                                 .copyWith(fontWeight: FontWeight.bold)),
@@ -718,7 +727,7 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(top: 25.0, left: 12.0),
+                        padding: const EdgeInsets.only(top: 20.0, left: 12.0),
                         child: Text("Account number",
                             style: AppStyles.font16.copyWith()),
                       ),
@@ -737,7 +746,7 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(top: 23.0, left: 12.0),
+                        padding: const EdgeInsets.only(top: 20.0, left: 12.0),
                         child: Text("Sort code",
                             style: AppStyles.font16.copyWith()),
                       ),
@@ -756,7 +765,7 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(top: 23.0, left: 12.0),
+                        padding: const EdgeInsets.only(top: 20.0, left: 12.0),
                         child: Text("IBAN", style: AppStyles.font16.copyWith()),
                       ),
                     ],
@@ -774,7 +783,7 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                   Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(top: 23.0, left: 12.0),
+                        padding: const EdgeInsets.only(top: 20.0, left: 12.0),
                         child: Text("SWIFT/BIC",
                             style: AppStyles.font16.copyWith()),
                       ),

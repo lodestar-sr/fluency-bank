@@ -2,6 +2,9 @@ import 'package:fluencybank/views/dashboard/Accounts/account_details.dart';
 import 'package:fluencybank/views/dashboard/Accounts/accountcreated.dart';
 import 'package:fluencybank/views/dashboard/Accounts/accounts.dart';
 import 'package:fluencybank/views/dashboard/Accounts/addacount.dart';
+import 'package:fluencybank/views/dashboard/Accounts/enteremail.dart';
+import 'package:fluencybank/views/dashboard/Accounts/statement.dart';
+import 'package:fluencybank/views/dashboard/Accounts/statementsent.dart';
 import 'package:fluencybank/views/dashboard/dashboard.dart';
 import 'package:fluencybank/views/home.dart';
 import 'package:fluencybank/views/topup/passcode.dart';
@@ -26,6 +29,8 @@ import 'package:fluencybank/views/verify/vcard_done.dart';
 import 'package:fluencybank/views/verify/verify_1.dart';
 import 'package:fluencybank/views/verify/verify_3.dart';
 import 'package:fluencybank/views/verify/verify_4.dart';
+
+import 'dashboard/Accounts/topupaccount.dart';
 
 class App extends StatelessWidget {
 
@@ -66,7 +71,11 @@ class App extends StatelessWidget {
         'dashboard': (_) => Dashboard(),
         'accounts' : (_) => Accounts(),
         'add_acount': (_) => Addaccount(),
+        'topupaccount': (_) => TopUpAccount(),
         'account_details': (_) => Account_details(),
+        'statement': (_) => Statement(),
+        'enteremail': (_) => EnterEmail(),
+        'statementsent':(_) => Statementsent(),
         'account_created': (_) => Accountcreated(),
       },
     );

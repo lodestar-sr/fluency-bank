@@ -23,6 +23,9 @@ dependencies:
   flutter_masked_text:
   percent_indicator: ^2.1.1
   share:
+  flutter_cupertino_date_picker: ^1.0.12
+  flutter_datetime_picker: ^1.2.5
+
 
 dev_dependencies:
   flutter_launcher_icons: "^0.7.0"

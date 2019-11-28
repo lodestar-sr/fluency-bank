@@ -59,6 +59,11 @@ class AppStyles {
     color: AppColors.c8E8E93,
     fontFamily: 'Gilroy',
   );
+  static const font20 = TextStyle(
+    fontSize: 20,
+    color: Colors.black,
+    fontFamily: 'Gilroy',
+  );
   static const font24 = TextStyle(
     fontSize: 24,
     color: Colors.black,
@@ -68,8 +73,20 @@ class AppStyles {
     fontSize: 22,
     color: Colors.black,
     fontFamily: 'Gilroy',
-  );
+  ); 
+  
 
+  static const font28 = TextStyle(
+    fontSize: 28,
+    color: Colors.black,
+    fontFamily: 'Gilroy',
+  );
+  static const font30 = TextStyle(
+    fontSize: 30,
+    color: Colors.black,
+    fontFamily: 'Gilroy',
+  );
+  
   static const font32 = TextStyle(
     fontSize: 32,
     color: Colors.black,
