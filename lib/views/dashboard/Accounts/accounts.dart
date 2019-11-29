@@ -290,7 +290,10 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                 ),
-                                onPressed: goSignUp,
+                                onPressed: (){
+                                  Navigator.of(context).pushNamed('exchange');
+                                  //// Changed goSignUp
+                                },
                               ),
                             ),
                           ],
@@ -333,7 +336,10 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                                                     .copyWith(
                                                         color:
                                                             AppColors.c00B3DF)),
-                                            onTap: null,
+                                            onTap: (){
+                                              Navigator.of(context).pushNamed('seealllastactions',
+                                    );
+                                            },
                                           ),
                                         ],
                                       ),
@@ -436,14 +442,17 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                                         title: 'GBP -> BTC',
                                         time: '10:43 PM',
                                         amount1: '+B1.00',
+                                        image : 'exchange',
                                         amount2: '+B1.00'),
                                     actionRow(
                                         title: 'from Jerry Simpson',
                                         time: '7:45 PM',
+                                        image : 'jerry',
                                         amount1: '+£4,342.12'),
                                     actionRow(
                                         title: 'Starbucks',
                                         time: '7:45 PM',
+                                        image : 'star',
                                         amount2: '-£3.99'),
                                   ],
                                 ),
@@ -468,6 +477,7 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
     String time = '',
     String amount1 = '',
     String amount2 = '',
+    String image = '',
   }) {
     return Container(
       margin: EdgeInsets.only(top: 8, bottom: 8),
@@ -480,7 +490,7 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
             children: <Widget>[
               Container(
                 margin: EdgeInsets.only(right: 8),
-                child: Image.asset('assets/images/minus.png', width: 32),
+                child: Image.asset('assets/images/$image.png', width: 32),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,3 +1,4 @@
+import 'package:fluencybank/views/dashboard/Accounts/SeeallLastAction.dart';
 import 'package:fluencybank/views/dashboard/Accounts/account_details.dart';
 import 'package:fluencybank/views/dashboard/Accounts/accountcreated.dart';
 import 'package:fluencybank/views/dashboard/Accounts/accounts.dart';
@@ -30,7 +31,11 @@ import 'package:fluencybank/views/verify/verify_1.dart';
 import 'package:fluencybank/views/verify/verify_3.dart';
 import 'package:fluencybank/views/verify/verify_4.dart';
 
+import 'dashboard/Accounts/CurrencyOptions.dart';
+import 'dashboard/Accounts/Exchange.dart';
+import 'dashboard/Accounts/ExchangeSuccess.dart';
 import 'dashboard/Accounts/topupaccount.dart';
+import 'dashboard/Accounts/topupaccountSuccess.dart';
 
 class App extends StatelessWidget {
 
@@ -76,7 +81,12 @@ class App extends StatelessWidget {
         'statement': (_) => Statement(),
         'enteremail': (_) => EnterEmail(),
         'statementsent':(_) => Statementsent(),
+        'topupaccountsuccess':(_) => TopupaccountSuccess(),
         'account_created': (_) => Accountcreated(),
+        'seealllastactions': (_) => SeeAllLastActions(),
+        'exchange' :(_) => Exchange(),
+        'ExchangeCurrencyTOoptions' : (_) => ExchangeCurrencyTOoptions(),
+        'ExchangeSuccess': (_) => ExchangeSuccess(),
       },
     );
   }

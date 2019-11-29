@@ -1,7 +1,9 @@
 import 'dart:collection';
-
+import  'package:keyboard_actions/keyboard_actions.dart';
 import 'package:fluencybank/components/raised_gradient_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 import '../../theme.dart';
 
@@ -16,13 +18,15 @@ class _TopUpAccountState extends State<TopUpAccount> {
   var currencyText = "";
   var amount = "";
   bool canContinue = false;
-  TextEditingController currencyamountController = TextEditingController();
+  var currencyamountController = MoneyMaskedTextController(leftSymbol: '£',decimalSeparator: '.',thousandSeparator: '');
+  
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    currencyamountController.addListener(validator);
+    //currencyamountController.addListener(validator);
+    
   }
 
   @override
@@ -33,26 +37,34 @@ class _TopUpAccountState extends State<TopUpAccount> {
 
   void validator() {
     var currencyinserted = currencyamountController.text;
-    if (currencyinserted == 0) {
+    print(currencyinserted);
+    if (currencyinserted != "£0.00" && currencyinserted != "£0" ) {
       setState(() {
         canContinue = true;
       });
     } else {
       setState(() {
-        canContinue = true;
+        canContinue = false;
       });
     }
   }
+  
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
+    
     //currencyText
     final LinkedHashMap<String, String> args =
         ModalRoute.of(context).settings.arguments;
     setState(() {
       currencyText = args['currencyText'];
       amount = args['amount'];
-      print("This is the $currencyText and $amount");
+      
     });
     return Scaffold(
       appBar: AppBar(
@@ -73,242 +85,250 @@ class _TopUpAccountState extends State<TopUpAccount> {
         ),
       ),
       body: SafeArea(child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints viewportConstraints) {
-        return GestureDetector(
-            onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
-            child: SingleChildScrollView(
-              //FIXME:check with devices
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: viewportConstraints.maxHeight,
-                ),
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: double.infinity,
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(top: 15.0),
-                          child: Text(
-                            "Choose account",
-                            style: TextStyle(
-                                fontFamily: 'Gilroy',
-                                fontSize: 16.0,
-                                color: Colors.grey[500],
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.grey[100]),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 12.0,
-                                  left: 8.0,
-                                  right: 10.0,
-                                  bottom: 12.0),
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    height: 40.0,
-                                    width: 40.0,
-                                    child: Image.asset("assets/images/eng.png"),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 10.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text("$currencyText",
-                                              style: AppStyles.font20.copyWith(
-                                                  fontWeight: FontWeight.w500)),
-                                          Text(
-                                            "$amount",
-                                            style: TextStyle(
-                                                color: Colors.grey[500],
-                                                fontFamily: 'Gilroy',
-                                                fontSize: 16.0),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Icon(Icons.keyboard_arrow_down,
-                                      color: Colors.black)
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        //topupmethod
-                        Padding(
-                          padding: EdgeInsets.only(top: 15.0),
-                          child: Text(
-                            "Select top up method",
-                            style: TextStyle(
-                                fontFamily: 'Gilroy',
-                                fontSize: 16.0,
-                                color: Colors.grey[500],
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.grey[100]),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 12.0,
-                                  left: 8.0,
-                                  right: 10.0,
-                                  bottom: 12.0),
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    height: 40.0,
-                                    width: 40.0,
-                                    child:
-                                        Image.asset("assets/images/master.png"),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 10.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text("*4322",
-                                              style: AppStyles.font20.copyWith(
-                                                  fontWeight: FontWeight.w500)),
-                                          Text(
-                                            "Bank of America",
-                                            style: TextStyle(
-                                                color: Colors.grey[500],
-                                                fontFamily: 'Gilroy',
-                                                fontSize: 16.0),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Icon(Icons.keyboard_arrow_down,
-                                      color: Colors.black)
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 15.0),
-                          child: Text(
-                            "Top up amount",
-                            style: TextStyle(
-                                fontFamily: 'Gilroy',
-                                fontSize: 16.0,
-                                color: Colors.grey[500],
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                        ////Amount
-
-                        Expanded(
-                          flex: 1,
-                          child: Form(
-                            child: TextFormField(
-                              
-                              textAlign: TextAlign.center,
-                              onFieldSubmitted: (term) {
-                                _formKey.currentState.validate();
-                              },
-                              keyboardType: TextInputType.phone,
-                              style: AppStyles.font32,
-                              cursorWidth: 1,
-                              cursorColor: AppColors.c212121,
-                              validator: (value) {
-                                if (value == 0) {
-                                  return "Please enter valid amount";
-                                }
-                              },
-                              controller: currencyamountController,
-                              decoration: InputDecoration(
-                                  hintText: "£0",
-                                  hintStyle: TextStyle(
-                                      color: Colors.grey[600], fontSize: 32.0)),
-                            ),
-                          ),
-                        ),
-                        //Top up Button
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Column(
-                              children: <Widget>[
-                                Center(
-                                    child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    "Top up fee £0.00",
-                                    style: TextStyle(
-                                        color: Colors.grey[500],
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Gilroy'),
-                                  ),
-                                )),
-                                Container(
-                                  margin: EdgeInsets.all(16),
-                                  child: RaisedGradientButton(
-                                    child: Text(
-                                      "Top Up",
-                                      style: AppStyles.buttonTextStyle,
-                                    ),
-                                    gradient: canContinue
-                                        ? LinearGradient(
-                                            colors: [
-                                              AppColors.c00B3DF,
-                                              AppColors.c00B3DF
-                                            ],
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                          )
-                                        : LinearGradient(
-                                            colors: [
-                                              AppColors.cBDBDBD,
-                                              AppColors.cBDBDBD
-                                            ],
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                          ),
-                                    onPressed: () {
-                                      if (canContinue == true) {
-                                        Navigator.of(context)
-                                            .pushNamed('statementsent');
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+            builder: (BuildContext context, BoxConstraints viewportConstraints) {
+          return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
+      child: SingleChildScrollView(
+        //FIXME:check with devices
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: viewportConstraints.maxHeight,
+          ),
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: double.infinity,
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 15.0),
+                    child: Text(
+                      "Choose account",
+                      style: TextStyle(
+                          fontFamily: 'Gilroy',
+                          fontSize: 16.0,
+                          color: Colors.grey[500],
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
-                ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 15.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.grey[100]),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 12.0,
+                            left: 8.0,
+                            right: 10.0,
+                            bottom: 12.0),
+                        child: Row(
+                          children: <Widget>[
+                            Container(
+                              height: 40.0,
+                              width: 40.0,
+                              child: Image.asset("assets/images/eng.png"),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 10.0),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text("$currencyText",
+                                        style: AppStyles.font20.copyWith(
+                                            fontWeight: FontWeight.w500)),
+                                    Text(
+                                      "$amount",
+                                      style: TextStyle(
+                                          color: Colors.grey[500],
+                                          fontFamily: 'Gilroy',
+                                          fontSize: 16.0),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Icon(Icons.keyboard_arrow_down,
+                                color: Colors.black)
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  //topupmethod
+                  Padding(
+                    padding: EdgeInsets.only(top: 15.0),
+                    child: Text(
+                      "Select top up method",
+                      style: TextStyle(
+                          fontFamily: 'Gilroy',
+                          fontSize: 16.0,
+                          color: Colors.grey[500],
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 15.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.grey[100]),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 12.0,
+                            left: 8.0,
+                            right: 10.0,
+                            bottom: 12.0),
+                        child: Row(
+                          children: <Widget>[
+                            Container(
+                              height: 40.0,
+                              width: 40.0,
+                              child:
+                                  Image.asset("assets/images/master.png"),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 10.0),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text("*4322",
+                                        style: AppStyles.font20.copyWith(
+                                            fontWeight: FontWeight.w500)),
+                                    Text(
+                                      "Bank of America",
+                                      style: TextStyle(
+                                          color: Colors.grey[500],
+                                          fontFamily: 'Gilroy',
+                                          fontSize: 16.0),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Icon(Icons.keyboard_arrow_down,
+                                color: Colors.black)
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 15.0),
+                    child: Text(
+                      "Top up amount",
+                      style: TextStyle(
+                          fontFamily: 'Gilroy',
+                          fontSize: 16.0,
+                          color: Colors.grey[500],
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  ////Amount
+
+                  Expanded(
+                    flex: 1,
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        
+                        textAlign: TextAlign.center,
+                        onFieldSubmitted: (term) {
+                          _formKey.currentState.validate();
+                          validator();
+                        },
+                        keyboardType: TextInputType.numberWithOptions(decimal : true),
+                        style: AppStyles.font32,
+                        cursorWidth: 1,
+                        cursorColor: AppColors.c212121,
+                        validator: (value) {
+                          if (value == "0.00") {
+                            return "Please enter valid amount";
+                          }
+                        },
+                        controller: currencyamountController,
+                        decoration: InputDecoration(
+                          
+                            hintText: "£0",
+                            
+                            
+                            hintStyle: TextStyle(
+                                color: Colors.grey[600], fontSize: 32.0)),
+                      ),
+                    ),
+                  ),
+                  //Top up Button
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Column(
+                        children: <Widget>[
+                          Center(
+                              child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              "Top up fee £0.00",
+                              style: TextStyle(
+                                  color: Colors.grey[500],
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Gilroy'),
+                            ),
+                          )),
+                          Container(
+                            margin: EdgeInsets.all(16),
+                            child: RaisedGradientButton(
+                              child: Text(
+                                "Top Up",
+                                style: AppStyles.buttonTextStyle,
+                              ),
+                              gradient: canContinue
+                                  ? LinearGradient(
+                                      colors: [
+                                        AppColors.c00B3DF,
+                                        AppColors.c00B3DF
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    )
+                                  : LinearGradient(
+                                      colors: [
+                                        AppColors.cBDBDBD,
+                                        AppColors.cBDBDBD
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    ),
+                              onPressed: () {
+                                if (canContinue == true) {
+                                  Navigator.of(context).pushNamed('topupaccountsuccess',arguments: <String,String>{
+                      "currencyText" : currencyText,
+                      "amount" : "${currencyamountController.text}",
+                      "amountinBank" :"$amount"
+                    });
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ));
-      })),
+            ),
+          ),
+        ),
+      ));
+        })),
     );
   }
 
