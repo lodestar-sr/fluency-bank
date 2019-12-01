@@ -36,6 +36,8 @@ import 'dashboard/Accounts/Exchange.dart';
 import 'dashboard/Accounts/ExchangeSuccess.dart';
 import 'dashboard/Accounts/topupaccount.dart';
 import 'dashboard/Accounts/topupaccountSuccess.dart';
+import 'dashboard/Cards/InviteFriends.dart';
+import 'dashboard/Cards/InvitefriendsfromContacts.dart';
 
 class App extends StatelessWidget {
 
@@ -87,6 +89,10 @@ class App extends StatelessWidget {
         'exchange' :(_) => Exchange(),
         'ExchangeCurrencyTOoptions' : (_) => ExchangeCurrencyTOoptions(),
         'ExchangeSuccess': (_) => ExchangeSuccess(),
+
+        //card 
+        'InviteFriends': (_) => InviteFriends(),
+        'InviteFriendsFromcontacts': (_) => InviteFriendsFromcontacts(),
       },
     );
   }

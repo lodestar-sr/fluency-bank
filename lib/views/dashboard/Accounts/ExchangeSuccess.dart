@@ -177,7 +177,7 @@ class ExchangeSuccessSuccessState extends State<ExchangeSuccess> {
                                                       MainAxisAlignment
                                                           .spaceAround,
                                                   children: <Widget>[
-                                                    Text("GDP",
+                                                    Text("GBP",
                                                             style: AppStyles
                                                                 .font20
                                                                 .copyWith(
@@ -195,6 +195,11 @@ class ExchangeSuccessSuccessState extends State<ExchangeSuccess> {
                                                 ),
                                               ),
                                             ),
+                                            Text("-$convertfrom",style: AppStyles.font22
+                                                          .copyWith(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),)
                                           ],
                                         ),
 
@@ -261,6 +266,12 @@ class ExchangeSuccessSuccessState extends State<ExchangeSuccess> {
                                                 ),
                                               ),
                                             ),
+                                            Text("+$convertto",
+                                      style: AppStyles.font24.copyWith(
+                                          color: AppColors.c24E343,
+                                          fontFamily: 'Gilroy',
+                                          fontWeight: FontWeight.bold,
+                                          decoration: TextDecoration.none))
                                           ],
                                         ),
 

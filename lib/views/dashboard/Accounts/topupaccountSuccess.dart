@@ -18,6 +18,7 @@ class _TopupaccountSuccessState extends State<TopupaccountSuccess> {
   var amount = "";
   var amountinBank = "";
   var CheckStatus = "success";
+  var from = "";
   //var CheckStatus = "failed" ;
   //var CheckStatus = "sdsd";
   var visibilty = true;
@@ -47,6 +48,7 @@ class _TopupaccountSuccessState extends State<TopupaccountSuccess> {
       currencyText = args['currencyText'];
       amount = args['amount'];
       amountinBank = args['amountinBank'];
+      from = args['from'];
     });
 
     return SafeArea(
@@ -399,11 +401,22 @@ class _TopupaccountSuccessState extends State<TopupaccountSuccess> {
                                             ),
                                             onPressed: () {
                                               setState(() {
-                                                var count = 0;
+                                                if (from == "acountdetails"){
+                                                  var count = 0;
                                                 Navigator.popUntil(context,
                                                     (route) {
                                                   return count++ == 3;
                                                 });
+                                                }
+                                                else
+                                                {
+                                                  var count = 0;
+                                                Navigator.popUntil(context,
+                                                    (route) {
+                                                  return count++ == 2;
+                                                });
+                                                }
+                                                
                                               });
                                             },
                                           ),

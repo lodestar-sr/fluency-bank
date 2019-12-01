@@ -2,10 +2,15 @@ import 'dart:async';
 
 import 'package:fluencybank/components/raised_gradient_button.dart';
 import 'package:fluencybank/views/dashboard/Accounts/accounts.dart';
+import 'package:fluencybank/views/dashboard/Cards/cardshomescreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:fluencybank/views/theme.dart';
+
+
+import 'Invite/InviteHomeScreen.dart';
+import 'More/MoreHomescreen.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -14,15 +19,32 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int currentTab = 0;
-  final List<Widget> screens = [];
-  final PageStorageBucket bucket = PageStorageBucket();
+  
   Widget currentScreen = Accounts();
+ 
+ final List<Widget> screens = [
+    Accounts(
+      key: PageStorageKey('Page1'),
+    ),
+    CardHomescreen(
+      key: PageStorageKey('Page2'),
+    ),
+    InviteHomescreen(
+      key: PageStorageKey('Page3'),
+    ),
+    MoreHomescreen(
+      key: PageStorageKey('Page4'),
+    ),
+    
+  ];
+
+  final PageStorageBucket bucket = PageStorageBucket();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageStorage(
-        child: currentScreen,
+        child:  screens[currentTab],
         bucket: bucket,
       ),
       floatingActionButton: Container(
@@ -44,7 +66,7 @@ class _DashboardState extends State<Dashboard> {
         shape: CircularNotchedRectangle(),
         notchMargin: 0,
         child: Container(
-            height: 84,
+            height: 64,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[

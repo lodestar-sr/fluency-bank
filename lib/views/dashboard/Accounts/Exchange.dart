@@ -390,124 +390,129 @@ class _ExchangeState extends State<Exchange> {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         context: context,
+        isScrollControlled: true,
         builder: (BuildContext bc) {
           return StatefulBuilder(builder: (BuildContext context,
               StateSetter setState /*You can rename this!*/) {
-            return Container(
-              height: 400.0,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: ListView(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          height: 5.0,
-                          width: 50.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.grey[350],
+            return Padding(
+              padding: EdgeInsets.only(
+             bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Container(
+                height: 400.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: ListView(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                            height: 5.0,
+                            width: 50.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.grey[350],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Text("Confirm exchange",
-                        style: AppStyles.font22
-                            .copyWith(fontWeight: FontWeight.bold)),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.0),
-                      child: Text(
-                        "You're exchanging ${currencyfromController.text} to ${currencytoController.text}, from you GBP account to your Btc account",
-                        style: AppStyles.font16.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.grey[500]),
-                      ),
-                    ),
-                    //Passcode
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            VerificationCodeInput(
-                              keyboardType: TextInputType.number,
-                              itemWidth: 40,
-                              itemHeight: 56,
-                              itemGap: 8,
-                              separateMiddle: false,
-                              obscure: obscurePasscode,
-                              textStyle: TextStyle(
-                                color: Colors.black,
-                                fontSize: 24,
-                              ),
-                              onCompleted: (value){
-                                completeInputCode(value);
-                              },
-                              onChanged: (value){
-                                completeInputCode(value);
-                              },
-                              
-                            ),
-
-                            Container(
-                              margin: EdgeInsets.only(left: 24),
-                              child: GestureDetector(
-                                child: Image.asset(
-                                  obscurePasscode ? 'assets/images/eye-gray.png' : 'assets/images/eye-black.png',
-                                  width: 26,
-                                ),
-                                onTap: (){
-                                  setState(() {
-                                    onTogglePasscode();
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
+                      Text("Confirm exchange",
+                          style: AppStyles.font22
+                              .copyWith(fontWeight: FontWeight.bold)),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          "You're exchanging ${currencyfromController.text} to ${currencytoController.text}, from you GBP account to your Btc account",
+                          style: AppStyles.font16.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey[500]),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 30),
-                      child: Container(
-                              margin: EdgeInsets.all(16),
-                              child: RaisedGradientButton(
-                                child: Text(
-                                  "Exchange Now",
-                                  style: AppStyles.buttonTextStyle,
+                      //Passcode
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              VerificationCodeInput(
+                                keyboardType: TextInputType.number,
+                                itemWidth: 40,
+                                itemHeight: 56,
+                                itemGap: 8,
+                                separateMiddle: false,
+                                obscure: obscurePasscode,
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 24,
                                 ),
-                                gradient: canContinueModel
-                                    ? LinearGradient(
-                                        colors: [
-                                          AppColors.c00B3DF,
-                                          AppColors.c00B3DF
-                                        ],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                      )
-                                    : LinearGradient(
-                                        colors: [
-                                          AppColors.cBDBDBD,
-                                          AppColors.cBDBDBD
-                                        ],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                      ),
-                                onPressed: () {
-                                  if (canContinueModel == true) {
-                                    Navigator.of(context).pushNamed('ExchangeSuccess',arguments: <String,String>{
-                                      "convertfrom" : '${currencyfromController.text}',
-                                      "convertto" : '${currencytoController.text}'
-                                    });
-                                  }
+                                onCompleted: (value){
+                                  completeInputCode(value);
                                 },
+                                onChanged: (value){
+                                  completeInputCode(value);
+                                },
+                                
                               ),
-                            )
-                    )
-                  ],
+
+                              Container(
+                                margin: EdgeInsets.only(left: 24),
+                                child: GestureDetector(
+                                  child: Image.asset(
+                                    obscurePasscode ? 'assets/images/eye-gray.png' : 'assets/images/eye-black.png',
+                                    width: 26,
+                                  ),
+                                  onTap: (){
+                                    setState(() {
+                                      onTogglePasscode();
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 30),
+                        child: Container(
+                                margin: EdgeInsets.all(16),
+                                child: RaisedGradientButton(
+                                  child: Text(
+                                    "Exchange Now",
+                                    style: AppStyles.buttonTextStyle,
+                                  ),
+                                  gradient: canContinueModel
+                                      ? LinearGradient(
+                                          colors: [
+                                            AppColors.c00B3DF,
+                                            AppColors.c00B3DF
+                                          ],
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                        )
+                                      : LinearGradient(
+                                          colors: [
+                                            AppColors.cBDBDBD,
+                                            AppColors.cBDBDBD
+                                          ],
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                        ),
+                                  onPressed: () {
+                                    if (canContinueModel == true) {
+                                      Navigator.of(context).pushNamed('ExchangeSuccess',arguments: <String,String>{
+                                        "convertfrom" : '${currencyfromController.text}',
+                                        "convertto" : '${currencytoController.text}'
+                                      });
+                                    }
+                                  },
+                                ),
+                              )
+                      )
+                    ],
+                  ),
                 ),
               ),
             );

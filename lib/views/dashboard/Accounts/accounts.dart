@@ -9,14 +9,15 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:share/share.dart';
 
 class Accounts extends StatefulWidget {
+  Accounts({Key key}) : super(key: key);
   @override
   State<StatefulWidget> createState() => _AccountsState();
 }
 
 class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
-  int currentTab = 0;
-  final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = Accounts();
+
+  
+  
   var flag = [false, false];
   double _scale;
   AnimationController _controller;
@@ -156,7 +157,15 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                                       begin: Alignment.topCenter,
                                       end: Alignment.bottomCenter,
                                     ),
-                                    onPressed: null,
+                                    onPressed: (){
+                                      setState(() {
+                                        Navigator.of(context).pushNamed('topupaccount',arguments: <String,String>{
+                      "currencyText" : "GBP",
+                      "amount" : "£1,000.00",
+                      "from" : 'accountHome',
+                    });
+                                      });
+                                    },
                                   ),
                                 ],
                               ),

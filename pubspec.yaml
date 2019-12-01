@@ -26,6 +26,8 @@ dependencies:
   flutter_cupertino_date_picker: ^1.0.12
   flutter_datetime_picker: ^1.2.5
   keyboard_actions:
+  contacts_service: 
+  permission_handler: 
   
 
 
