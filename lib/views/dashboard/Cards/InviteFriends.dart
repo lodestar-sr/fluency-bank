@@ -1,4 +1,5 @@
 import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/utils/globals.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme.dart';
@@ -11,10 +12,18 @@ class InviteFriends extends StatefulWidget {
 }
 
 class _InviteFriendsState extends State<InviteFriends> {
+
+
+
+
+  //Sharedpreference
+
   @override
   Widget build(BuildContext context) {
     var pixelheight = MediaQuery.of(context).size.height / 100;
     var pixelwidth = MediaQuery.of(context).size.width / 100;
+    var friendsList = Globals.savedList;
+    print("This is the global list${Globals.savedList}");
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -67,6 +76,7 @@ class _InviteFriendsState extends State<InviteFriends> {
                                 child: Container(
                                   height: 210,
                                   child: ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
                                     itemCount: 3,
                                     itemBuilder:
                                         (BuildContext context, int index) {
@@ -82,21 +92,26 @@ class _InviteFriendsState extends State<InviteFriends> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.0)),
-                                                child: Icon(
-                                                  Icons.person_outline,
-                                                  color: Colors.grey[400],
-                                                  size: 30.0,
-                                                )),
+                                                child: Center(
+                                                  child: friendsList.isEmpty ? Icon(
+                                                    Icons.person_outline,
+                                                    color: Colors.grey[400],
+                                                    size: 30.0,
+                                                  ): friendsList[index].firstLetter.contains("PNG") ? Text("Image") : Text(friendsList[index].firstLetter),
+                                                )
+                                                
+                                                
+                                                ),
                                             Padding(
                                               padding:
                                                   EdgeInsets.only(left: 15.0),
-                                              child: Text("Invite",
+                                              child: friendsList.isEmpty ?Text("Invite",
                                                   style: AppStyles.font18
                                                       .copyWith(
                                                           color:
                                                               Colors.grey[700],
                                                           fontWeight:
-                                                              FontWeight.w600)),
+                                                              FontWeight.w600)) : Text(friendsList[index].displayname)
                                             )
                                           ],
                                         ),
@@ -125,7 +140,10 @@ class _InviteFriendsState extends State<InviteFriends> {
                                     onPressed: () {
                                       setState(() {
                                         Navigator.of(context)
-                                            .pushNamed('InviteFriendsFromcontacts');
+                                            .pushNamed('InviteFriendsFromcontacts',arguments: <String,String>{
+                                              'from' : 'cards'
+
+                                            });
                                       });
                                     },
                                   ),

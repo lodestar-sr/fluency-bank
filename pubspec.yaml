@@ -28,6 +28,7 @@ dependencies:
   keyboard_actions:
   contacts_service: 
   permission_handler: 
+  shared_preferences:
   
 
 

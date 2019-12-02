@@ -1,10 +1,14 @@
+import 'dart:collection';
+
 import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share/share.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:contacts_service/contacts_service.dart';
 import '../../theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class InviteFriendsFromcontacts extends StatefulWidget {
   InviteFriendsFromcontacts({Key key}) : super(key: key);
@@ -17,6 +21,9 @@ class InviteFriendsFromcontacts extends StatefulWidget {
 class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
   var shareLink = "http://fluency.io/fdHFRee98";
   Iterable<Contact> _contacts;
+  List<ContactsChoosed> selectedContacts = [];
+  
+  
   // get contacts
   @override
   void initState() {
@@ -29,9 +36,12 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
     if (permissionStatus == PermissionStatus.granted) {
       var contacts = await ContactsService.getContacts();
 
-      setState(() {
+      if (mounted)
+      {
+        setState(() {
         _contacts = contacts;
       });
+      }
     } else {
       throw PlatformException(
         code: 'PERMISSION_DENIED',
@@ -61,7 +71,13 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
   Widget build(BuildContext context) {
     var pixelheight = MediaQuery.of(context).size.height / 100;
     var pixelwidth = MediaQuery.of(context).size.width / 100;
-    ;
+    final LinkedHashMap<String, String> args =
+        ModalRoute.of(context).settings.arguments;
+        var from ;
+    setState(() {
+      from = args['from'];
+      
+    });
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -254,6 +270,8 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
                                           itemBuilder: (context, index) {
                                             Contact c =
                                                 _contacts?.elementAt(index);
+                                               Contact a = _contacts?.elementAt(index);
+                                               var phone = a.phones.toList();
                                             return Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
@@ -301,21 +319,78 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
                                                                   .only(
                                                                       top:
                                                                           10.0),
-                                                              child: Column(
-                                                                children: c
-                                                                    .phones
-                                                                    .map(
-                                                                      (i) =>
-                                                                          Text(i.value ?? ""),
-                                                                    )
-                                                                    .toList(),
-                                                              ))
+                                                              child: phone.length >= 1 && phone[0]?.value !=null ? 
+                                                              Text(phone[0].value):Text(""))
                                                         ],
                                                       ),
                                                     ),
                                                   ),
                                                   GestureDetector(
-                                                    onTap: () {},
+                                                    onTap: () {
+                                                       phone.length >= 1 && phone[0]?.value !=null ? 
+                                                              print(phone[0].value):print("null");
+                                                      print("${c.displayName}");
+                                                       if (selectedContacts.length <= 2) {
+                                                         for(int i = 0 ; i <= selectedContacts.length ; i++)
+                                                         {
+                                                           if (selectedContacts.length == 0) {
+                                                             selectedContacts.add(ContactsChoosed(c.displayName , phone.length >= 1 && phone[0]?.value !=null ? 
+                                                              phone[0].value:"null",c.avatar !=
+                                                                  null &&
+                                                              c.avatar.length >
+                                                                  0
+                                                          ? 
+                                                              c.avatar
+                                                              
+                                                            
+                                                          : c.initials()
+                                                          )
+                                                          );
+                                                          print("This is the contact selected ${selectedContacts[0].firstLetter},${selectedContacts[1].displayname},${selectedContacts[2].displayname}");
+                                                           } 
+                                                           
+                                                           else { 
+                                                               
+                                                             for(int z = 0 ; z<= selectedContacts.length ; z++)
+                                                             {
+                                                               if (selectedContacts[z].displayname == c.displayName) {
+                                                             print("Alredy added");
+                                                              } 
+                                                               else {
+                                                                  selectedContacts.add(ContactsChoosed(c.displayName , phone.length >= 1 && phone[0]?.value !=null ? 
+                                                                  phone[0].value:"null",c.avatar !=
+                                                                  null &&
+                                                                  c.avatar.length >
+                                                                  0
+                                                                     ? 
+                                                                   String.fromCharCodes(c.avatar) : c.initials()
+                                                          )
+                                                          );
+                                                          print("This is the contact selected ${selectedContacts[0].firstLetter},${selectedContacts[1].firstLetter},${selectedContacts[2].firstLetter}");
+                                                           }
+                                                             }
+                                                           }
+                                                         }
+                                                         
+                                                       } else { 
+                                                         print("Exceeded the Limit");
+                                                         
+                                                         if (from == 'cards') {
+                                                           Globals.savedList = selectedContacts;
+                                                         } else {
+                                                           Globals.savedListfromInviteScreen = selectedContacts;
+                                                         }
+                                                         Scaffold.of(context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                          content: Text(
+                                                              "You can Invite only 3 Friends  "),
+                                                        ));
+                                                       }  
+                                                       
+
+                                                       
+                                                    },
                                                     child: Text("Invite",
                                                         style: AppStyles.font18
                                                             .copyWith(
@@ -345,4 +420,12 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
       ),
     );
   }
+}
+class ContactsChoosed {
+
+  String displayname;
+  String phoneno;
+  String firstLetter;
+  ContactsChoosed(this.displayname , this.phoneno , this.firstLetter);
+  ContactsChoosed.fpp();
 }

@@ -1,4 +1,5 @@
 import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:fluencybank/utils/globals.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme.dart';
@@ -11,9 +12,27 @@ class CardHomescreen extends StatefulWidget {
 }
 
 class _CardHomescreenState extends State<CardHomescreen> {
-  
+  var friendsList = Globals.savedList;
+  bool ifInvited = false;
+  @override
+  void initState() { 
+    super.initState();
+    
+  }
   @override
   Widget build(BuildContext context) {
+    if (friendsList.isEmpty) {
+      setState(() {
+        ifInvited = true;
+      });
+    } else {
+      setState(() {
+        ifInvited = false;
+      });
+    }
+    setState(() {
+      friendsList = Globals.savedList;
+    });
     var pixelheight = MediaQuery.of(context).size.height/100;
     var pixelwidth = MediaQuery.of(context).size.width/100;
     return SafeArea(
@@ -76,7 +95,9 @@ class _CardHomescreenState extends State<CardHomescreen> {
                                           child: Text("Spend crypto instantly with your Fluency card",style: AppStyles.font24.copyWith(fontWeight: FontWeight.bold),),
                                         ),
                                         Text("In the coming weeks,we'll begin to roll out a debit card which will allow you to effortlessly spend your crypto and fait fund from your Fluency accounts in retail stores and online.\n\n Invite 3 friends before March 2020 to get your card for free.",style: AppStyles.font16.copyWith(fontWeight: FontWeight.w600),),
-                                       Container(
+                                       Visibility(
+                                         visible: ifInvited,
+                                         child: Container(
                                           margin: EdgeInsets.all(16),
                                           child: RaisedGradientButton(
                                             child: Text(
@@ -99,6 +120,34 @@ class _CardHomescreenState extends State<CardHomescreen> {
                                             },
                                           ),
                                         ),
+                                        replacement: Padding(
+                                          padding: const EdgeInsets.only( top : 10.0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10.0),
+                                              border: Border.all(color: AppColors.c24E343)
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(top : 10.0,left: 8.0,right: 8.0,bottom: 8.0),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text("Congrats!",style:AppStyles.font24.copyWith(
+                                                    fontWeight: FontWeight.bold,color: AppColors.c24E343)),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(top:8.0),
+                                                    child: Text("You've successfully invited 3 friends , and you will get your Fluency card for free.",
+                                                    style:AppStyles.font18),
+                                                  )
+                                                
+                                                
+                                                ],
+                                                
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                       )
                                        
                                     
                                     
