@@ -30,6 +30,7 @@ import 'package:fluencybank/views/verify/vcard_done.dart';
 import 'package:fluencybank/views/verify/verify_1.dart';
 import 'package:fluencybank/views/verify/verify_3.dart';
 import 'package:fluencybank/views/verify/verify_4.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dashboard/Accounts/CurrencyOptions.dart';
 import 'dashboard/Accounts/Exchange.dart';
@@ -38,9 +39,14 @@ import 'dashboard/Accounts/topupaccount.dart';
 import 'dashboard/Accounts/topupaccountSuccess.dart';
 import 'dashboard/Cards/InviteFriends.dart';
 import 'dashboard/Cards/InvitefriendsfromContacts.dart';
+import 'dashboard/More/AccountConfiguration.dart';
+import 'dashboard/More/PersonalDetails.dart';
+import 'dashboard/More/PersonaldetailschangeSucess.dart';
 
 class App extends StatelessWidget {
-
+   Widget home;
+   //loginComplte
+   App(this.home);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -93,6 +99,10 @@ class App extends StatelessWidget {
         //card 
         'InviteFriends': (_) => InviteFriends(),
         'InviteFriendsFromcontacts': (_) => InviteFriendsFromcontacts(),
+        //More
+        'PersonalDetails': (_) => PersonalDetails(),
+        'PersonalDetailsChangeSuccess': (_) => PersonalDetailsChangeSuccess(),
+        'AccountConfiguration' : (_) => AccountConfiguration(),
       },
     );
   }

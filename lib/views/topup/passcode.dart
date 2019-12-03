@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluencybank/components/raised_gradient_button.dart';
@@ -67,7 +67,11 @@ class _PasscodeState extends State<Passcode> {
     setState(() {
       obscurePasscode = !obscurePasscode;
     });
-  }
+  }  
+  addBoolToSF() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool("loginComplte", true);
+}
 
   submitPassCode() {
     if (!this.showRepeat && this.code != '') {
@@ -79,6 +83,7 @@ class _PasscodeState extends State<Passcode> {
       });
     } else if (this.repeatCode == this.code && this.code.length == 4) {
       // Final Step
+      addBoolToSF();
       Navigator.of(context).pushNamed('dashboard');
     }
   }
