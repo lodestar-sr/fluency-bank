@@ -4,7 +4,7 @@ import 'package:fluencybank/components/raised_gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-import '../../theme.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class PersonalDetailsChangeSuccess extends StatefulWidget {
   PersonalDetailsChangeSuccess({Key key}) : super(key: key);

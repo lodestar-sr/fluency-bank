@@ -1,4 +1,6 @@
+import 'package:fluencybank/components/raised_gradient_button.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../theme.dart';
 
@@ -20,10 +22,33 @@ class _AddaccountState extends State<Addaccount> {
     "Activate for",
     "Activate for",
   ];
-  var money = ["", "£4.99", "£4.99", "£4.99", "£4.99"];
-  var currency = ["AED", "AUD", "CAD"];
-  var currencyname = ["Emirati Dirham", "Australian Dollar", "Canadian Dollar"];
+  var money = ["₿0.00", "£4.99", "£4.99", "£4.99", "£4.99"];
+  var currency = ["AED", "AUD","CAD","CHF","CKZ","DKK","HKD"];
+  var currencyname = ["Emirati Dirham", "Australian Dollar", "Canadian Dollar","Swiss Franc","Czech Koruna","Danish Krone","Hong Kong Dollar"];
+  List<String> selectedCryptoCurrency = [];
+  List<String> selectedCryptoCurrencytype = [];
+  var retrivedCryptoCurrency;
+  var retrivedCryptoCurrencytype;
+  //₿
 
+  //Shared preference 
+  addStringToSF(List cryp , List cryptype) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setStringList("cryp", cryp);
+  prefs.setStringList("cryptype", cryptype);
+  }
+   
+   getValuesSF() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  retrivedCryptoCurrency = prefs.getStringList("cryp") ?? "";
+  retrivedCryptoCurrencytype = prefs.getStringList("cryptype") ?? "";
+  }
+  
+  @override
+  void initState() { 
+    super.initState();
+    getValuesSF();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,14 +110,57 @@ class _AddaccountState extends State<Addaccount> {
                           itemCount: cryp.length,
                           itemBuilder: (BuildContext context, int index) {
                             return GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushNamed('account_created',
+                              onTap: () {                            
+                                      print(retrivedCryptoCurrency?.isNotEmpty ?? false);
+                                      if (retrivedCryptoCurrency?.isNotEmpty ?? false)
+                                      {  
+
+                                        if (retrivedCryptoCurrency.contains("${cryp[index]}"))
+                                         {
+                                         print("already Added");
+                                         Scaffold.of(context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                                  shape: RoundedRectangleBorder(
+                                                                    borderRadius: BorderRadius.circular(10.0)
+                                                                  ),
+                                                            duration: Duration(milliseconds: 800),  
+                                                            //backgroundColor: Colors.white,    
+                                                          content: Text(
+                                                              "Already added.",textAlign: TextAlign.center,),
+                                                        ));
+                                         } else {
+                                        retrivedCryptoCurrency.add(cryp[index]);
+                                        retrivedCryptoCurrencytype.add(cryptype[index]);
+                                        addStringToSF(retrivedCryptoCurrency, retrivedCryptoCurrencytype);
+                                        
+                                        //to next page after adding to retrived
+                                        Navigator.of(context).pushNamed('account_created',
                                     arguments: <String, String>{
                                       "cryncurrency": cryp[index],
                                       "cryncurrencyname":cryptype[index],
                                       "money": money[index],
                                       "count": index.toString() ,
-                                    });
+                                    }); 
+                                                }
+                                      }
+                                      else
+                                      {
+                                             selectedCryptoCurrency.add(cryp[index]);
+                                             selectedCryptoCurrencytype.add(cryptype[index]);
+                                             addStringToSF(selectedCryptoCurrency, selectedCryptoCurrencytype);
+                                             // to nextpage if firsttime
+                                             
+                                             Navigator.of(context).pushNamed('account_created',
+                                    arguments: <String, String>{
+                                      "cryncurrency": cryp[index],
+                                      "cryncurrencyname":cryptype[index],
+                                      "money": money[index],
+                                      "count": index.toString() ,
+                                    }); 
+                                      }
+                                    
+
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -100,8 +168,8 @@ class _AddaccountState extends State<Addaccount> {
                                   child: Row(
                                     children: <Widget>[
                                       Container(
-                                        height: 60.0,
-                                        width: 60.0,
+                                        height: 50.0,
+                                        width: 50.0,
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
@@ -115,7 +183,7 @@ class _AddaccountState extends State<Addaccount> {
                                                     : Colors.white,
                                             image: DecorationImage(
                                                 image: ExactAssetImage(
-                                                    "assets/images/cryp${index + 1}.png"),
+                                                    "assets/images/${cryp[index]}.png"),
                                                 fit: BoxFit.contain)),
                                       ),
                                       Expanded(
@@ -205,10 +273,10 @@ class _AddaccountState extends State<Addaccount> {
                       child: Row(
                         children: <Widget>[
                           Container(
-                              height: 60.0,
-                              width: 60.0,
+                              height: 50.0,
+                              width: 50.0,
                               child: Image.asset(
-                                "assets/images/cu${index + 1}.png",
+                                "assets/images/${currency[index]}.png",
                                 fit: BoxFit.cover,
                               )),
                           Expanded(
@@ -244,4 +312,5 @@ class _AddaccountState extends State<Addaccount> {
       ),
     );
   }
+
 }
