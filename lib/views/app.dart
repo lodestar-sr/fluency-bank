@@ -40,8 +40,8 @@ import 'dashboard/Accounts/topupaccountSuccess.dart';
 import 'dashboard/Cards/InviteFriends.dart';
 import 'dashboard/Cards/InvitefriendsfromContacts.dart';
 import 'dashboard/More/AccountConfiguration.dart';
-import 'dashboard/More/PersonalDetails.dart';
-import 'dashboard/More/PersonaldetailschangeSucess.dart';
+import 'dashboard/More/PersonalDetails/PersonalDetails.dart';
+import 'dashboard/More/PersonalDetails/PersonaldetailschangeSucess.dart';
 
 class App extends StatelessWidget {
    Widget home;

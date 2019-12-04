@@ -6,7 +6,7 @@ import 'package:fluencybank/components/verification_code_input.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../theme.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class PersonalDetails extends StatefulWidget {
   PersonalDetails({Key key}) : super(key: key);
