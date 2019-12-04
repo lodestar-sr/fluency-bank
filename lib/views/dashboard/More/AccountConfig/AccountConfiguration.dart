@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme.dart';
+import 'package:fluencybank/views/theme.dart';
 
 class AccountConfiguration extends StatefulWidget {
   AccountConfiguration({Key key}) : super(key: key);

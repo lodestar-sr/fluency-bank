@@ -39,7 +39,7 @@ import 'dashboard/Accounts/topupaccount.dart';
 import 'dashboard/Accounts/topupaccountSuccess.dart';
 import 'dashboard/Cards/InviteFriends.dart';
 import 'dashboard/Cards/InvitefriendsfromContacts.dart';
-import 'dashboard/More/AccountConfiguration.dart';
+import 'dashboard/More/AccountConfig/AccountConfiguration.dart';
 import 'dashboard/More/PersonalDetails/PersonalDetails.dart';
 import 'dashboard/More/PersonalDetails/PersonaldetailschangeSucess.dart';
 
