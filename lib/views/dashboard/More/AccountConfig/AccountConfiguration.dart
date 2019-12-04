@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fluencybank/views/theme.dart';
@@ -75,18 +76,18 @@ class _AccountConfigurationState extends State<AccountConfiguration> {
                       subtitle: Text("${subheading[index] ?? ""}",style:AppStyles.font16.copyWith(color:Colors.grey[500])),
                       trailing: Icon(Icons.keyboard_arrow_right),
                       onTap: (){
-                        // if (index == 0) 
-                        // {                         
-                        //  Navigator.of(context).pushNamed('PersonalDetails');                       
-                        // }
-                        // if (index == 1) 
-                        // {                         
-                        //  Navigator.of(context).pushNamed('AccountConfiguration');                       
-                        // }
-                        // if (index == 2) 
-                        // {                         
-                        //  Navigator.of(context).pushNamed('PersonalDetails');                       
-                        // }
+                        if (index == 0) 
+                        {                         
+                         Navigator.of(context).pushNamed('ChoosemainCurrency');                       
+                        }
+                        if (index == 1) 
+                        {                         
+                         _settingbottomsheet(context);                       
+                        }
+                        if (index == 2) 
+                        {                         
+                         Navigator.of(context).pushNamed('AccountManagement');                       
+                        }
                         
                       },
                     );
@@ -112,5 +113,73 @@ class _AccountConfigurationState extends State<AccountConfiguration> {
       ),
     )
     );
+  }
+
+  void _settingbottomsheet(BuildContext context) {
+    var selected;
+    showBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: 250,
+            color: Colors.white,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  color: Colors.grey[100],
+                  height: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,                   
+                    children: <Widget>[
+                      Text("Action period",style: AppStyles.font18.copyWith(fontWeight: FontWeight.w600),),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          setState(() {
+                            daysSelected = selected;
+                          });
+                        
+                        },
+                        child: Text("Done",
+                            style: TextStyle(
+                                fontSize: 18.0,fontWeight: FontWeight.w600,
+                                color: Color.fromRGBO(0, 122, 255, 1))),
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    height: 100.0,
+                    child: CupertinoPicker(
+                      backgroundColor: Colors.white,
+                      children: <Widget>[
+                        Text("1 Day"),
+                        Text("7 days"),
+                        Text(" 2 weeks"),
+                        Text("1 month")
+                      ],
+                      itemExtent: 50,
+                      onSelectedItemChanged: (int index) {
+                        print(index);
+                        if (index == 0) {
+                          selected = "1 Day";
+                        } else if (index == 1) {
+                          selected = "7 days";
+                        }
+                        else if (index == 2) {
+                          selected = "2 weeks";
+                        }
+                        else if (index == 3) {
+                          selected = "1 month";
+                        }
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

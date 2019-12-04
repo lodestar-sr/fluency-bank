@@ -40,6 +40,8 @@ import 'dashboard/Accounts/topupaccountSuccess.dart';
 import 'dashboard/Cards/InviteFriends.dart';
 import 'dashboard/Cards/InvitefriendsfromContacts.dart';
 import 'dashboard/More/AccountConfig/AccountConfiguration.dart';
+import 'dashboard/More/AccountConfig/AccountManagement.dart';
+import 'dashboard/More/AccountConfig/ChooseMainCurrency.dart';
 import 'dashboard/More/PersonalDetails/PersonalDetails.dart';
 import 'dashboard/More/PersonalDetails/PersonaldetailschangeSucess.dart';
 
@@ -103,6 +105,8 @@ class App extends StatelessWidget {
         'PersonalDetails': (_) => PersonalDetails(),
         'PersonalDetailsChangeSuccess': (_) => PersonalDetailsChangeSuccess(),
         'AccountConfiguration' : (_) => AccountConfiguration(),
+        'ChoosemainCurrency' : (_) => ChoosemainCurrency(),
+        'AccountManagement' : (_) => AccountManagement(),
       },
     );
   }

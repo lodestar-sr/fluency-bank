@@ -120,7 +120,7 @@ class _accountcreatedState extends State<Accountcreated> {
                                                             : Colors.white,
                                                     image: DecorationImage(
                                                         image: ExactAssetImage(
-                                                            "assets/images/cryp${code + 1}.png"))),
+                                                            "assets/images/$currency.png"))),
                                               ),
                                             ),
                                             Expanded(
