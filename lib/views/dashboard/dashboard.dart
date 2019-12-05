@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:fluencybank/components/raised_gradient_button.dart';
 import 'package:fluencybank/views/dashboard/Accounts/accounts.dart';
 import 'package:fluencybank/views/dashboard/Cards/cardshomescreen.dart';
+import 'package:fluencybank/views/dashboard/Payment/PaymentHome.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -35,6 +36,9 @@ class _DashboardState extends State<Dashboard> {
     MoreHomescreen(
       key: PageStorageKey('Page4'),
     ),
+    Paymenthome(
+      key: PageStorageKey('Page5'),
+    )
     
   ];
 
@@ -58,7 +62,11 @@ class _DashboardState extends State<Dashboard> {
           shape: new CircleBorder(),
           elevation: 0.0,
           child: Image.asset('assets/images/icon.png', width: 40),
-          onPressed: null,
+          onPressed: (){
+                          setState(() {
+                          currentTab = 4 ;
+                        });
+          },
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

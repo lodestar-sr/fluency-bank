@@ -6,6 +6,15 @@ import 'package:fluencybank/views/dashboard/Accounts/addacount.dart';
 import 'package:fluencybank/views/dashboard/Accounts/enteremail.dart';
 import 'package:fluencybank/views/dashboard/Accounts/statement.dart';
 import 'package:fluencybank/views/dashboard/Accounts/statementsent.dart';
+import 'package:fluencybank/views/dashboard/More/FAQ/Answer.dart';
+import 'package:fluencybank/views/dashboard/More/FAQ/FAQ.dart';
+import 'package:fluencybank/views/dashboard/More/Login&Secutiry/Login_Security.dart';
+import 'package:fluencybank/views/dashboard/More/Login&Secutiry/SuccessPasswordChange.dart';
+import 'package:fluencybank/views/dashboard/More/Notification/Notifications.dart';
+import 'package:fluencybank/views/dashboard/More/Privacy_Policy/Ans_Privacy_Policy.dart';
+import 'package:fluencybank/views/dashboard/More/Privacy_Policy/Privacy_Policy.dart';
+import 'package:fluencybank/views/dashboard/Payment/BankTransfer1.dart';
+import 'package:fluencybank/views/dashboard/Payment/PaymentHome.dart';
 import 'package:fluencybank/views/dashboard/dashboard.dart';
 import 'package:fluencybank/views/home.dart';
 import 'package:fluencybank/views/topup/passcode.dart';
@@ -107,6 +116,17 @@ class App extends StatelessWidget {
         'AccountConfiguration' : (_) => AccountConfiguration(),
         'ChoosemainCurrency' : (_) => ChoosemainCurrency(),
         'AccountManagement' : (_) => AccountManagement(),
+        'Login_Security' : (_) => Login_Security(),
+        'PinCodeChangeSucess' : (_) => PinCodeChangeSucess(),
+        'Notifications' : (_) => Notifications(),
+        'FAQ' : (_) => FAQ(),
+        'FaqAnswers' : (_) => FaqAnswers(),
+        'Privacy_Policy' : (_) => Privacy_Policy(),
+        'Ans_Privacy_Policy' : (_) => Ans_Privacy_Policy(),
+
+        //Payment 
+        'Paymenthome' : (_) => Paymenthome(),
+        'BankTransfer1' : (_) => BankTransfer1(),
       },
     );
   }
