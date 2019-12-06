@@ -15,6 +15,7 @@ import 'package:fluencybank/views/dashboard/More/Privacy_Policy/Ans_Privacy_Poli
 import 'package:fluencybank/views/dashboard/More/Privacy_Policy/Privacy_Policy.dart';
 import 'package:fluencybank/views/dashboard/Payment/BankTransfer1.dart';
 import 'package:fluencybank/views/dashboard/Payment/PaymentHome.dart';
+import 'package:fluencybank/views/dashboard/Payment/SuccessPayment.dart';
 import 'package:fluencybank/views/dashboard/dashboard.dart';
 import 'package:fluencybank/views/home.dart';
 import 'package:fluencybank/views/topup/passcode.dart';
@@ -62,7 +63,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: appTheme(context),
+     // theme: appTheme(context),
+      theme: ThemeData(
+        buttonTheme: ButtonThemeData(minWidth: 10,),
+        textTheme: TextTheme(button: TextStyle(fontSize: 10)),
+),
       home: Dashboard(),
       routes: {
         'splash': (_) => Splash(),
@@ -127,6 +132,7 @@ class App extends StatelessWidget {
         //Payment 
         'Paymenthome' : (_) => Paymenthome(),
         'BankTransfer1' : (_) => BankTransfer1(),
+        'PaymentSuccess' : (_) => PaymentSuccess(),
       },
     );
   }

@@ -30,6 +30,8 @@ dependencies:
   permission_handler: 
   shared_preferences:
   line_awesome_icons:
+  grouped_buttons:
+  timeline_list:
   
 
 

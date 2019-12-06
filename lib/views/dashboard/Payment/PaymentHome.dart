@@ -87,6 +87,7 @@ class _PaymenthomeState extends State<Paymenthome> {
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Column(
+                            mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text("Choose the country and currency and add account details",
