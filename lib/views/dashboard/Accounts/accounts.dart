@@ -76,7 +76,6 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                 constraints: BoxConstraints(
                   minHeight: viewportConstraints.maxHeight,
                 ),
-
                 //Removed Intrinsic height
                 child: Stack(children: [
                   Image.asset(
@@ -122,11 +121,13 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                                 children: <Widget>[
                                   Container(
                                     margin: EdgeInsets.only(bottom: 18),
-                                    child: GestureDetector(
+                                    child: GestureDetector(                                     
                                       child: Image.asset(
                                           'assets/images/search-white.png',
                                           width: 24),
-                                      onTap: null,
+                                      onTap: (){
+                                        Navigator.of(context).pushNamed('SearchScreen');
+                                      },
                                     ),
                                   ),
                                   RaisedGradientButton(

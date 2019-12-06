@@ -1,3 +1,4 @@
+import 'package:fluencybank/views/dashboard/Accounts/SearchScreen.dart';
 import 'package:fluencybank/views/dashboard/Accounts/SeeallLastAction.dart';
 import 'package:fluencybank/views/dashboard/Accounts/account_details.dart';
 import 'package:fluencybank/views/dashboard/Accounts/accountcreated.dart';
@@ -99,6 +100,7 @@ class App extends StatelessWidget {
 
         'dashboard': (_) => Dashboard(),
         'accounts' : (_) => Accounts(),
+        'SearchScreen' : (_) => SearchScreen(),
         'add_acount': (_) => Addaccount(),
         'topupaccount': (_) => TopUpAccount(),
         'account_details': (_) => Account_details(),
