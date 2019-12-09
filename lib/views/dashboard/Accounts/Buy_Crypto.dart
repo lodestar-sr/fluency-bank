@@ -1,28 +1,29 @@
+//Buy_Crypto
+
 import 'package:flutter/material.dart';
 
 import '../../theme.dart';
 
-class ExchangeCurrencyTOoptions extends StatefulWidget {
-  ExchangeCurrencyTOoptions({Key key}) : super(key: key);
+class Buy_Crypto extends StatefulWidget {
+  Buy_Crypto({Key key}) : super(key: key);
 
   @override
-  ExchangeCurrencyTOoptionsstate createState() => ExchangeCurrencyTOoptionsstate();
+  Buy_Cryptostate createState() => Buy_Cryptostate();
 }
 
-class ExchangeCurrencyTOoptionsstate extends State<ExchangeCurrencyTOoptions> {
+class Buy_Cryptostate extends State<Buy_Crypto> {
   var header = ["Cryptocurrencies", "Currencies"];
   var cryp = ["BTC", "LTC", "ETH", "BCH", "XRP"];
   var cryptype = ["Bitcoin", "Litecoin", "Ethereum", "Bitcoin Cash", "Ripple"];
   var moneytitle = [
-    "Activate for Free",
+    "Buy BTC",
     "Activate for",
     "Activate for",
     "Activate for",
     "Activate for",
   ];
   var money = ["", "£4.99", "£4.99", "£4.99", "£4.99"];
-  var currency = ["AED","AUD","CAD","CHF","CKZ","DKK","HKD"];
-  var currencyname = ["Emirati Dirham", "Australian Dollar", "Canadian Dollar","Swiss Franc","Czech Koruna","Danish Krone","Hong Kong Dollar"];
+  
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +41,8 @@ class ExchangeCurrencyTOoptionsstate extends State<ExchangeCurrencyTOoptions> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.all(15.0),
-              child: Text("What currency do you want to exchange?",
-                  style: AppStyles.font24.copyWith(
+              child: Text("Choose source",
+                  style: AppStyles.font28.copyWith(
                     fontWeight: FontWeight.bold,
                   )),
             ),
@@ -93,7 +94,7 @@ class ExchangeCurrencyTOoptionsstate extends State<ExchangeCurrencyTOoptions> {
                                 //       "money": money[index],
                                 //       "count": index.toString() ,
                                 //     });
-                                Navigator.pop(context);
+                               index == 0 ? Navigator.of(context).pushNamed("Buy_BTC"): Navigator.pop(context);
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -152,7 +153,7 @@ class ExchangeCurrencyTOoptionsstate extends State<ExchangeCurrencyTOoptions> {
                                             Text("${moneytitle[index]}",
                                                 textAlign: TextAlign.end,
                                                 style: TextStyle(
-                                                    color: Colors.grey[500],
+                                                    color: index == 0 ? AppColors.c00B3DF: Colors.grey[500],
                                                     fontSize: 20.0)),
                                             Padding(
                                               padding: const EdgeInsets.only(
@@ -181,66 +182,8 @@ class ExchangeCurrencyTOoptionsstate extends State<ExchangeCurrencyTOoptions> {
               ),
             ),
 
-            // currency
-            Padding(
-              padding: EdgeInsets.only(top: 18, left: 12.0, right: 12.0),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    "${header[1]}",
-                    style: TextStyle(color: Colors.grey[700], fontSize: 20),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 18.0, left: 12.0, right: 12.0),
-              child: Container(
-                  child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: currency.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                              height: 50.0,
-                              width: 50.0,
-                              child: Image.asset(
-                                "assets/images/${currency[index] ?? ""}.png",
-                                fit: BoxFit.cover,
-                              )),
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.only(left: 15.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: <Widget>[
-                                  Text("${currency[index] ?? ""}",
-                                      style: AppStyles.font22.copyWith(
-                                          fontWeight: FontWeight.w600)),
-                                  Text(
-                                    "${currencyname[index] ?? ""}",
-                                    style: TextStyle(
-                                        color: Colors.grey[500],
-                                        fontSize: 18.0),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              )),
-            )
+            
+           
           ],
         ),
       ),

@@ -1,5 +1,11 @@
+import 'package:fluencybank/views/dashboard/Accounts/BTC_AccountDetails.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Buy_BTC.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Buy_Crypto.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Crypto_Transfer.dart';
 import 'package:fluencybank/views/dashboard/Accounts/SearchScreen.dart';
 import 'package:fluencybank/views/dashboard/Accounts/SeeallLastAction.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Sell_BTC.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Send_Money.dart';
 import 'package:fluencybank/views/dashboard/Accounts/account_details.dart';
 import 'package:fluencybank/views/dashboard/Accounts/accountcreated.dart';
 import 'package:fluencybank/views/dashboard/Accounts/accounts.dart';
@@ -103,7 +109,9 @@ class App extends StatelessWidget {
         'SearchScreen' : (_) => SearchScreen(),
         'add_acount': (_) => Addaccount(),
         'topupaccount': (_) => TopUpAccount(),
+        'BTC_AccountDetails': (_) => BTC_AccountDetails(),
         'account_details': (_) => Account_details(),
+        'Send_Money' : (_) => Send_Money(),
         'statement': (_) => Statement(),
         'enteremail': (_) => EnterEmail(),
         'statementsent':(_) => Statementsent(),
@@ -113,7 +121,12 @@ class App extends StatelessWidget {
         'exchange' :(_) => Exchange(),
         'ExchangeCurrencyTOoptions' : (_) => ExchangeCurrencyTOoptions(),
         'ExchangeSuccess': (_) => ExchangeSuccess(),
+        'Buy_Crypto' : (_) => Buy_Crypto(),
+        'Buy_BTC' : (_) => Buy_BTC(),
+        'Sell_BTC': (_) => Sell_BTC(),
+        'Crypto_Transfer' : (_) => Crypto_Transfer(),
 
+ 
         //card 
         'InviteFriends': (_) => InviteFriends(),
         'InviteFriendsFromcontacts': (_) => InviteFriendsFromcontacts(),

@@ -199,7 +199,10 @@ class Account_detailsState extends State<Account_details> {
             Padding(
               padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 2.0),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+
+                  Navigator.of(context).pushNamed("Send_Money");
+                },
                 child: Container(
                     child: Padding(
                   padding:
