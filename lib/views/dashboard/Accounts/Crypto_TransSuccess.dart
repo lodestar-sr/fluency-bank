@@ -1,58 +1,46 @@
+//Crypto_TransSuccess
+
 import 'dart:collection';
 
 import 'package:fluencybank/components/raised_gradient_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:share/share.dart';
 import '../../theme.dart';
 
-class PaymentSuccess extends StatefulWidget {
-  PaymentSuccess({Key key}) : super(key: key);
+class Crypto_TransSuccess extends StatefulWidget {
+  Crypto_TransSuccess({Key key}) : super(key: key);
 
   @override
-  PaymentSuccessSuccessState createState() => PaymentSuccessSuccessState();
+  Crypto_TransSuccessSuccessState createState() => Crypto_TransSuccessSuccessState();
 }
 
-class PaymentSuccessSuccessState extends State<PaymentSuccess> {
-  var amount = "";
-  var paymenttype = "";
+class Crypto_TransSuccessSuccessState extends State<Crypto_TransSuccess> {
+  var bitcoinamount = "";
+  var poundsamount = "";
+  var barcode = "";
   var heading = ["Today (24 August)","Today","Your money's being processed.","Today","Today"];
   List<String> testing = ["Today (24 August)","Today","Your money's being processed.","Today","Today"];
   List<String> subheading = ["You set up transfer to EUR account.","You used your GBP account.","we'll pay it out in the next 4 minuts.","We pay out your EUR.","Your money is due to arrive today."];
   var showDetails = false;
   var CheckStatus = "success";
   //var CheckStatus = "failed" ;
-
-  
-  var visibilty = true;
-
-  @override
-  void initState() { 
-    super.initState();
-    if (CheckStatus == "success") {
-      setState(() {
-        visibilty = true;
-      });
-      
-    } else {
-      setState(() {
-        visibilty = false;
-      });
-    }
-    
-  }
-  
+  bool saveWalletname = false;
+  TextEditingController createWalletNameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-   
     //currencyText
     final LinkedHashMap<String, String> args =
         ModalRoute.of(context).settings.arguments;
     setState(() {
-      amount = args['amount'];
-      paymenttype = args['paymenttype'];
+      bitcoinamount = args['BitcoinAmount'];
+      poundsamount = args['PoundsAmount'];
+      barcode = args['barcode'];
       
     });
+    
 
     return SafeArea(
       child: WillPopScope(
@@ -109,7 +97,7 @@ class PaymentSuccessSuccessState extends State<PaymentSuccess> {
                             Padding(
                               padding: EdgeInsets.only(top: 10.0),
                               child: CheckStatus == "success"
-                                  ? Text("Funds will be received within 1 day.",
+                                  ? Text("Funds will be received within 5 minutes.",
                                       style: TextStyle(
                                           color: Colors.grey[500],
                                           fontFamily: 'Gilroy',
@@ -126,88 +114,9 @@ class PaymentSuccessSuccessState extends State<PaymentSuccess> {
                                               fontWeight: FontWeight.w500))
                                       ,
                             ),
-                             Padding(
-                             padding: EdgeInsets.only(top: 22),
-                             child: GestureDetector(
-                               onTap: (){
-                                 setState(() {
-                                   showDetails == false ? showDetails = true : showDetails = false;
-                                 });
-                               },
-                               child: Text(showDetails ? "Hide transfer details" : "Show transfer details",
-                               style:AppStyles.font15.copyWith(
-                                 decoration: TextDecoration.none,color:Color.fromRGBO(0, 179, 223, 1))),
-                             ),
-                             ),
-
-                             Padding(
-                              padding: EdgeInsets.only(top: 15,bottom: 15),
-                              child: Visibility(
-                                visible: showDetails,
-                                child: Container(
-                                  height: 250,
-                                  width: double.infinity,
-                                  child: new ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: subheading.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return new Stack(
-                      children: <Widget>[
-                        new Padding(
-                          padding: const EdgeInsets.only(left: 50.0),
-                          child: new Container(
-                            width: double.infinity,
-                            margin: EdgeInsets.all(5),
-                            child:  Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(testing[index],style: AppStyles.font16.copyWith(fontWeight: FontWeight.w400,color: Colors.grey[500],decoration: TextDecoration.none),),
-                              Text(subheading[index],style: AppStyles.font16.copyWith(fontWeight: FontWeight.w400,color: Colors.grey[500],decoration: TextDecoration.none),),
-                            ],
-                          ),
-                          ),
-                        ),
-                        new Positioned(
-                          top: 0.0,
-                          bottom: 0.0,
-                          left: 25.0,
-                          child: new Container(
-                            height: double.infinity,
-                            width: 1.0,
-                            color: Colors.blue,
-                          ),
-                        ),
-                        new Positioned(
-                          top: 10.0,
-                          left: 15.0,
-                          child: new Container(
-                            height: 20.0,
-                            width: 20.0,
-                            decoration: new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                            ),
-                            child: new Container(
-                              margin: new EdgeInsets.all(5.0),
-                              height: 10.0,
-                              width: 10.0,
-                              decoration: new BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color.fromRGBO(42, 183, 133, 1)),
-                            ),
-                          ),
-                        )
-                      ],
-                    );
-                  },
-                  
-                ),            
-                                ),
-                              ),
-                             ),
                             //card
                             Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 25),
                               child: Card(
                                 color: Color.fromRGBO(249, 249, 249, 1),
                                 child: Padding(
@@ -249,46 +158,22 @@ class PaymentSuccessSuccessState extends State<PaymentSuccess> {
                                                               child: Padding(
                                                                 padding: const EdgeInsets.all(8.0),
                                                                 child: Icon(
-                                                                  Icons
-                                                                      .account_balance,
+                                                                  LineAwesomeIcons.bitcoin,size: 30,
                                                                   color: Colors
                                                                       .grey[700],
                                                                 ),
                                                               ),
                                                             )),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 8.0),
-                                                          child: Container(
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: <
-                                                                  Widget>[
-                                                                Text(
-                                                                    "Helena Brauer : GBP",
-                                                                    style: AppStyles
-                                                                        .font20
-                                                                        .copyWith(
-                                                                            fontWeight:
-                                                                                FontWeight.w500)),
-                                                                Text(
-                                                                    "Account number: 23242134",
-                                                                    style: AppStyles
-                                                                        .font16
-                                                                        .copyWith(
-                                                                            color: Colors.grey[600])),
-                                                                Text(
-                                                                    "Sort code: 23-54-65",
-                                                                    style: AppStyles
-                                                                        .font16
-                                                                        .copyWith(
-                                                                            color:
-                                                                                Colors.grey[600])),
-                                                              ],
+                                                        Expanded(
+                                                           child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 8.0),
+                                                            child: Container(
+                                                              child: Text(barcode,
+                                                              overflow: TextOverflow.ellipsis,
+                                                              style: AppStyles.font16.copyWith(color: Colors.grey[700],fontWeight: FontWeight.w500,))
                                                             ),
                                                           ),
                                                         ),
@@ -297,6 +182,66 @@ class PaymentSuccessSuccessState extends State<PaymentSuccess> {
                                                     ),
                                         ),
 
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 20 , bottom: 5),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(17),
+                                              child: Column(
+                                               crossAxisAlignment: CrossAxisAlignment.start,
+                                               children: <Widget>[
+                                                 Container(
+                                                   child: Row(
+                                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                     children: <Widget>[
+                                                       Expanded(child: Text("Save this wallet address in you list?",style: AppStyles.font20.copyWith(color: Colors.grey[700]),)),
+                                                     Padding(
+                                                       padding: const EdgeInsets.only(left : 20.0),
+                                                       child: Container(
+                                                        height: 30,
+                                                        width: 30,
+                                                        child:
+                                                            CupertinoSwitch(
+                                                          value: saveWalletname,
+                                                          onChanged: (value) {
+                                                            setState(() {
+                                                              saveWalletname =
+                                                                  value;
+                                                            });
+                                                          },
+                                                          activeColor:
+                                                              Colors.green,
+                                                        ),
+                                                    ),
+                                                     )
+
+                                                     ],
+                                                   ),
+                                                 ),
+
+                                                 Padding(
+                                                   padding: EdgeInsets.only(top: 15),
+                                                   child: Visibility(
+                                                     visible: saveWalletname,                                                
+                                                     child: TextField(
+                                                       style: AppStyles.font20,
+                                                       controller: createWalletNameController,
+                                                       decoration: InputDecoration(
+                                                         hintText: "Create wallet name",
+                                                         hintStyle: AppStyles.font20.copyWith(color: Colors.grey[500])
+                                                       ),
+                                                     ),
+                                                   ),
+                                                 )
+                                               ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                         ///How to send
                                         Padding(
                                           padding: const EdgeInsets.only(
@@ -314,22 +259,18 @@ class PaymentSuccessSuccessState extends State<PaymentSuccess> {
                                           child: Row(
                                                       children: <Widget>[
                                                         Container(
-                                                            height: 40,
-                                                            width: 40,
-                                                            decoration: BoxDecoration(
-                                                                color:
-                                                                    Colors.white,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5)),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(2.0),
-                                                              child: Image.asset(
-                                                                  "assets/images/eng.png"),
-                                                            )),
+                                                height: 40,
+                                                width: 40,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius
+                                                            .circular(10.0),
+                                                    color: Color.fromRGBO(
+                                                        247, 147, 26, 1),
+                                                    image: DecorationImage(
+                                                        image: ExactAssetImage(
+                                                            "assets/images/BTC.png"))),
+                                              ),
                                                         Expanded(
                                                           child: Padding(
                                                             padding:
@@ -343,14 +284,14 @@ class PaymentSuccessSuccessState extends State<PaymentSuccess> {
                                                                         .start,
                                                                 children: <
                                                                     Widget>[
-                                                                  Text("GBP",
+                                                                  Text("BTC  ₿0.1125",
                                                                       style: AppStyles
                                                                           .font20
                                                                           .copyWith(
                                                                               fontWeight:
-                                                                                  FontWeight.w500)),
+                                                                                  FontWeight.w600)),
                                                                   Text(
-                                                                      "£981.26",
+                                                                      "Bitcoin",
                                                                       style: AppStyles
                                                                           .font18
                                                                           .copyWith(
@@ -372,35 +313,38 @@ class PaymentSuccessSuccessState extends State<PaymentSuccess> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
                                             children: <Widget>[
-                                             Column(                                                
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Text("Amount",
-                                                      style: TextStyle(
-                                                          color: Colors.grey[500],
-                                                          fontFamily: 'Gilroy',
-                                                          fontSize: 15.0,
-                                                          decoration:
-                                                              TextDecoration.none,
-                                                          fontWeight:
-                                                              FontWeight.w500)),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 6.0),
-                                                    child: Text(
-                                                      "-$amount",
-                                                      style: AppStyles.font22
-                                                          .copyWith(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
+                                             Expanded(
+                                                                                            child: Column(                                                
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text("Amount",
+                                                        style: TextStyle(
+                                                            color: Colors.grey[500],
+                                                            fontFamily: 'Gilroy',
+                                                            fontSize: 15.0,
+                                                            decoration:
+                                                                TextDecoration.none,
+                                                            fontWeight:
+                                                                FontWeight.w500)),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 6.0),
+                                                      child: Text(
+                                                        "$bitcoinamount",
+                                                        style: AppStyles.font22
+                                                            .copyWith(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                      ),
                                                     ),
-                                                  )
-                                                ],
-                                              ),
+                                                    
+                                                  ],
+                                                ),
+                                             ),
                                              
                                              
                                              
@@ -409,7 +353,7 @@ class PaymentSuccessSuccessState extends State<PaymentSuccess> {
                                                     MainAxisAlignment.center,
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: <Widget>[
-                                                  Text("Transfer fee ($paymenttype)",
+                                                  Text("Transfer fee ",
                                                       style: TextStyle(
                                                           color: Colors.grey[500],
                                                           fontFamily: 'Gilroy',
@@ -423,7 +367,7 @@ class PaymentSuccessSuccessState extends State<PaymentSuccess> {
                                                         const EdgeInsets.only(
                                                             top: 6.0),
                                                     child: Text(
-                                                      "£4.99",
+                                                      "₿0.00",
                                                       style: AppStyles.font22
                                                           .copyWith(
                                                               fontWeight:
@@ -437,6 +381,10 @@ class PaymentSuccessSuccessState extends State<PaymentSuccess> {
                                               
                                             ],
                                           ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 5),
+                                          child: Text(poundsamount,style:AppStyles.font20.copyWith(color:Colors.grey[500])),
                                         )
                                       ],
                                     ),

@@ -300,7 +300,9 @@ class Account_detailsState extends State<Account_details> {
                             ],
                           )),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).pushNamed('seealllastactions');
+                            },
                             child: Icon(
                               Icons.search,
                               size: 35.0,

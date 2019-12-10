@@ -1,6 +1,8 @@
 import 'package:fluencybank/views/dashboard/Accounts/BTC_AccountDetails.dart';
+import 'package:fluencybank/views/dashboard/Accounts/BTC_GBP_Graph.dart';
 import 'package:fluencybank/views/dashboard/Accounts/Buy_BTC.dart';
 import 'package:fluencybank/views/dashboard/Accounts/Buy_Crypto.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Crypto_TransSuccess.dart';
 import 'package:fluencybank/views/dashboard/Accounts/Crypto_Transfer.dart';
 import 'package:fluencybank/views/dashboard/Accounts/SearchScreen.dart';
 import 'package:fluencybank/views/dashboard/Accounts/SeeallLastAction.dart';
@@ -110,6 +112,7 @@ class App extends StatelessWidget {
         'add_acount': (_) => Addaccount(),
         'topupaccount': (_) => TopUpAccount(),
         'BTC_AccountDetails': (_) => BTC_AccountDetails(),
+        'BTC_GBP_Graph': (_) => BTC_GBP_Graph(),
         'account_details': (_) => Account_details(),
         'Send_Money' : (_) => Send_Money(),
         'statement': (_) => Statement(),
@@ -125,6 +128,7 @@ class App extends StatelessWidget {
         'Buy_BTC' : (_) => Buy_BTC(),
         'Sell_BTC': (_) => Sell_BTC(),
         'Crypto_Transfer' : (_) => Crypto_Transfer(),
+        'Crypto_TransSuccess': (_) => Crypto_TransSuccess(),
 
  
         //card 

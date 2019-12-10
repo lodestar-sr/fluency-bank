@@ -124,7 +124,9 @@ class _BTC_AccountDetailsState extends State<BTC_AccountDetails> {
                                         Padding(
                                           padding: EdgeInsets.only(top: 25),
                                           child: GestureDetector(
-                                            onTap: null,
+                                            onTap: (){
+                                              Navigator.of(context).pushNamed('BTC_GBP_Graph');
+                                            },
                                             child: Container(
                                               width: double.infinity,
                                               decoration: BoxDecoration(

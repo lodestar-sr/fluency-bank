@@ -204,7 +204,9 @@ class _accountcreatedState extends State<Accountcreated> {
                                           //         end: Alignment.bottomCenter,
                                           //       )
 
-                                          onPressed: null,
+                                          onPressed: (){
+                                            Navigator.of(context).pushNamed('Buy_BTC');
+                                          },
                                         ),
                                       ),
                                     ],
