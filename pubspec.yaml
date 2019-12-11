@@ -35,6 +35,7 @@ dependencies:
   qr_flutter:
   path_provider: 
   barcode_scan:
+  charts_flutter:
   
 
 
