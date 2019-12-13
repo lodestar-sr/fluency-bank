@@ -330,6 +330,7 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
                                                               print(phone[0].value):print("null");
                                                       print("${c.displayName}");
                                                       var test = false;
+                                                      //Working properly
                                                        if (from == 'cards') {
                                                           if (Globals.savedList.isEmpty) {
                                                             selectedContacts.add(ContactsChoosed(c.displayName , phone.length >= 1 && phone[0]?.value !=null ? 
@@ -340,6 +341,7 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
                                                                      ? 
                                                                    String.fromCharCodes(c.avatar) : c.initials()
                                                           )
+                                                        
                                                           );
                                                             setState(() {
                                                               Globals.savedList = selectedContacts;
