@@ -11,7 +11,7 @@ class Globals {
   static String postCode = "";
   static String street = "";
   static var preAddresses = [];
-  static List<ContactsChoosed> savedList = [];
-  static List<ContactsChoosed> savedListfromInviteScreen = [];
+  static List savedList = [];
+  static List savedListfromInviteScreen = [];
   static var getExchangeBtnClickedInTheInviteHomeScreen = [];
 }

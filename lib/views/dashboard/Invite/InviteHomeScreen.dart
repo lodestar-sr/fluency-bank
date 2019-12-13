@@ -34,13 +34,13 @@ class _InviteHomescreenState extends State<InviteHomescreen> {
       print("object");   
       friendsList = Globals.savedListfromInviteScreen;
     });
-    if (friendsList.isEmpty) {
+    if (friendsList.length == 3) {
       setState(() {
-        ifInvited = true;
+        ifInvited = false;
       });
     } else {
       setState(() {
-        ifInvited = false;
+        ifInvited = true;
       });
     }
     return Container(
@@ -221,79 +221,87 @@ class _InviteHomescreenState extends State<InviteHomescreen> {
                                           Padding(
                                             padding: EdgeInsets.only(top: 15.0),
                                             child: Container(
-                                              height: 210,
+                                              
                                               child: ListView.builder(
-                                                physics:
-                                                    const NeverScrollableScrollPhysics(),
-                                                itemCount: 3,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10.0),
-                                                    child: Row(
-                                                      children: <Widget>[
-                                                        Container(
-                                                            height: 50.0,
-                                                            width: 50.0,
-                                                            decoration: BoxDecoration(
-                                                                color: Colors
-                                                                    .grey[200],
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10.0)),
-                                                            child: Center(
-                                                              child: friendsList
-                                                                      .isEmpty
-                                                                  ? Icon(
-                                                                      Icons
-                                                                          .person_outline,
-                                                                      color: Colors
-                                                                              .grey[
-                                                                          400],
-                                                                      size:
-                                                                          30.0,
-                                                                    )
-                                                                  : friendsList[
-                                                                              index]
-                                                                          .firstLetter
-                                                                          .contains(
-                                                                              "PNG")
-                                                                      ? Text(
-                                                                          "Image")
-                                                                      : Text(friendsList[
-                                                                              index]
-                                                                          .firstLetter),
-                                                            )),
-                                                        Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 15.0),
-                                                            child: friendsList
-                                                                    .isEmpty
-                                                                ? Text(
-                                                                    "${index} Friend",
-                                                                    style: AppStyles.font18.copyWith(
-                                                                        color: Colors.grey[
-                                                                            700],
-                                                                        fontWeight: FontWeight
-                                                                            .w600))
-                                                                : Text(friendsList[index].displayname,
-                                                                    style: AppStyles
-                                                                        .font18
-                                                                        .copyWith(
-                                                                            color: Colors.grey[700],
-                                                                            fontWeight: FontWeight.w600)))
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                              ),
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: friendsList.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                                height: 50.0,
+                                                width: 50.0,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.grey[200],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0)),
+                                                child: Center(
+                                                  child: friendsList[index].firstLetter.contains("PNG") ? Text("Image") : Text(friendsList[index].firstLetter ?? ""),
+                                                )
+                                                ),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 15.0),
+                                              child:Text(friendsList[index].displayname)
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
                                             ),
                                           ),
+                                          Container(
+                                child:ListView.builder(
+                                  shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: 3 - friendsList.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                                height: 50.0,
+                                                width: 50.0,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.grey[200],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0)),
+                                                child: Center(
+                                                  child: Icon(
+                                                    Icons.person_outline,
+                                                    color: Colors.grey[400],
+                                                    size: 30.0,
+                                                  ),
+                                                )
+                                                
+                                                
+                                                ),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 15.0),
+                                              child: Text("Invite",
+                                                  style: AppStyles.font18
+                                                      .copyWith(
+                                                          color:
+                                                              Colors.grey[700],
+                                                          fontWeight:
+                                                              FontWeight.w600)) 
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  )
+                              ),
                                           Visibility( 
                                             visible: ifInvited,
                                                                                       child: Padding(

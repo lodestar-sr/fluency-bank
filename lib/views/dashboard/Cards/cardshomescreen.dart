@@ -21,18 +21,21 @@ class _CardHomescreenState extends State<CardHomescreen> {
   }
   @override
   Widget build(BuildContext context) {
-    if (friendsList.isEmpty) {
-      setState(() {
-        ifInvited = true;
-      });
-    } else {
-      setState(() {
-        ifInvited = false;
-      });
-    }
+    
     setState(() {
       friendsList = Globals.savedList;
     });
+    
+    if (friendsList.length == 3) {
+      setState(() {
+        ifInvited = false;
+      });
+    } else {
+      setState(() {
+        ifInvited = true;
+      });
+    }
+    
     var pixelheight = MediaQuery.of(context).size.height/100;
     var pixelwidth = MediaQuery.of(context).size.width/100;
     return SafeArea(

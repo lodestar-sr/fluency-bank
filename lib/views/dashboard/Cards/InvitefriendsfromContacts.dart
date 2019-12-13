@@ -21,7 +21,7 @@ class InviteFriendsFromcontacts extends StatefulWidget {
 class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
   var shareLink = "http://fluency.io/fdHFRee98";
   Iterable<Contact> _contacts;
-  List<ContactsChoosed> selectedContacts = [];
+  List <ContactsChoosed>selectedContacts = [];
   // get contacts
   @override
   void initState() {
@@ -30,6 +30,7 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
   }
 
   GetContacts() async {
+  
     PermissionStatus permissionStatus = await _getPermission();
     if (permissionStatus == PermissionStatus.granted) {
       var contacts = await ContactsService.getContacts();
@@ -260,7 +261,7 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
                               //Contacts
 
                               Container(
-                                height: 500,
+                                height: (MediaQuery.of(context).size.height/100 )* 78,
                                 child: Center(
                                   child: _contacts != null
                                       ? ListView.builder(
@@ -328,30 +329,45 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
                                                        phone.length >= 1 && phone[0]?.value !=null ? 
                                                               print(phone[0].value):print("null");
                                                       print("${c.displayName}");
-                                                       if (selectedContacts.length <= 2) {
-                                                         for(int i = 0 ; i <= selectedContacts.length ; i++)
-                                                         {
-                                                           if (selectedContacts.length == 0) {
-                                                             selectedContacts.add(ContactsChoosed(c.displayName , phone.length >= 1 && phone[0]?.value !=null ? 
-                                                              phone[0].value:"null",c.avatar !=
+                                                      var test = false;
+                                                       if (from == 'cards') {
+                                                          if (Globals.savedList.isEmpty) {
+                                                            selectedContacts.add(ContactsChoosed(c.displayName , phone.length >= 1 && phone[0]?.value !=null ? 
+                                                                  phone[0].value:"null",c.avatar !=
                                                                   null &&
-                                                              c.avatar.length >
+                                                                  c.avatar.length >
                                                                   0
-                                                          ? 
-                                                              c.avatar                                                       
-                                                          : c.initials()
+                                                                     ? 
+                                                                   String.fromCharCodes(c.avatar) : c.initials()
                                                           )
                                                           );
-                                                           } 
-                                                           
-                                                           else { 
-                                                               
-                                                             for(int z = 0 ; z<= selectedContacts.length ; z++)
-                                                             {
-                                                               if (selectedContacts[z].displayname == c.displayName) {
-                                                             print("Alredy added");
-                                                              } 
-                                                               else {
+                                                            setState(() {
+                                                              Globals.savedList = selectedContacts;
+                                                              print("This the first time ${Globals.savedList}");
+                                                              Scaffold.of(context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                                   content: Text(
+                                                                  "Invite ${3 - Globals.savedList.length} friends"),
+                                                                 ));
+                                                            });
+                                                          } else {   
+                                                             
+                                                            if (Globals.savedList.length < 3) {
+                                                              
+                                                           for (var i = 0; i < Globals.savedList.length; i++) {                                                     
+                                                                if (Globals.savedList[i].displayname == c.displayName) {
+                                                                  print("Already added");
+                                                                  Scaffold.of(context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                                   content: Text(
+                                                                  "Contact already added"),
+                                                                 ));
+                                                                  test = true;
+                                                                }
+                                                                } 
+                                                                if(test == false) {
                                                                   selectedContacts.add(ContactsChoosed(c.displayName , phone.length >= 1 && phone[0]?.value !=null ? 
                                                                   phone[0].value:"null",c.avatar !=
                                                                   null &&
@@ -361,30 +377,102 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
                                                                    String.fromCharCodes(c.avatar) : c.initials()
                                                           )
                                                           );
-                                                          print("This is the contact selected ${selectedContacts[0].firstLetter},${selectedContacts[1].firstLetter},${selectedContacts[2].firstLetter}");
-                                                           }
-                                                             }
-                                                           }
-                                                         }
-                                                         
-                                                       } else { 
-                                                         print("Exceeded the Limit");
-                                                         
-                                                         if (from == 'cards') {
-                                                           Globals.savedList = selectedContacts;
-                                                         } else {
-                                                           Globals.savedListfromInviteScreen = selectedContacts;
-                                                         }
-                                                         Scaffold.of(context)
+                                                          
+                                                            setState(() {
+                                                                    Globals.savedList.addAll(selectedContacts);
+                                                                    Scaffold.of(context)
                                                             .showSnackBar(
                                                                 SnackBar(
-                                                          content: Text(
-                                                              "You can Invite only 3 Friends  "),
-                                                        ));
-                                                       }  
-                                                       
-
-                                                       
+                                                                   content: Text(
+                                                                  "Invite ${3 - Globals.savedList.length} friends"),
+                                                                 ));
+                                                            });
+                                                            }
+                                                            } else {
+                                                              Scaffold.of(context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                                   content: Text(
+                                                                  "You can invite on 3 friends"),
+                                                                 ));
+                                                            }
+                                                          
+                                                          }
+                                                         
+                                                       }
+                                                       else
+                                                       {
+                                                         //savedListfromInviteScreen
+                                                          if (Globals.savedListfromInviteScreen.isEmpty) {
+                                                            selectedContacts.add(ContactsChoosed(c.displayName , phone.length >= 1 && phone[0]?.value !=null ? 
+                                                                  phone[0].value:"null",c.avatar !=
+                                                                  null &&
+                                                                  c.avatar.length >
+                                                                  0
+                                                                     ? 
+                                                                   String.fromCharCodes(c.avatar) : c.initials()
+                                                          )
+                                                          );
+                                                            setState(() {
+                                                              Globals.savedListfromInviteScreen = selectedContacts;
+                                                              print("This the first time ${Globals.savedListfromInviteScreen}");
+                                                              Scaffold.of(context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                                   content: Text(
+                                                                  "Invite ${3 - Globals.savedListfromInviteScreen.length} friends"),
+                                                                 ));
+                                                            });
+                                                          } else {   
+                                                             
+                                                            if (Globals.savedListfromInviteScreen.length < 3) {
+                                                              
+                                                           for (var i = 0; i < Globals.savedListfromInviteScreen.length; i++) {                                                     
+                                                                if (Globals.savedListfromInviteScreen[i].displayname == c.displayName) {
+                                                                  print("Already added");
+                                                                  Scaffold.of(context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                                   content: Text(
+                                                                  "Contact already added"),
+                                                                 ));
+                                                                  test = true;
+                                                                }
+                                                                } 
+                                                                if(test == false) {
+                                                                  selectedContacts.add(ContactsChoosed(c.displayName , phone.length >= 1 && phone[0]?.value !=null ? 
+                                                                  phone[0].value:"null",c.avatar !=
+                                                                  null &&
+                                                                  c.avatar.length >
+                                                                  0
+                                                                     ? 
+                                                                   String.fromCharCodes(c.avatar) : c.initials()
+                                                          )
+                                                          );
+                                                          
+                                                            setState(() {
+                                                                    Globals.savedListfromInviteScreen.addAll(selectedContacts);
+                                                                    Scaffold.of(context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                                   content: Text(
+                                                                  "Invite ${3 - Globals.savedListfromInviteScreen.length} friends"),
+                                                                 ));
+                                                            });
+                                                            }
+                                                            } else {
+                                                              Scaffold.of(context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                                   content: Text(
+                                                                  "You can invite on 3 friends"),
+                                                                 ));
+                                                            }
+                                                          
+                                                          }
+                                                       }
+                                                         
+                                                          
                                                     },
                                                     child: Text("Invite",
                                                         style: AppStyles.font18

@@ -13,9 +13,6 @@ class InviteFriends extends StatefulWidget {
 
 class _InviteFriendsState extends State<InviteFriends> {
 
-
-
-
   //Sharedpreference
 
   @override
@@ -71,13 +68,15 @@ class _InviteFriendsState extends State<InviteFriends> {
                                         color: Colors.grey[700],
                                         fontWeight: FontWeight.w600)),
                               ),
+                              
                               Padding(
                                 padding: EdgeInsets.only(top: 15.0),
                                 child: Container(
-                                  height: 210,
+                                 
                                   child: ListView.builder(
+                                    shrinkWrap: true,
                                     physics: NeverScrollableScrollPhysics(),
-                                    itemCount: 3,
+                                    itemCount: friendsList.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return Padding(
@@ -93,11 +92,7 @@ class _InviteFriendsState extends State<InviteFriends> {
                                                         BorderRadius.circular(
                                                             10.0)),
                                                 child: Center(
-                                                  child: friendsList.isEmpty ? Icon(
-                                                    Icons.person_outline,
-                                                    color: Colors.grey[400],
-                                                    size: 30.0,
-                                                  ): friendsList[index].firstLetter.contains("PNG") ? Text("Image") : Text(friendsList[index].firstLetter),
+                                                  child: friendsList[index].firstLetter.contains("PNG") ? Text("Image") : Text(friendsList[index].firstLetter ?? ""),
                                                 )
                                                 
                                                 
@@ -105,13 +100,7 @@ class _InviteFriendsState extends State<InviteFriends> {
                                             Padding(
                                               padding:
                                                   EdgeInsets.only(left: 15.0),
-                                              child: friendsList.isEmpty ?Text("Invite",
-                                                  style: AppStyles.font18
-                                                      .copyWith(
-                                                          color:
-                                                              Colors.grey[700],
-                                                          fontWeight:
-                                                              FontWeight.w600)) : Text(friendsList[index].displayname)
+                                              child:Text(friendsList[index].displayname)
                                             )
                                           ],
                                         ),
@@ -119,6 +108,52 @@ class _InviteFriendsState extends State<InviteFriends> {
                                     },
                                   ),
                                 ),
+                              ),
+                              Container(
+                                child:ListView.builder(
+                                  shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: 3 - friendsList.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                                height: 50.0,
+                                                width: 50.0,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.grey[200],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0)),
+                                                child: Center(
+                                                  child: Icon(
+                                                    Icons.person_outline,
+                                                    color: Colors.grey[400],
+                                                    size: 30.0,
+                                                  ),
+                                                )
+                                                
+                                                
+                                                ),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 15.0),
+                                              child: Text("Invite",
+                                                  style: AppStyles.font18
+                                                      .copyWith(
+                                                          color:
+                                                              Colors.grey[700],
+                                                          fontWeight:
+                                                              FontWeight.w600)) 
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  )
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 15.0),
