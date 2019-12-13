@@ -170,13 +170,12 @@ Padding(
                                 color: Colors.grey[350],
                               ),
                             ),
-/////
                             Container(
                               child: Row(
                                     children: <Widget>[
                                       Container(
-                                        height: 60.0,
-                                        width: 60.0,
+                                        height: 40.0,
+                                        width: 40.0,
                                         child: Center(
                                           child: SizedBox(
                                             height: 30.0,
@@ -185,7 +184,7 @@ Padding(
                                         ),
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(10.0),
+                                                BorderRadius.circular(5.0),
                                             color: Colors.grey[200],
                                             
                                             
