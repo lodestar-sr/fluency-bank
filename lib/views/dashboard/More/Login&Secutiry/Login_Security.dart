@@ -15,30 +15,38 @@ class _Login_SecurityState extends State<Login_Security> {
   bool fingerprintcheck = false;
   bool faceidcheck = false;
   bool obscurePasscode = true;
+  bool obscureNewPasscode = true;
   bool canContinueModel = false;
   bool confirmpasscode = false;
 
 
-  //Toggle password state 
+  ///////for new passcode 
+  bool canContinueWithNewPasscode = false;
+
+  //Toggle password state
   onTogglePasscode() {
     setState(() {
       obscurePasscode = !obscurePasscode;
     });
   }
 
-   completeInputCode(String code) {
+  onToggleNewPasscode() {
+    setState(() {
+      obscureNewPasscode = !obscureNewPasscode;
+    });
+  }
 
-    print("This is the code ${code.length}");
+  completeInputCode(String code) {
     if (code.length == 4) {
       setState(() {
         canContinueModel = true;
       });
-      
     } else {
       canContinueModel = false;
     }
   }
-  
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -218,7 +226,7 @@ class _Login_SecurityState extends State<Login_Security> {
                                                 ),
 
                                                 //use faceid
-                                                 Padding(
+                                                Padding(
                                                   padding:
                                                       const EdgeInsets.only(
                                                           top: 10.0),
@@ -243,8 +251,7 @@ class _Login_SecurityState extends State<Login_Security> {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: <Widget>[
-                                                              Text(
-                                                                  "Use FaceID",
+                                                              Text("Use FaceID",
                                                                   style: AppStyles.font18.copyWith(
                                                                       fontWeight:
                                                                           FontWeight
@@ -275,8 +282,7 @@ class _Login_SecurityState extends State<Login_Security> {
                                                           ),
                                                         ),
                                                         CupertinoSwitch(
-                                                          value:
-                                                              faceidcheck,
+                                                          value: faceidcheck,
                                                           onChanged: (value) {
                                                             setState(() {
                                                               faceidcheck =
@@ -292,12 +298,11 @@ class _Login_SecurityState extends State<Login_Security> {
                                                 ),
                                               ],
                                             ))))))))));
-        }
+  }
 
-
-        // Model sheet 
+  // Model sheet
   void bottomsheet(BuildContext context) {
-    var title = "Enter old PIN code";
+    
     showModalBottomSheet(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
@@ -308,126 +313,241 @@ class _Login_SecurityState extends State<Login_Security> {
               StateSetter setState /*You can rename this!*/) {
             return Padding(
               padding: EdgeInsets.only(
-             bottom: MediaQuery.of(context).viewInsets.bottom),
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Container(
                 height: 400.0,
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child: ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Align(
-                          alignment: Alignment.topCenter,
-                          child: Container(
-                            height: 5.0,
-                            width: 50.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.grey[350],
+                  child: Visibility(
+                    visible: confirmpasscode,
+                   child: ListView(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Container(
+                              height: 5.0,
+                              width: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.grey[350],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Text("$title",
-                          style: AppStyles.font22
-                              .copyWith(fontWeight: FontWeight.bold)),
-                      
-                      //Passcode
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 25.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              VerificationCodeInput(
-                                keyboardType: TextInputType.number,                               
-                                itemWidth: 40,
-                                itemHeight: 56,
-                                itemGap: 8,
-                                separateMiddle: false,
-                                obscure: obscurePasscode,
-                                textStyle: TextStyle(
-                                  color: Color.fromRGBO(0, 179, 223, 1),
-                                  fontSize: 24,
-                                ),
-                                onCompleted: (value){
-                                  completeInputCode(value);
-                                },
-                                onChanged: (value){
-                                  completeInputCode(value);
-                                },
-                                
-                              ),
+                        Text("Enter new PIN code",
+                            style: AppStyles.font22
+                                .copyWith(fontWeight: FontWeight.bold)),
 
-                              Container(
-                                margin: EdgeInsets.only(left: 24),
-                                child: GestureDetector(
-                                  child: Image.asset(
-                                    obscurePasscode ? 'assets/images/eye-gray.png' : 'assets/images/eye-black.png',
-                                    width: 26,
+                        //Passcode
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 25.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                VerificationCodeInput(
+                                  keyboardType: TextInputType.number,
+                                  itemWidth: 40,
+                                  itemHeight: 56,
+                                  itemGap: 8,
+                                  separateMiddle: false,
+                                  obscure: obscureNewPasscode,
+                                  textStyle: TextStyle(
+                                    color: Color.fromRGBO(0, 179, 223, 1),
+                                    fontSize: 24,
                                   ),
-                                  onTap: (){
-                                    setState(() {
-                                      onTogglePasscode();
-                                    });
+                                  onCompleted: (value) {
+                                    completeInputCode(value);
+                                  },
+                                  onChanged: (value) {
+                                    print(value);
+                                    
+                                    if (value.length == 4) {
+                                      setState(() {
+                                        canContinueWithNewPasscode = true;
+                                      });
+                                    } else {
+                                      setState((){
+                                        canContinueWithNewPasscode = false;
+                                      });
+                                    }
                                   },
                                 ),
-                              ),
-                            ],
+                                Container(
+                                  margin: EdgeInsets.only(left: 24),
+                                  child: GestureDetector(
+                                    child: Image.asset(
+                                      obscurePasscode
+                                          ? 'assets/images/eye-gray.png'
+                                          : 'assets/images/eye-black.png',
+                                      width: 26,
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        onToggleNewPasscode();
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 30),
-                        child: Container(
-                                margin: EdgeInsets.all(16),
-                                child: RaisedGradientButton(
-                                  child: confirmpasscode == true ? Text("Create New Pin",
-                                    style: AppStyles.buttonTextStyle):Text(
-                                    "Confirm",
-                                    style: AppStyles.buttonTextStyle,
-                                  ),
-                                  gradient: canContinueModel
-                                      ? LinearGradient(
-                                          colors: [
-                                            AppColors.c00B3DF,
-                                            AppColors.c00B3DF
-                                          ],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                        )
-                                      : LinearGradient(
-                                          colors: [
-                                            AppColors.cBDBDBD,
-                                            AppColors.cBDBDBD
-                                          ],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                        ),
-                                  onPressed: () {
-
-                                    if (confirmpasscode) {
+                        Padding(
+                            padding: EdgeInsets.only(top: 30),
+                            child: Container(
+                              margin: EdgeInsets.all(16),
+                              child: RaisedGradientButton(
+                                child:  Text(
+                                        "Create New Pin",
+                                        style: AppStyles.buttonTextStyle,
+                                      ),
+                                gradient: canContinueWithNewPasscode
+                                    ? LinearGradient(
+                                        colors: [
+                                          AppColors.c00B3DF,
+                                          AppColors.c00B3DF
+                                        ],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                      )
+                                    : LinearGradient(
+                                        colors: [
+                                          AppColors.cBDBDBD,
+                                          AppColors.cBDBDBD
+                                        ],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                      ),
+                                onPressed: () {                               
+                                    if (canContinueWithNewPasscode == true) {
                                       setState(() {
-                                         Navigator.of(context).pushNamed('PinCodeChangeSucess');
-                                       });
+                                        //confirmpasscode = true;
+                                        Navigator.of(context).pushNamed('PinCodeChangeSucess');
+                                      });
                                     }
-                                    else
-                                    {
-                                      if (canContinueModel == true){
-                                       setState(() {
-                                         confirmpasscode = true;
-                                         title = "Enter new PIN code";
-                                         canContinueModel = false;
-                                       });
+                                },
+                              ),
+                            ))
+                      ],
+                    ),
+
+
+
+                    //Replacement 
+                     replacement: ListView(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Container(
+                              height: 5.0,
+                              width: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.grey[350],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Text("Enter old PIN code",
+                            style: AppStyles.font22
+                                .copyWith(fontWeight: FontWeight.bold)),
+
+                        //Passcode
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 25.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                VerificationCodeInput(
+                                  keyboardType: TextInputType.number,
+                                  itemWidth: 40,
+                                  itemHeight: 56,
+                                  itemGap: 8,
+                                  separateMiddle: false,
+                                  obscure: obscurePasscode,
+                                  textStyle: TextStyle(
+                                    color: Color.fromRGBO(0, 179, 223, 1),
+                                    fontSize: 24,
+                                  ),
+                                  onCompleted: (value) {
+                                    completeInputCode(value);
+                                  },
+                                  onChanged: (value) {
+                                    print(value);
+                                    if (value.length == 4) {
+                                      setState(() {
+                                        canContinueModel = true;
+                                      });
+                                    } else {
+                                      setState((){
+                                        canContinueModel = false;
+                                      });
                                     }
-                                    }
-                                    
                                   },
                                 ),
-                              )
-                      )
-                    ],
+                                Container(
+                                  margin: EdgeInsets.only(left: 24),
+                                  child: GestureDetector(
+                                    child: Image.asset(
+                                      obscurePasscode
+                                          ? 'assets/images/eye-gray.png'
+                                          : 'assets/images/eye-black.png',
+                                      width: 26,
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        onTogglePasscode();
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(top: 30),
+                            child: Container(
+                              margin: EdgeInsets.all(16),
+                              child: RaisedGradientButton(
+                                child:  Text(
+                                        "Confirm",
+                                        style: AppStyles.buttonTextStyle,
+                                      ),
+                                gradient: canContinueModel
+                                    ? LinearGradient(
+                                        colors: [
+                                          AppColors.c00B3DF,
+                                          AppColors.c00B3DF
+                                        ],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                      )
+                                    : LinearGradient(
+                                        colors: [
+                                          AppColors.cBDBDBD,
+                                          AppColors.cBDBDBD
+                                        ],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                      ),
+                                onPressed: () {                               
+                                    if (canContinueModel == true) {
+                                      setState(() {
+                                        confirmpasscode = true;
+                                      });
+                                    }
+                                },
+                              ),
+                            ))
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 Widget _defaultHome = Home();
 
 Future main() async {
-  
+  WidgetsFlutterBinding.ensureInitialized();
 
   // Get result of the login function.
 
@@ -18,6 +18,6 @@ Future main() async {
   if (boolValue == true) {
     _defaultHome = Dashboard();
   }
-
+  
   runApp(App(_defaultHome));
 }

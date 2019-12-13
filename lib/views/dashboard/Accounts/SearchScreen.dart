@@ -106,7 +106,9 @@ class _SearchScreenState extends State<SearchScreen> {
                               replacement: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Image.asset("assets/images/noresult.png"),
+                                  Container(
+                                    height: 45,
+                                    child: Image.asset("assets/images/noresult.png")),
                                   Padding(
                                     padding: EdgeInsets.only(top: 15),
                                     child: Text("No results found.",style:AppStyles.font24.copyWith(fontWeight:FontWeight.w600)),
@@ -114,8 +116,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                 ],
                               ),
                           )
-
-
                             )
                             )
                             )

@@ -51,18 +51,16 @@ class _Buy_BTCState extends State<Buy_BTC> {
     });
   }
 
-  
-
   completeInputCode(String code) {
-
     print("This is the code ${code.length}");
     if (code.length == 4) {
       setState(() {
         canContinueModel = true;
       });
-      
     } else {
-      canContinueModel = false;
+      setState(() {
+        canContinueModel = false;
+      });
     }
   }
 
@@ -116,8 +114,8 @@ class _Buy_BTCState extends State<Buy_BTC> {
                               validator();
                             },
                             controller: currencyfromController,
-                            keyboardType: TextInputType.numberWithOptions(
-                                decimal: true),
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
                             style: AppStyles.font32,
                             cursorWidth: 1,
                             cursorColor: AppColors.c212121,
@@ -157,10 +155,8 @@ class _Buy_BTCState extends State<Buy_BTC> {
                                         //MainAxisAlignment.spaceAround,
                                         children: <Widget>[
                                           Text("GBP",
-                                              style: AppStyles.font20
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w600)),
+                                              style: AppStyles.font20.copyWith(
+                                                  fontWeight: FontWeight.w600)),
                                           Text(
                                             "£1,000.00",
                                             style: TextStyle(
@@ -248,8 +244,8 @@ class _Buy_BTCState extends State<Buy_BTC> {
                             onChanged: (value) {
                               validator();
                             },
-                            keyboardType: TextInputType.numberWithOptions(
-                                decimal: true),
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
                             style: AppStyles.font32,
                             cursorWidth: 1,
                             cursorColor: AppColors.c212121,
@@ -279,8 +275,8 @@ class _Buy_BTCState extends State<Buy_BTC> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
-                                            color: Color.fromRGBO(
-                                                247, 147, 26, 1),
+                                            color:
+                                                Color.fromRGBO(247, 147, 26, 1),
                                             image: DecorationImage(
                                                 image: ExactAssetImage(
                                                     "assets/images/BTC.png"))),
@@ -315,8 +311,7 @@ class _Buy_BTCState extends State<Buy_BTC> {
                                 ),
                                 decoration: BoxDecoration(
                                     color: Colors.grey[100],
-                                    borderRadius:
-                                        BorderRadius.circular(10.0)),
+                                    borderRadius: BorderRadius.circular(10.0)),
                               ),
                             ),
                           ),
@@ -394,7 +389,7 @@ class _Buy_BTCState extends State<Buy_BTC> {
               StateSetter setState /*You can rename this!*/) {
             return Padding(
               padding: EdgeInsets.only(
-             bottom: MediaQuery.of(context).viewInsets.bottom),
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Container(
                 height: 400.0,
                 child: Padding(
@@ -435,33 +430,38 @@ class _Buy_BTCState extends State<Buy_BTC> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               VerificationCodeInput(
-                                keyboardType: TextInputType.number,
-                                itemWidth: 40,
-                                itemHeight: 56,
-                                itemGap: 8,
-                                separateMiddle: false,
-                                obscure: obscurePasscode,
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 24,
-                                ),
-                                onCompleted: (value){
-                                  completeInputCode(value);
-                                },
-                                onChanged: (value){
-                                  completeInputCode(value);
-                                },
-                                
-                              ),
-
+                                  keyboardType: TextInputType.number,
+                                  itemWidth: 40,
+                                  itemHeight: 56,
+                                  itemGap: 8,
+                                  separateMiddle: false,
+                                  obscure: obscurePasscode,
+                                  textStyle: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 24,
+                                  ),
+                                  onCompleted: completeInputCode,
+                                  onChanged: (value) {
+                                    if (code.length == 4) {
+                                      setState(() {
+                                        canContinueModel = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        canContinueModel = false;
+                                      });
+                                    }
+                                  }),
                               Container(
                                 margin: EdgeInsets.only(left: 24),
                                 child: GestureDetector(
                                   child: Image.asset(
-                                    obscurePasscode ? 'assets/images/eye-gray.png' : 'assets/images/eye-black.png',
+                                    obscurePasscode
+                                        ? 'assets/images/eye-gray.png'
+                                        : 'assets/images/eye-black.png',
                                     width: 26,
                                   ),
-                                  onTap: (){
+                                  onTap: () {
                                     setState(() {
                                       onTogglePasscode();
                                     });
@@ -473,43 +473,46 @@ class _Buy_BTCState extends State<Buy_BTC> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 30),
-                        child: Container(
-                                margin: EdgeInsets.all(16),
-                                child: RaisedGradientButton(
-                                  child: Text(
-                                    "Buy Now",
-                                    style: AppStyles.buttonTextStyle,
-                                  ),
-                                  gradient: canContinueModel
-                                      ? LinearGradient(
-                                          colors: [
-                                            AppColors.c00B3DF,
-                                            AppColors.c00B3DF
-                                          ],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                        )
-                                      : LinearGradient(
-                                          colors: [
-                                            AppColors.cBDBDBD,
-                                            AppColors.cBDBDBD
-                                          ],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                        ),
-                                  onPressed: () {
-                                    if (canContinueModel == true) {
-                                      Navigator.of(context).pushNamed('ExchangeSuccess',arguments: <String,String>{
-                                        "convertfrom" : '${currencyfromController.text}',
-                                        "convertto" : '${currencytoController.text}',
-                                        "from" : "buybtc",
+                          padding: EdgeInsets.only(top: 30),
+                          child: Container(
+                            margin: EdgeInsets.all(16),
+                            child: RaisedGradientButton(
+                              child: Text(
+                                "Buy Now",
+                                style: AppStyles.buttonTextStyle,
+                              ),
+                              gradient: canContinueModel
+                                  ? LinearGradient(
+                                      colors: [
+                                        AppColors.c00B3DF,
+                                        AppColors.c00B3DF
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    )
+                                  : LinearGradient(
+                                      colors: [
+                                        AppColors.cBDBDBD,
+                                        AppColors.cBDBDBD
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    ),
+                              onPressed: () {
+                                if (canContinueModel == true) {
+                                  Navigator.of(context).pushNamed(
+                                      'ExchangeSuccess',
+                                      arguments: <String, String>{
+                                        "convertfrom":
+                                            '${currencyfromController.text}',
+                                        "convertto":
+                                            '${currencytoController.text}',
+                                        "from": "buybtc",
                                       });
-                                    }
-                                  },
-                                ),
-                              )
-                      )
+                                }
+                              },
+                            ),
+                          ))
                     ],
                   ),
                 ),

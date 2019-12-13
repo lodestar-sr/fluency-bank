@@ -582,7 +582,14 @@ class _Crypto_TransferState extends State<Crypto_Transfer> {
                                   completeInputCode(value);
                                 },
                                 onChanged: (value){
-                                  completeInputCode(value);
+                                  if (value.length == 4) {
+      setState(() {
+        canContinueModel = true;
+      });
+      
+    } else {
+      canContinueModel = false;
+    }
                                 },
                                 
                               ),

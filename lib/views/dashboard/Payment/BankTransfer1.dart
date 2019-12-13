@@ -596,7 +596,14 @@ class _BankTransfer1State extends State<BankTransfer1> {
                                   completeInputCode(value);
                                 },
                                 onChanged: (value){
-                                  completeInputCode(value);
+                                  if (value.length == 4) {
+      setState(() {
+        confirmPassword = true;
+      });
+      
+    } else {
+      confirmPassword = false;
+    }
                                 },
                                 
                               ),

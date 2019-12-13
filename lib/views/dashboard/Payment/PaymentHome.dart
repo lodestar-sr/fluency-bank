@@ -1,4 +1,5 @@
 import 'package:fluencybank/components/circular_image.dart';
+import 'package:fluencybank/components/country_picker/country_code_picker.dart';
 import 'package:fluencybank/components/raised_gradient_button.dart';
 import 'package:fluencybank/views/theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,6 +16,9 @@ class _PaymenthomeState extends State<Paymenthome> {
 
   bool isCompany = false;
   bool canContinue = false;
+  String currencyseleted = "GBP";
+  var currency = ["AED", "AUD","CAD","CHF","CKZ","DKK","HKD"];
+  var currencyname = ["Emirati Dirham", "Australian Dollar", "Canadian Dollar","Swiss Franc","Czech Koruna","Danish Krone","Hong Kong Dollar"];
   final _formKey = GlobalKey<FormState>();
   TextEditingController fullNameController = TextEditingController();
   TextEditingController accountNumberController = TextEditingController();
@@ -109,27 +113,15 @@ class _PaymenthomeState extends State<Paymenthome> {
                                               children: <Widget>[
                                                 Text("Country",style:TextStyle(color: Colors.grey[500])),
                                                 Container(
-                                                  margin: EdgeInsets.only(top: 10,bottom: 10),
-                                                  child: Row(
-                                                    children: <Widget>[
-                                                      Container(
-                                                        decoration: BoxDecoration(
-                                                          shape: BoxShape.circle,
-                                                          image: DecorationImage(image: AssetImage("assets/images/eng.png")),
-                                                        ),
-                                                        height: 20,
-                                                        width: 20,
-                                                        
-                                                      ),
-                                                      Expanded(
-                                                                                                              child: Padding(
-                                                          padding: const EdgeInsets.only(left :8.0),
-                                                          child: Text("United Kingdom...",style:AppStyles.font20.copyWith(fontWeight: FontWeight.w500)),
-                                                        ),
-                                                      ),
-                                                      Icon(Icons.keyboard_arrow_right,color: Colors.grey[600]),
-                                                    ],
-                                                  ),
+                                                  margin: EdgeInsets.only(top: 4,bottom: 4),
+                                                  child: CountryCodePicker(
+                            initialSelection: 'GB',
+                            //onChanged: onCountryCodeChange,
+                            showCountryOnly: true,
+                            showOnlyCountryWhenClosed: true,
+                            textStyle: AppStyles.font24,
+                            searchStyle: AppStyles.font24,
+                          ),
                                                 )
 
                                               ],
@@ -155,8 +147,12 @@ class _PaymenthomeState extends State<Paymenthome> {
                                                 margin: EdgeInsets.only(top: 10,bottom: 10),
                                                 child: Row(
                                                   children: <Widget>[
-                                                    Text("GBP",style:AppStyles.font20.copyWith(fontWeight: FontWeight.w500)),
-                                                    Icon(Icons.keyboard_arrow_right,color: Colors.grey[600]),
+                                                    GestureDetector(
+                                                      onTap: (){
+                                                        _showDialog();
+                                                      },
+                                                      child: Text(currencyseleted,style:AppStyles.font20.copyWith(fontWeight: FontWeight.w500))),
+                                                    Icon(Icons.keyboard_arrow_down,color: Colors.grey[600]),
                                                   ],
                                                 ),
                                               )
@@ -305,8 +301,6 @@ class _PaymenthomeState extends State<Paymenthome> {
                                   },
                                 ),
                               )
-                                
-
                             ]
                             )
                             )
@@ -319,5 +313,76 @@ class _PaymenthomeState extends State<Paymenthome> {
                             )
                             )
                             );
+  }
+
+  // user defined function
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          shape: RoundedRectangleBorder(),
+          title: new Text("Choose Currency"),
+          content: Padding(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Container(
+                  child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: currency.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          currencyseleted = currency[index];
+                          Navigator.of(context).pop();
+                        });
+                      },
+                                          child: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Container(
+                                height: 40.0,
+                                width: 40.0,
+                                child: Image.asset(
+                                  "assets/images/${currency[index]}.png",
+                                  fit: BoxFit.cover,
+                                )),
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.only(left: 15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: <Widget>[
+                                    Text("${currency[index]}",
+                                        style: AppStyles.font20.copyWith(
+                                            fontWeight: FontWeight.w600)),
+                                    Text(
+                                      "${currencyname[index]}",
+                                      style: TextStyle(
+                                          color: Colors.grey[500],
+                                          fontSize: 16.0),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              )),
+            ),          
+        );
+      },
+    );
   }
 }

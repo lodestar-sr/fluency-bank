@@ -62,7 +62,9 @@ class _ExchangeState extends State<Exchange> {
       });
       
     } else {
-      canContinueModel = false;
+      setState(() {
+        canContinueModel = false;
+      });
     }
   }
 
@@ -449,7 +451,16 @@ class _ExchangeState extends State<Exchange> {
                                   completeInputCode(value);
                                 },
                                 onChanged: (value){
-                                  completeInputCode(value);
+                                  if (value.length == 4) {
+      setState(() {
+        canContinueModel = true;
+      });
+      
+    } else {
+      setState(() {
+        canContinueModel = false;
+      });
+    }
                                 },
                                 
                               ),

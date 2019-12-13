@@ -73,7 +73,9 @@ class _Sell_BTCState extends State<Sell_BTC> {
       });
       
     } else {
-      canContinueModel = false;
+      setState(() {
+        canContinueModel = false;
+      });
     }
   }
 
@@ -536,7 +538,16 @@ class _Sell_BTCState extends State<Sell_BTC> {
                                   completeInputCode(value);
                                 },
                                 onChanged: (value){
-                                  completeInputCode(value);
+                                  if (code.length == 4) {
+      setState(() {
+        canContinueModel = true;
+      });
+      
+    } else {
+      setState(() {
+        canContinueModel = false;
+      });
+    }
                                 },
                                 
                               ),

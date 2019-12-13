@@ -207,7 +207,19 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           padding: EdgeInsets.only(top: 20),
                           child: Text("Country",style:AppStyles.font16.copyWith(color:Colors.grey[500])),
                         ),
-                        TextFormField(
+                       _edit ? Container(
+                          decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(color: Colors.grey))
+                          ),
+                          child: CountryCodePicker(
+                            initialSelection: 'GB',
+                            //onChanged: onCountryCodeChange,
+                            showCountryOnly: true,
+                            showOnlyCountryWhenClosed: true,
+                            textStyle: AppStyles.font24,
+                            searchStyle: AppStyles.font24,
+                          ),
+                        ) : TextFormField(
                           enabled: _edit,
                           controller: country,
                           style: AppStyles.font20.copyWith(color: check),
@@ -262,7 +274,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           child: Row(
                             children: <Widget>[
                              _edit == true ? Container(
-                                      width: 69,
+                                      //width: 80,
                                       child: CountryCodePicker(
                                         autoInitial: true,
                                         //onChanged: onCountryCodeChange,
@@ -449,7 +461,14 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                                   completeInputCode(value);
                                 },
                                 onChanged: (value){
-                                  completeInputCode(value);
+                                  if (value.length == 4) {
+      setState(() {
+        canContinueModel = true;
+      });
+      
+    } else {
+      canContinueModel = false;
+    }completeInputCode(value);
                                 },
                                 
                               ),
