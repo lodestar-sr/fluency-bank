@@ -1,8 +1,8 @@
 import 'package:fluencybank/components/raised_gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluencybank/views/theme.dart';
 
-import '../../../theme.dart';
 
 
 class AccountManagement extends StatefulWidget {
@@ -55,7 +55,7 @@ class _AccountManagementState extends State<AccountManagement> {
   }
 
   
-
+  var t = false;
   @override
   void initState() { 
     super.initState();
@@ -64,10 +64,12 @@ class _AccountManagementState extends State<AccountManagement> {
   }
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      getValuesSF();
-    getValuesSFInactive();
-    });
+     
+    //   setState(() {
+    //   getValuesSF();
+    // getValuesSFInactive();
+    // });
+    
     if (retrivedCryptoCurrency?.isNotEmpty ?? false) {
       
       if (checklistpopulated == false) {
@@ -79,6 +81,7 @@ class _AccountManagementState extends State<AccountManagement> {
       }
       
     } 
+    print(retrivedCryptoCurrencytype);
 
     //Forinactive
     if (inActiveRetrivedCryptoCurrency?.isNotEmpty ?? false) {
@@ -92,6 +95,8 @@ class _AccountManagementState extends State<AccountManagement> {
       }
       
     }
+    
+    
     
     return Scaffold(
       appBar: AppBar(
@@ -117,7 +122,10 @@ class _AccountManagementState extends State<AccountManagement> {
              padding: EdgeInsets.only(top: 20, left: 15.0, right: 15.0,bottom: 20),
              child: GestureDetector(
                onTap: (){
-                 Navigator.of(context).pushNamed('add_acount');
+                setState(() {
+                   Navigator.of(context).pushNamed('add_acount');
+                });
+        
                },
                             child: Container(
                  child: Row(
@@ -187,7 +195,7 @@ class _AccountManagementState extends State<AccountManagement> {
                 child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: retrivedCryptoCurrencytype.length,
+                  itemCount: retrivedCryptoCurrency.length ,
                   itemBuilder: (BuildContext context , int index){
                     return GestureDetector(
                       onTap: (){
@@ -220,9 +228,9 @@ class _AccountManagementState extends State<AccountManagement> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: <Widget>[
-                                              Text("${retrivedCryptoCurrency[index]}",style: AppStyles.font20.copyWith(
+                                              Text("${retrivedCryptoCurrency[index] ?? ""}",style: AppStyles.font20.copyWith(
                                                   fontWeight: FontWeight.w600)),
-                                                  Text("${retrivedCryptoCurrencytype[index]}",style: TextStyle(
+                                                  Text("${retrivedCryptoCurrencytype[index] ?? ""}",style: TextStyle(
                                                 color: Colors.grey[500],
                                                 fontSize: 18.0))
                                             ],
@@ -312,7 +320,7 @@ class _AccountManagementState extends State<AccountManagement> {
                 child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: inActiveRetrivedCryptoCurrency.length,
+                  itemCount: inActiveRetrivedCryptoCurrency.length ,
                   itemBuilder: (BuildContext context , int index){
                     return GestureDetector(
                       onTap: (){
@@ -336,7 +344,7 @@ class _AccountManagementState extends State<AccountManagement> {
                                                               141, 195, 81, 1) : Colors.white,
                                       ),
                                       child: Image.asset(
-                                        "assets/images/${inActiveRetrivedCryptoCurrency[index]}.png",
+                                        "assets/images/${inActiveRetrivedCryptoCurrency[index] }.png",
                                         fit: BoxFit.cover,
                                       )),
                                       Expanded(

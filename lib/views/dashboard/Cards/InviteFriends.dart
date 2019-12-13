@@ -142,7 +142,6 @@ class _InviteFriendsState extends State<InviteFriends> {
                                         Navigator.of(context)
                                             .pushNamed('InviteFriendsFromcontacts',arguments: <String,String>{
                                               'from' : 'cards'
-
                                             });
                                       });
                                     },

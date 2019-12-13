@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:share/share.dart';
 
 import '../../theme.dart';
@@ -199,7 +200,10 @@ class Account_detailsState extends State<Account_details> {
             Padding(
               padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 2.0),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+
+                  Navigator.of(context).pushNamed("Send_Money");
+                },
                 child: Container(
                     child: Padding(
                   padding:
@@ -297,7 +301,9 @@ class Account_detailsState extends State<Account_details> {
                             ],
                           )),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).pushNamed('seealllastactions');
+                            },
                             child: Icon(
                               Icons.search,
                               size: 35.0,
@@ -538,7 +544,9 @@ class Account_detailsState extends State<Account_details> {
         builder: (BuildContext bc) {
           return StatefulBuilder(builder: (BuildContext context,
               StateSetter setState /*You can rename this!*/) {
-            return Container(
+            return Scaffold(
+                          body: Builder(
+        builder: (context) =>Container(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: new ListView(
@@ -658,8 +666,8 @@ class Account_detailsState extends State<Account_details> {
                                   flag[1] = false;
                                   print(flag);
                                   Share.share(
-                                      'check out my website https://example.com',
-                                      subject: 'Look what I made!');
+                                      'Account number:- 25443658\n Sort code :- 08-90-90 \n IBAN:- GB29 NWBK 6016 1331 9268 19 \n SWIFT/BIC :- SREDF344G',
+                                      subject: '$accounttype Details');
                                 });
                               },
                               child: Padding(
@@ -707,6 +715,18 @@ class Account_detailsState extends State<Account_details> {
                                   flag[1] = true;
                                   flag[0] = false;
                                   print(flag);
+                                  Clipboard.setData(
+                                                              new ClipboardData(
+                                                                  text:
+                                                                      'Account number:- 25443658\n Sort code :- 08-90-90 \n IBAN:- GB29 NWBK 6016 1331 9268 19 \n SWIFT/BIC :- SREDF344G'));
+                                                          //Copied to Clipboard
+
+                                                          Scaffold.of(context)
+                                                              .showSnackBar(
+                                                                  SnackBar(
+                                                            content: Text(
+                                                                "Copied to Clipboard."),
+                                                          ));
                                 });
                               },
                               child: Padding(
@@ -754,7 +774,7 @@ class Account_detailsState extends State<Account_details> {
                   ],
                 ),
               ),
-            );
+            )));
           });
         });
   }

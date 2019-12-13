@@ -6,14 +6,14 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import '../../theme.dart';
 
-class Exchange extends StatefulWidget {
-  Exchange({Key key}) : super(key: key);
+class Buy_BTC extends StatefulWidget {
+  Buy_BTC({Key key}) : super(key: key);
 
   @override
-  _ExchangeState createState() => _ExchangeState();
+  _Buy_BTCState createState() => _Buy_BTCState();
 }
 
-class _ExchangeState extends State<Exchange> {
+class _Buy_BTCState extends State<Buy_BTC> {
   var currencyfromController = MoneyMaskedTextController(
       leftSymbol: '£', decimalSeparator: '.', thousandSeparator: ',');
 
@@ -44,23 +44,19 @@ class _ExchangeState extends State<Exchange> {
     }
   }
 
-  //Confirm exchange
+  //Confirm Buy_BTC
   onTogglePasscode() {
     setState(() {
       obscurePasscode = !obscurePasscode;
     });
   }
 
-  
-
   completeInputCode(String code) {
-
     print("This is the code ${code.length}");
     if (code.length == 4) {
       setState(() {
         canContinueModel = true;
       });
-      
     } else {
       setState(() {
         canContinueModel = false;
@@ -73,7 +69,7 @@ class _ExchangeState extends State<Exchange> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Exchange",
+          "Buy BTC",
           style: AppStyles.font20,
         ),
         centerTitle: true,
@@ -118,8 +114,8 @@ class _ExchangeState extends State<Exchange> {
                               validator();
                             },
                             controller: currencyfromController,
-                            keyboardType: TextInputType.numberWithOptions(
-                                decimal: true),
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
                             style: AppStyles.font32,
                             cursorWidth: 1,
                             cursorColor: AppColors.c212121,
@@ -159,10 +155,8 @@ class _ExchangeState extends State<Exchange> {
                                         //MainAxisAlignment.spaceAround,
                                         children: <Widget>[
                                           Text("GBP",
-                                              style: AppStyles.font20
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w600)),
+                                              style: AppStyles.font20.copyWith(
+                                                  fontWeight: FontWeight.w600)),
                                           Text(
                                             "£1,000.00",
                                             style: TextStyle(
@@ -250,8 +244,8 @@ class _ExchangeState extends State<Exchange> {
                             onChanged: (value) {
                               validator();
                             },
-                            keyboardType: TextInputType.numberWithOptions(
-                                decimal: true),
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
                             style: AppStyles.font32,
                             cursorWidth: 1,
                             cursorColor: AppColors.c212121,
@@ -266,8 +260,8 @@ class _ExchangeState extends State<Exchange> {
                             padding: EdgeInsets.only(left: 10.0),
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed('ExchangeCurrencyTOoptions');
+                                // Navigator.of(context)
+                                //     .pushNamed('Buy_BTCCurrencyTOoptions');
                               },
                               child: Container(
                                 height: 60.0,
@@ -281,8 +275,8 @@ class _ExchangeState extends State<Exchange> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
-                                            color: Color.fromRGBO(
-                                                247, 147, 26, 1),
+                                            color:
+                                                Color.fromRGBO(247, 147, 26, 1),
                                             image: DecorationImage(
                                                 image: ExactAssetImage(
                                                     "assets/images/BTC.png"))),
@@ -317,8 +311,7 @@ class _ExchangeState extends State<Exchange> {
                                 ),
                                 decoration: BoxDecoration(
                                     color: Colors.grey[100],
-                                    borderRadius:
-                                        BorderRadius.circular(10.0)),
+                                    borderRadius: BorderRadius.circular(10.0)),
                               ),
                             ),
                           ),
@@ -336,7 +329,7 @@ class _ExchangeState extends State<Exchange> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text("Exchange fee £0.00",
+                          Text("Buy BTC fee £0.00",
                               style: TextStyle(
                                   color: Colors.grey[500],
                                   fontSize: 16.0,
@@ -345,7 +338,7 @@ class _ExchangeState extends State<Exchange> {
                             margin: EdgeInsets.all(16),
                             child: RaisedGradientButton(
                               child: Text(
-                                "Exchange",
+                                "Buy BTC",
                                 style: AppStyles.buttonTextStyle,
                               ),
                               gradient: canContinue
@@ -396,7 +389,7 @@ class _ExchangeState extends State<Exchange> {
               StateSetter setState /*You can rename this!*/) {
             return Padding(
               padding: EdgeInsets.only(
-             bottom: MediaQuery.of(context).viewInsets.bottom),
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Container(
                 height: 400.0,
                 child: Padding(
@@ -417,7 +410,7 @@ class _ExchangeState extends State<Exchange> {
                           ),
                         ),
                       ),
-                      Text("Confirm exchange",
+                      Text("Confirm Buy",
                           style: AppStyles.font22
                               .copyWith(fontWeight: FontWeight.bold)),
                       Padding(
@@ -437,42 +430,38 @@ class _ExchangeState extends State<Exchange> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               VerificationCodeInput(
-                                keyboardType: TextInputType.number,
-                                itemWidth: 40,
-                                itemHeight: 56,
-                                itemGap: 8,
-                                separateMiddle: false,
-                                obscure: obscurePasscode,
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 24,
-                                ),
-                                onCompleted: (value){
-                                  completeInputCode(value);
-                                },
-                                onChanged: (value){
-                                  if (value.length == 4) {
-      setState(() {
-        canContinueModel = true;
-      });
-      
-    } else {
-      setState(() {
-        canContinueModel = false;
-      });
-    }
-                                },
-                                
-                              ),
-
+                                  keyboardType: TextInputType.number,
+                                  itemWidth: 40,
+                                  itemHeight: 56,
+                                  itemGap: 8,
+                                  separateMiddle: false,
+                                  obscure: obscurePasscode,
+                                  textStyle: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 24,
+                                  ),
+                                  onCompleted: completeInputCode,
+                                  onChanged: (value) {
+                                    if (code.length == 4) {
+                                      setState(() {
+                                        canContinueModel = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        canContinueModel = false;
+                                      });
+                                    }
+                                  }),
                               Container(
                                 margin: EdgeInsets.only(left: 24),
                                 child: GestureDetector(
                                   child: Image.asset(
-                                    obscurePasscode ? 'assets/images/eye-gray.png' : 'assets/images/eye-black.png',
+                                    obscurePasscode
+                                        ? 'assets/images/eye-gray.png'
+                                        : 'assets/images/eye-black.png',
                                     width: 26,
                                   ),
-                                  onTap: (){
+                                  onTap: () {
                                     setState(() {
                                       onTogglePasscode();
                                     });
@@ -484,42 +473,46 @@ class _ExchangeState extends State<Exchange> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 30),
-                        child: Container(
-                                margin: EdgeInsets.all(16),
-                                child: RaisedGradientButton(
-                                  child: Text(
-                                    "Exchange Now",
-                                    style: AppStyles.buttonTextStyle,
-                                  ),
-                                  gradient: canContinueModel
-                                      ? LinearGradient(
-                                          colors: [
-                                            AppColors.c00B3DF,
-                                            AppColors.c00B3DF
-                                          ],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                        )
-                                      : LinearGradient(
-                                          colors: [
-                                            AppColors.cBDBDBD,
-                                            AppColors.cBDBDBD
-                                          ],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                        ),
-                                  onPressed: () {
-                                    if (canContinueModel == true) {
-                                      Navigator.of(context).pushNamed('ExchangeSuccess',arguments: <String,String>{
-                                        "convertfrom" : '${currencyfromController.text}',
-                                        "convertto" : '${currencytoController.text}'
+                          padding: EdgeInsets.only(top: 30),
+                          child: Container(
+                            margin: EdgeInsets.all(16),
+                            child: RaisedGradientButton(
+                              child: Text(
+                                "Buy Now",
+                                style: AppStyles.buttonTextStyle,
+                              ),
+                              gradient: canContinueModel
+                                  ? LinearGradient(
+                                      colors: [
+                                        AppColors.c00B3DF,
+                                        AppColors.c00B3DF
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    )
+                                  : LinearGradient(
+                                      colors: [
+                                        AppColors.cBDBDBD,
+                                        AppColors.cBDBDBD
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    ),
+                              onPressed: () {
+                                if (canContinueModel == true) {
+                                  Navigator.of(context).pushNamed(
+                                      'ExchangeSuccess',
+                                      arguments: <String, String>{
+                                        "convertfrom":
+                                            '${currencyfromController.text}',
+                                        "convertto":
+                                            '${currencytoController.text}',
+                                        "from": "buybtc",
                                       });
-                                    }
-                                  },
-                                ),
-                              )
-                      )
+                                }
+                              },
+                            ),
+                          ))
                     ],
                   ),
                 ),

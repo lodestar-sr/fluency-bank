@@ -18,7 +18,7 @@ class _TopUpAccountState extends State<TopUpAccount> {
   var currencyText = "";
   var amount = "";
   bool canContinue = false;
-  var currencyamountController = MoneyMaskedTextController(leftSymbol: '£',decimalSeparator: '.',thousandSeparator: '');
+  var currencyamountController = MoneyMaskedTextController(leftSymbol: '£',decimalSeparator: '.',thousandSeparator: ',');
   
   final _formKey = GlobalKey<FormState>();
 

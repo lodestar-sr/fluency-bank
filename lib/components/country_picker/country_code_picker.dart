@@ -112,7 +112,7 @@ class _CountryCodePickerState extends State<CountryCodePicker> {
                       ? Container(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(selectedItem.toCountryStringOnly(),
-                        style: AppStyles.font14),
+                        style: AppStyles.font20),
                   )
                       : Container(),
                 ],

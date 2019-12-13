@@ -16,6 +16,7 @@ class ExchangeSuccess extends StatefulWidget {
 class ExchangeSuccessSuccessState extends State<ExchangeSuccess> {
   var convertfrom = "";
   var convertto = "";
+  var from = "";
   
   var CheckStatus = "success";
   //var CheckStatus = "failed" ;
@@ -46,6 +47,7 @@ class ExchangeSuccessSuccessState extends State<ExchangeSuccess> {
     setState(() {
       convertfrom = args['convertfrom'];
       convertto = args['convertto'];
+      from = args['from'];
       
     });
 
@@ -230,7 +232,7 @@ class ExchangeSuccessSuccessState extends State<ExchangeSuccess> {
                                                             10.0),
                                                     image: DecorationImage(
                                                         image: ExactAssetImage(
-                                                            "assets/images/cryp1.png"))),
+                                                            "assets/images/BTC.png"))),
                                               ),
                                             ),
                                             Expanded(
@@ -350,7 +352,10 @@ class ExchangeSuccessSuccessState extends State<ExchangeSuccess> {
                                             onPressed: () {
                                               setState(() {
                                                 var count = 0;
-                                                Navigator.popUntil(context,
+                                               from == "buybtc" ? Navigator.popUntil(context,
+                                                    (route) {
+                                                  return count++ == 4;
+                                                }) : Navigator.popUntil(context,
                                                     (route) {
                                                   return count++ == 3;
                                                 });

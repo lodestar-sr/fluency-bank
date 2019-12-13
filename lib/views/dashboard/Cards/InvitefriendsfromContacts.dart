@@ -22,8 +22,6 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
   var shareLink = "http://fluency.io/fdHFRee98";
   Iterable<Contact> _contacts;
   List<ContactsChoosed> selectedContacts = [];
-  
-  
   // get contacts
   @override
   void initState() {
@@ -340,13 +338,10 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
                                                               c.avatar.length >
                                                                   0
                                                           ? 
-                                                              c.avatar
-                                                              
-                                                            
+                                                              c.avatar                                                       
                                                           : c.initials()
                                                           )
                                                           );
-                                                          print("This is the contact selected ${selectedContacts[0].firstLetter},${selectedContacts[1].displayname},${selectedContacts[2].displayname}");
                                                            } 
                                                            
                                                            else { 

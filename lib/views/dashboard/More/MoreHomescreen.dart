@@ -88,11 +88,11 @@ class _MoreHomescreenState extends State<MoreHomescreen> {
                         }
                         if (index == 2) 
                         {                         
-                         Navigator.of(context).pushNamed('PersonalDetails');                       
+                         Navigator.of(context).pushNamed('Login_Security');                       
                         }
                         if (index == 3) 
                         {                         
-                         Navigator.of(context).pushNamed('PersonalDetails');                       
+                         Navigator.of(context).pushNamed('Notifications');                       
                         }
                         
                       },
@@ -117,6 +117,33 @@ class _MoreHomescreenState extends State<MoreHomescreen> {
                                       dense: true,
                                       leading: Icon(icons[index],color:Colors.black,size:28),
                                       title: Text("${settings[index]}",style: AppStyles.font18.copyWith(fontSize: 18.0,fontWeight: FontWeight.w600),),
+                                    onTap: (){
+                                    if (index == 0) {
+                                      
+                                    }
+                                    else if (index == 1) {
+                                      Navigator.of(context).pushNamed("FAQ");
+                                      
+                                    }
+                                    else if (index == 2) {
+                                      Navigator.of(context).pushNamed("Privacy_Policy");
+                                      
+                                    }
+                                    else if (index == 3) {
+                                      Navigator.of(context).pushNamed("FAQ");
+                                      
+                                    }
+                                    else if (index == 4) {
+                                      Navigator.of(context).pushNamed("FAQ");
+                                      
+                                    }
+
+
+
+
+                                    },
+                                    
+                                    
                                     ),
                                   ),
                                 ),

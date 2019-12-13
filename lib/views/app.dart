@@ -1,4 +1,14 @@
+import 'package:fluencybank/components/country_picker/selection_dialog.dart';
+import 'package:fluencybank/views/dashboard/Accounts/BTC_AccountDetails.dart';
+import 'package:fluencybank/views/dashboard/Accounts/BTC_GBP_Graph.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Buy_BTC.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Buy_Crypto.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Crypto_TransSuccess.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Crypto_Transfer.dart';
+import 'package:fluencybank/views/dashboard/Accounts/SearchScreen.dart';
 import 'package:fluencybank/views/dashboard/Accounts/SeeallLastAction.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Sell_BTC.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Send_Money.dart';
 import 'package:fluencybank/views/dashboard/Accounts/account_details.dart';
 import 'package:fluencybank/views/dashboard/Accounts/accountcreated.dart';
 import 'package:fluencybank/views/dashboard/Accounts/accounts.dart';
@@ -6,6 +16,16 @@ import 'package:fluencybank/views/dashboard/Accounts/addacount.dart';
 import 'package:fluencybank/views/dashboard/Accounts/enteremail.dart';
 import 'package:fluencybank/views/dashboard/Accounts/statement.dart';
 import 'package:fluencybank/views/dashboard/Accounts/statementsent.dart';
+import 'package:fluencybank/views/dashboard/More/FAQ/Answer.dart';
+import 'package:fluencybank/views/dashboard/More/FAQ/FAQ.dart';
+import 'package:fluencybank/views/dashboard/More/Login&Secutiry/Login_Security.dart';
+import 'package:fluencybank/views/dashboard/More/Login&Secutiry/SuccessPasswordChange.dart';
+import 'package:fluencybank/views/dashboard/More/Notification/Notifications.dart';
+import 'package:fluencybank/views/dashboard/More/Privacy_Policy/Ans_Privacy_Policy.dart';
+import 'package:fluencybank/views/dashboard/More/Privacy_Policy/Privacy_Policy.dart';
+import 'package:fluencybank/views/dashboard/Payment/BankTransfer1.dart';
+import 'package:fluencybank/views/dashboard/Payment/PaymentHome.dart';
+import 'package:fluencybank/views/dashboard/Payment/SuccessPayment.dart';
 import 'package:fluencybank/views/dashboard/dashboard.dart';
 import 'package:fluencybank/views/home.dart';
 import 'package:fluencybank/views/topup/passcode.dart';
@@ -53,7 +73,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: appTheme(context),
+     // theme: appTheme(context),
+      theme: ThemeData(
+        buttonTheme: ButtonThemeData(minWidth: 10,),
+        textTheme: TextTheme(button: TextStyle(fontSize: 10)),
+),
       home: Dashboard(),
       routes: {
         'splash': (_) => Splash(),
@@ -74,7 +98,7 @@ class App extends StatelessWidget {
         'topup_payment': (_) => TopupPayment(),
         'topup_success': (_) => TopupSuccess(),
         'passcode': (_) => Passcode(),
-
+      
         'add_card': (_) => AddCard(),
 
         'confirm_delivery_address': (_) => ConfirmDeliveryAddress(),
@@ -85,9 +109,13 @@ class App extends StatelessWidget {
 
         'dashboard': (_) => Dashboard(),
         'accounts' : (_) => Accounts(),
+        'SearchScreen' : (_) => SearchScreen(),
         'add_acount': (_) => Addaccount(),
         'topupaccount': (_) => TopUpAccount(),
+        'BTC_AccountDetails': (_) => BTC_AccountDetails(),
+        'BTC_GBP_Graph': (_) => BTC_GBP_Graph(),
         'account_details': (_) => Account_details(),
+        'Send_Money' : (_) => Send_Money(),
         'statement': (_) => Statement(),
         'enteremail': (_) => EnterEmail(),
         'statementsent':(_) => Statementsent(),
@@ -97,7 +125,13 @@ class App extends StatelessWidget {
         'exchange' :(_) => Exchange(),
         'ExchangeCurrencyTOoptions' : (_) => ExchangeCurrencyTOoptions(),
         'ExchangeSuccess': (_) => ExchangeSuccess(),
+        'Buy_Crypto' : (_) => Buy_Crypto(),
+        'Buy_BTC' : (_) => Buy_BTC(),
+        'Sell_BTC': (_) => Sell_BTC(),
+        'Crypto_Transfer' : (_) => Crypto_Transfer(),
+        'Crypto_TransSuccess': (_) => Crypto_TransSuccess(),
 
+ 
         //card 
         'InviteFriends': (_) => InviteFriends(),
         'InviteFriendsFromcontacts': (_) => InviteFriendsFromcontacts(),
@@ -107,6 +141,18 @@ class App extends StatelessWidget {
         'AccountConfiguration' : (_) => AccountConfiguration(),
         'ChoosemainCurrency' : (_) => ChoosemainCurrency(),
         'AccountManagement' : (_) => AccountManagement(),
+        'Login_Security' : (_) => Login_Security(),
+        'PinCodeChangeSucess' : (_) => PinCodeChangeSucess(),
+        'Notifications' : (_) => Notifications(),
+        'FAQ' : (_) => FAQ(),
+        'FaqAnswers' : (_) => FaqAnswers(),
+        'Privacy_Policy' : (_) => Privacy_Policy(),
+        'Ans_Privacy_Policy' : (_) => Ans_Privacy_Policy(),
+
+        //Payment 
+        'Paymenthome' : (_) => Paymenthome(),
+        'BankTransfer1' : (_) => BankTransfer1(),
+        'PaymentSuccess' : (_) => PaymentSuccess(),
       },
     );
   }

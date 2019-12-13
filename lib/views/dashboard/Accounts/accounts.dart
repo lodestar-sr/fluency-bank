@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:fluencybank/components/raised_gradient_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:fluencybank/views/theme.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share/share.dart';
 
 class Accounts extends StatefulWidget {
@@ -76,7 +78,6 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                 constraints: BoxConstraints(
                   minHeight: viewportConstraints.maxHeight,
                 ),
-
                 //Removed Intrinsic height
                 child: Stack(children: [
                   Image.asset(
@@ -122,11 +123,13 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                                 children: <Widget>[
                                   Container(
                                     margin: EdgeInsets.only(bottom: 18),
-                                    child: GestureDetector(
+                                    child: GestureDetector(                                     
                                       child: Image.asset(
                                           'assets/images/search-white.png',
                                           width: 24),
-                                      onTap: null,
+                                      onTap: (){
+                                        Navigator.of(context).pushNamed('SearchScreen');
+                                      },
                                     ),
                                   ),
                                   RaisedGradientButton(
@@ -179,7 +182,7 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: <Widget>[
-                            addcurrencycard(),
+                            
                             currencyCard(
                               currencyText: 'GBP',
                               currencySymbol: '£',
@@ -201,17 +204,18 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                                   'assets/images/barcode-qr.png',
                                   width: 24),
                             ),
-                            currencyCard(
-                              currencyText: 'ETH',
-                              currencySymbol: '£',
-                              amount: '16,560.40',
-                              additionalAmount: '+£234.43 (10%)',
-                              currencyName: 'British Pound',
-                              enabledCard: true,
-                              extraImage: Image.asset(
-                                  'assets/images/barcode-qr.png',
-                                  width: 24),
-                            ),
+                            // currencyCard(
+                            //   currencyText: 'ETH',
+                            //   currencySymbol: '£',
+                            //   amount: '16,560.40',
+                            //   additionalAmount: '+£234.43 (10%)',
+                            //   currencyName: 'British Pound',
+                            //   enabledCard: true,
+                            //   extraImage: Image.asset(
+                            //       'assets/images/barcode-qr.png',
+                            //       width: 24),
+                            // ),
+                            addcurrencycard(),
                           ],
                         ),
                       ),
@@ -240,9 +244,9 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                                     style: AppStyles.font16.copyWith(
                                         fontWeight: FontWeight.bold)),
                                 RaisedGradientButton(
-                                  child: Text('Increase',
+                                  child: Text('Buy Crypto',
                                       style: AppStyles.font14.copyWith(
-                                          color: AppColors.c00B3DF)),
+                                          color: AppColors.c00B3DF,fontWeight: FontWeight.w600)),
                                   width: 104,
                                   height: 40,
                                   border: Border.all(
@@ -252,7 +256,9 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                   ),
-                                  onPressed: null,
+                                  onPressed: (){
+                                    Navigator.of(context).pushNamed('Buy_Crypto');
+                                  },
                                 ),
                               ],
                             ),
@@ -552,18 +558,32 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
             scale: _scale,
             child: Container(
               margin: EdgeInsets.only(right: 8, left: 8),
-              height: 80.0,
-              width: 80.0,
+              height: 200.0,
+              //width: 80.0,
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                   color: Color.fromARGB(48, 36, 32, 55),
                   offset: Offset(0, 2),
                   blurRadius: 20,
                 ),
-              ], color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
-              child: Icon(
-                Icons.add,
-                color: AppColors.c00B3DF,
+                
+              ],border: Border.all(color: AppColors.c00B3DF), 
+              color: Color.fromRGBO(255, 255, 255, 0.7),
+               borderRadius: BorderRadius.circular(10.0)),
+              child: Padding(
+                padding: const EdgeInsets.only(left : 10.0,right: 10,top: 20,bottom: 20),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.add,
+                      color: AppColors.c00B3DF,
+                    ),
+                    Padding(
+                      padding:  EdgeInsets.only(left :8.0),
+                      child: Text("Add \naccount",style:AppStyles.font18.copyWith(color:AppColors.c00B3DF)),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -583,8 +603,14 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
   }) {
     return GestureDetector(
       onTap: () {
+        //BTC_AccountDetails
       
-        Navigator.of(context).pushNamed('account_details',
+        currencyText == "BTC" ? Navigator.of(context).pushNamed('BTC_AccountDetails',
+                                    arguments: <String, String>{
+                                      "currencyText": currencyText,
+                                      "amount" : amount,
+                                    }) :
+                                    Navigator.of(context).pushNamed('account_details',
                                     arguments: <String, String>{
                                       "currencyText": currencyText,
                                       "amount" : amount,
@@ -672,6 +698,7 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
             GestureDetector(
               onTap: (){
                 setState(() {
+                  currencyText == "BTC" ? accountDetailsBottomSheet(context , currencyText):
                   ModalBottomSheet(context , currencyText);
                 });
               },
@@ -712,223 +739,437 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
           return StatefulBuilder(builder: (BuildContext context,
               StateSetter setState /*You can rename this!*/) {
                 
-            return Container(
-              
-              child: new ListView(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: SingleChildScrollView(
-                                              child: Container(
-                          height: 5.0,
-                          width: 50.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.grey[350],
+            return Scaffold(
+                          body: Builder(
+        builder: (context) => Container(             
+                child: new ListView(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: SingleChildScrollView(
+                                                child: Container(
+                            height: 5.0,
+                            width: 50.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.grey[350],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12.0, left: 12.0),
-                        child: Text("Your $accounttype account details",
-                            style: AppStyles.font24
-                                .copyWith(fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0, left: 12.0),
-                        child: Text("Account number",
-                            style: AppStyles.font16.copyWith()),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                        child: Text("25443658",
-                            style: AppStyles.font24.copyWith(
-                                fontWeight: FontWeight.bold, fontSize: 18.0)),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0, left: 12.0),
-                        child: Text("Sort code",
-                            style: AppStyles.font16.copyWith()),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                        child: Text("08-90-90",
-                            style: AppStyles.font24.copyWith(
-                                fontWeight: FontWeight.bold, fontSize: 18.0)),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0, left: 12.0),
-                        child: Text("IBAN", style: AppStyles.font16.copyWith()),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                        child: Text("GB29 NWBK 6016 1331 9268 19",
-                            style: AppStyles.font24.copyWith(
-                                fontWeight: FontWeight.bold, fontSize: 18.0)),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0, left: 12.0),
-                        child: Text("SWIFT/BIC",
-                            style: AppStyles.font16.copyWith()),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, left: 12.0),
-                        child: Text("SREDF344G",
-                            style: AppStyles.font24.copyWith(
-                                fontWeight: FontWeight.bold, fontSize: 18.0)),
-                      ),
-                    ],
-                  ),
-                  //button
-
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Row(
+                    Row(
                       children: <Widget>[
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                print("OBject1 tapped");
-                                flag[0] = true;
-                                flag[1] = false;
-                                print(flag);
-                                Share.share(
-                                    'check out my website https://example.com',
-                                    subject: 'Look what I made!');
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: Container(
-                                height: 50,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(
-                                      CupertinoIcons.share_up,
-                                      size: 25.0,
-                                      color: flag[0] == true
-                                          ? Colors.white
-                                          : AppColors.c00B3DF,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 10.0),
-                                      child: Text("Share",
-                                          style: AppStyles.font16.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: flag[0] == true
-                                                ? Colors.white
-                                                : AppColors.c00B3DF,
-                                          )),
-                                    )
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  color: flag[0] == true
-                                      ? AppColors.c00B3DF
-                                      : Colors.white,
-                                  border: Border.all(
-                                      color: AppColors.c00B3DF, width: 2),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                flag[1] = true;
-                                flag[0] = false;
-                                print(flag);
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10.0, right: 10.0),
-                              child: Container(
-                                height: 50,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.content_copy,
-                                      size: 25.0,
-                                      color: flag[1] == true
-                                          ? Colors.white
-                                          : AppColors.c00B3DF,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 10.0),
-                                      child: Text("copy",
-                                          style: AppStyles.font16.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: flag[1] == true
-                                                ? Colors.white
-                                                : AppColors.c00B3DF,
-                                          )),
-                                    )
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  color: flag[1] == true
-                                      ? AppColors.c00B3DF
-                                      : Colors.white,
-                                  border: Border.all(
-                                      color: AppColors.c00B3DF, width: 2),
-                                ),
-                              ),
-                            ),
-                          ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12.0, left: 12.0),
+                          child: Text("Your $accounttype account details",
+                              style: AppStyles.font24
+                                  .copyWith(fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),
-                  ),
-                ],
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0, left: 12.0),
+                          child: Text("Account number",
+                              style: AppStyles.font16.copyWith()),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+                          child: Text("25443658",
+                              style: AppStyles.font24.copyWith(
+                                  fontWeight: FontWeight.bold, fontSize: 18.0)),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0, left: 12.0),
+                          child: Text("Sort code",
+                              style: AppStyles.font16.copyWith()),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+                          child: Text("08-90-90",
+                              style: AppStyles.font24.copyWith(
+                                  fontWeight: FontWeight.bold, fontSize: 18.0)),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0, left: 12.0),
+                          child: Text("IBAN", style: AppStyles.font16.copyWith()),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+                          child: Text("GB29 NWBK 6016 1331 9268 19",
+                              style: AppStyles.font24.copyWith(
+                                  fontWeight: FontWeight.bold, fontSize: 18.0)),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0, left: 12.0),
+                          child: Text("SWIFT/BIC",
+                              style: AppStyles.font16.copyWith()),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+                          child: Text("SREDF344G",
+                              style: AppStyles.font24.copyWith(
+                                  fontWeight: FontWeight.bold, fontSize: 18.0)),
+                        ),
+                      ],
+                    ),
+                    //button
+
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  print("OBject1 tapped");
+                                  flag[0] = true;
+                                  flag[1] = false;
+                                  print(flag);
+                                  Share.share(
+                                      'Account number:- 25443658\n Sort code :- 08-90-90 \n IBAN:- GB29 NWBK 6016 1331 9268 19 \n SWIFT/BIC :- SREDF344G',
+                                      subject: '$accounttype Details');
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Container(
+                                  height: 50,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(
+                                        CupertinoIcons.share_up,
+                                        size: 25.0,
+                                        color: flag[0] == true
+                                            ? Colors.white
+                                            : AppColors.c00B3DF,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child: Text("Share",
+                                            style: AppStyles.font16.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: flag[0] == true
+                                                  ? Colors.white
+                                                  : AppColors.c00B3DF,
+                                            )),
+                                      )
+                                    ],
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                    color: flag[0] == true
+                                        ? AppColors.c00B3DF
+                                        : Colors.white,
+                                    border: Border.all(
+                                        color: AppColors.c00B3DF, width: 2),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  flag[1] = true;
+                                  flag[0] = false;
+                                  print(flag);
+
+                                  Clipboard.setData(
+                                                              new ClipboardData(
+                                                                  text:
+                                                                      'Account number:- 25443658\n Sort code :- 08-90-90 \n IBAN:- GB29 NWBK 6016 1331 9268 19 \n SWIFT/BIC :- SREDF344G'));
+                                                          //Copied to Clipboard
+
+                                                          Scaffold.of(context)
+                                                              .showSnackBar(
+                                                                  SnackBar(
+                                                            content: Text(
+                                                                "Copied to Clipboard."),
+                                                          ));
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, right: 10.0),
+                                child: Container(
+                                  height: 50,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.content_copy,
+                                        size: 25.0,
+                                        color: flag[1] == true
+                                            ? Colors.white
+                                            : AppColors.c00B3DF,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child: Text("copy",
+                                            style: AppStyles.font16.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: flag[1] == true
+                                                  ? Colors.white
+                                                  : AppColors.c00B3DF,
+                                            )),
+                                      )
+                                    ],
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                    color: flag[1] == true
+                                        ? AppColors.c00B3DF
+                                        : Colors.white,
+                                    border: Border.all(
+                                        color: AppColors.c00B3DF, width: 2),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            );
+            ));
+          });
+        });
+  }
+
+  //Bottom sheet
+  void accountDetailsBottomSheet(context, String accounttype) {
+    var code = "3EHLU8hgBKwucH4N2LYHH46CtZk9RsqScm";
+    List<bool> flag = [false,false];
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return StatefulBuilder(builder: (BuildContext context,
+              StateSetter setState /*You can rename this!*/) {
+            return Scaffold(
+                          body: Builder(
+        builder: (context) =>SingleChildScrollView(
+                          child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                            height: 5.0,
+                            width: 50.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.grey[350],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15.0,),
+                            child: Text("Your $accounttype account details",
+                                style: AppStyles.font24
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Text("Scan or share your address",style:AppStyles.font18.copyWith(color:Colors.grey[500])),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Center(
+                          child: Container(
+                            child: QrImage(
+                           data: "$code",
+                           version: QrVersions.auto,
+                           size: 200.0,
+                           ),
+                          ),
+                        ),
+                      ),
+
+                      Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Text("Wallet address",style:AppStyles.font18.copyWith(color:Colors.grey[500])),
+                      ),
+                      Padding(
+                      padding: EdgeInsets.only(top: 10,bottom: 20),
+                      child: Text("$code",style:AppStyles.font16.copyWith(fontSize: 17,fontWeight: FontWeight.w600)),
+                      ),
+                      //button
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    print("OBject1 tapped");
+                                    flag[0] = true;
+                                    flag[1] = false;
+                                    print(flag);
+                                    Share.share(
+                                        'Wallet Address :- $code',
+                                        subject: 'Look what I made!');
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10.0),
+                                  child: Container(
+                                    height: 50,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Icon(
+                                          CupertinoIcons.share_up,
+                                          size: 25.0,
+                                          color: flag[0] == true
+                                              ? Colors.white
+                                              : AppColors.c00B3DF,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 10.0),
+                                          child: Text("Share",
+                                              style: AppStyles.font16.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: flag[0] == true
+                                                    ? Colors.white
+                                                    : AppColors.c00B3DF,
+                                              )),
+                                        )
+                                      ],
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      color: flag[0] == true
+                                          ? AppColors.c00B3DF
+                                          : Colors.white,
+                                      border: Border.all(
+                                          color: AppColors.c00B3DF, width: 2),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    flag[1] = true;
+                                    flag[0] = false;
+                                    print(flag);
+                                    setState(() {
+                                                        Clipboard.setData(
+                                                            new ClipboardData(
+                                                                text:
+                                                                    code));
+                                                        //Copied to Clipboard
+
+                                                        Scaffold.of(context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                          content: Text(
+                                                              "Copied to Clipboard."),
+                                                        ));
+                                                      });
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10.0, right: 10.0),
+                                  child: Container(
+                                    height: 50,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.content_copy,
+                                          size: 25.0,
+                                          color: flag[1] == true
+                                              ? Colors.white
+                                              : AppColors.c00B3DF,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 10.0),
+                                          child: Text("copy",
+                                              style: AppStyles.font16.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: flag[1] == true
+                                                    ? Colors.white
+                                                    : AppColors.c00B3DF,
+                                              )),
+                                        )
+                                      ],
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      color: flag[1] == true
+                                          ? AppColors.c00B3DF
+                                          : Colors.white,
+                                      border: Border.all(
+                                          color: AppColors.c00B3DF, width: 2),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )));
           });
         });
   }
