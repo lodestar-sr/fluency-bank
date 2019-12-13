@@ -424,7 +424,7 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
                                                                  ));
                                                             });
                                                           } else {   
-                                                             
+                                                             print("This is the invite ${Globals.savedListfromInviteScreen.length}");
                                                             if (Globals.savedListfromInviteScreen.length < 3) {
                                                               
                                                            for (var i = 0; i < Globals.savedListfromInviteScreen.length; i++) {                                                     
@@ -461,12 +461,14 @@ class _InviteFriendsStateFromcontacts extends State<InviteFriendsFromcontacts> {
                                                             });
                                                             }
                                                             } else {
-                                                              Scaffold.of(context)
+                                                              setState(() {
+                                                                Scaffold.of(context)
                                                             .showSnackBar(
                                                                 SnackBar(
                                                                    content: Text(
                                                                   "You can invite on 3 friends"),
                                                                  ));
+                                                              });
                                                             }
                                                           
                                                           }
