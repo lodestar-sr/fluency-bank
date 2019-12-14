@@ -56,14 +56,14 @@ class _Signup4State extends State<Signup4> {
   onTapAddress() {
     showDialog(
       context: context,
-      builder: (_) => SelectionAddressDialog(Globals.preAddresses),
+      builder: (_) => SelectionAddressDialog(Globals.preAddresses ?? ""),
     ).then((ret) {
       if (ret != null) {
         setState(() {
           if (ret == "Manual Address Input") {
             manualInput = true;
           } else {
-            addressController.text = "${ret['streetNumber']} ${ret['streetName']}";
+            addressController.text = "${ret['streetNumber'] ??""} ${ret['streetName']?? ""}";
             postCodeController.text = ret['postalCode'];
           }
         });
@@ -134,7 +134,7 @@ class _Signup4State extends State<Signup4> {
                             children: <Widget>[
                               Text("Country", style: AppStyles.font12),
                               CountryCodePicker(
-                                initialSelection: Globals.countryInfo.code,
+                                initialSelection: Globals.countryInfo?.code ?? "+54",
                                 onChanged: onCountryCodeChange,
                                 showCountryOnly: true,
                                 showOnlyCountryWhenClosed: true,
@@ -189,7 +189,13 @@ class _Signup4State extends State<Signup4> {
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                       ),
-                                onPressed: canContinue ? onContinue : null,
+                                onPressed: (){
+                                  if (canContinue== true){
+                                  setState(() {
+                                    onContinue();
+                                  });
+                                } 
+                                }  ,
                               ),
                             ),
                           ],

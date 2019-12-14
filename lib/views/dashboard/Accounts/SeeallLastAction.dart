@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme.dart';
@@ -42,12 +43,13 @@ class _SeeAllLastActionsState extends State<SeeAllLastActions> {
       body: SafeArea(
               child: SingleChildScrollView(
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Container(
                                     height: 100.0,
                                     color: Colors.grey[100],
                                     child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
+                                      padding: const EdgeInsets.only(top : 10.0,left: 15,right: 15),
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
@@ -142,23 +144,24 @@ class _SeeAllLastActionsState extends State<SeeAllLastActions> {
 
                                   //Today 
                                   
-Padding(
-                        padding: EdgeInsets.only(top: 15.0, left: 15.0 , right: 15.0),
+                        Padding(
+                        padding: EdgeInsets.only(top: 15.0,left: 15,right: 15),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 Expanded(
-                                                                  child: Text("Today",
-                                      style: AppStyles.font22
+                                   child: Text("Today",
+                                      style: AppStyles.font20
                                           .copyWith(fontWeight: FontWeight.bold)),
                                 ),
                                 Text(
                                     "+£1,000.00",
                                     style: TextStyle(
                                         color: AppColors.c24E343,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                         fontFamily: 'Gilroy'),
                                   )
                               ],
@@ -171,91 +174,196 @@ Padding(
                               ),
                             ),
                             Container(
-                              child: Row(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Container(
-                                        height: 40.0,
-                                        width: 40.0,
-                                        child: Center(
-                                          child: SizedBox(
-                                            height: 30.0,
-                                            width: 30.0,
-                                            child: Image.asset("assets/images/arrow.png")),
+                                      actionRow(
+                                        title: 'GBP -> BTC',
+                                        time: '10:43 PM',
+                                        amount1: '+B1.00',
+                                        image : 'exchange',
+                                        amount2: '+B1.00'),
+                                    actionRow(
+                                        title: 'from Jerry Simpson',
+                                        time: '7:45 PM',
+                                        image : 'jerry',
+                                        amount1: '+£4,342.12',
+                                        amount2: '-£92.74',
+                                         type: 'person',),
+                                    actionRow(
+                                        title: 'Starbucks',
+                                        time: '7:45 PM',
+                                        image : 'star',
+                                        amount1: '-£3.99',
+                                         type: 'company',),
+                                        actionRow(
+                                          title: 'Adobe',
+                                          time: '2:12 PM',
+                                          image: 'adobe',
+                                          amount1: '-\$174.76',
+                                          amount2: '-\$19,99',
+                                           type: 'company',
                                         ),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5.0),
-                                            color: Colors.grey[200],
-                                            
-                                            
-                                      ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          padding: EdgeInsets.only(left: 15.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: <Widget>[
-                                              Text("*4664 -> GBP",
-                                                  style: AppStyles.font22
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w600)),
-                                              Text(
-                                                "10:43 pm",
-                                                style: TextStyle(
-                                                    color: Colors.grey[500],
-                                                    fontSize: 18.0),
-                                              )
-                                            ],
-                                          ),
+                                        actionRow(
+                                          title: 'Wallmart',
+                                          time: '10:32 am',
+                                          image: 'walmart',
+                                          amount1: '-£174.76',
+                                          amount2: '-£78.19',
+                                           type: 'company',
                                         ),
-                                      ),
-                                      Container(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: <Widget>[
-                                            Text("+£1,000.00",
-                                                textAlign: TextAlign.end,
-                                                style: TextStyle(
-                                                    color: AppColors.c24E343,
-                                                    fontSize: 20.0,fontWeight: FontWeight.bold)),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10.0),
-                                              child: Text(
-                                                "Vis *4664",
-                                                textAlign: TextAlign.end,
-                                                style: AppStyles.font16
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
                                     ],
                                   ),
                             ),
-                            Container(
-                              height: 50.0,
-                            )
                           ],
                         ),
-                      )
+                      ),
 
-
-
-
-                                  
-                                ],
+                      //6 august
+                            Padding(
+                              padding: const EdgeInsets.only(top : 10.0,left: 15,right: 15),
+                              child: Text("6 August",
+                                        style: AppStyles.font20
+                                            .copyWith(fontWeight: FontWeight.bold)),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0 , bottom: 8.0,left: 15,right: 15),
+                              child: Container(
+                                height: 0.5,
+                                color: Colors.grey[350],
                               ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0 , bottom: 8.0,left: 15,right: 15),
+                              child: Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        actionRow(
+                                          title: 'GBP -> ETH',
+                                          time: '10:43 PM',
+                                          amount1: '+1.00',
+                                          image : 'exchange',
+                                          amount2: '-£174.76'),
+                                      actionRow(
+                                          title: 'to Ava-May Connolly',
+                                          time: '2:55 PM',
+                                          image : 'avamay',
+                                          amount1: '-£9,224.66',
+                                          amount2: '-£92.74',
+                                          type: 'person',
+                                          ),
+                                          
+                                      actionRow(
+                                          title: 'Starbucks',
+                                          time: '7:45 PM',
+                                          image : 'star',
+                                          amount1: '-£174.76',
+                                          amount2: '-£3.99',
+                                          type: 'company',),
+                                          actionRow(
+                                            title: 'Adobe',
+                                            time: '2:12 PM',
+                                            image: 'adobe',
+                                            amount1: '-\$174.76',
+                                            amount2: '-\$19,99',
+                                            type: 'company',
+                                          ),
+                                          
+                                      ],
+                                    ),
+                              ),
+                            ),
+                            
+
+
+
+
+
+
+                      ],
+                ),
               ),
+      ),
+    );
+  }
+
+  actionRow({
+    String title = '',
+    String time = '',
+    String amount1 = '',
+    String amount2 = '',
+    String image = '',
+    String type = '',
+  }) {
+    return GestureDetector(
+      onTap: (){
+        if (type == "person") {
+          Navigator.of(context).pushNamed('Payment_Receipt_person',arguments: <String,String>{
+            'amount1':amount1,
+            'amount2':amount2,
+            'time':time,
+            'paymenttype':'Regular'
+          });
+        } else if (type == "company")    
+        {
+          //Payment_Receipt_Company
+          Navigator.of(context).pushNamed('Payment_Receipt_Company',arguments: <String,String>{
+            'amount1':amount1,
+            'amount2':amount2,
+            'time':time,
+            'name':title,
+            'image':image,
+            'paymenttype':'Regular',
+          });
+        }
+      },
+          child: Container(
+        margin: EdgeInsets.only(top: 8, bottom: 8),
+        padding: EdgeInsets.all(8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(right: 8),
+                  child: Center(child: Image.asset('assets/images/$image.png', width: 40)),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(title,
+                        style: AppStyles.font14.copyWith(
+                            color: AppColors.c212121,
+                            fontWeight: FontWeight.bold)),
+                    Text(time,
+                        style:
+                            AppStyles.font14.copyWith(color: AppColors.c131113)),
+                  ],
+                )
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                amount1 != ''
+                    ? Text(amount1,
+                        style: AppStyles.font14.copyWith(
+                            color: AppColors.c24E343,
+                            fontWeight: FontWeight.bold))
+                    : Container(),
+                amount2 != ''
+                    ? Text(amount2,
+                        style: amount1 == ''
+                            ? AppStyles.font14.copyWith(color: AppColors.c131113)
+                            : AppStyles.font12.copyWith(color: AppColors.c131113))
+                    : Container(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

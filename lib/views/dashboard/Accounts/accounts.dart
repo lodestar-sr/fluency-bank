@@ -463,12 +463,29 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
                                         title: 'from Jerry Simpson',
                                         time: '7:45 PM',
                                         image : 'jerry',
-                                        amount1: '+£4,342.12'),
+                                        amount1: '+£4,342.12',
+                                        type: 'person'),
                                     actionRow(
                                         title: 'Starbucks',
                                         time: '7:45 PM',
                                         image : 'star',
-                                        amount2: '-£3.99'),
+                                        amount1: '-£3.99',
+                                        type: 'company'),
+                                        actionRow(
+                                          title: 'Adobe',
+                                          time: '2:12 PM',
+                                          image: 'adobe',
+                                          amount1: '-\$199,99',
+                                          amount2: '-\$19,99',
+                                          type: 'company'
+                                        ),
+                                        actionRow(
+                                          title: 'Wallmart',
+                                          time: '10:32 am',
+                                          image: 'walmart',
+                                          amount1: '-£78.19',
+                                          type: 'company'
+                                        ),
                                   ],
                                 ),
                               ),
@@ -493,52 +510,76 @@ class _AccountsState extends State<Accounts> with TickerProviderStateMixin {
     String amount1 = '',
     String amount2 = '',
     String image = '',
+    String type = "",
   }) {
-    return Container(
-      margin: EdgeInsets.only(top: 8, bottom: 8),
-      padding: EdgeInsets.all(8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(right: 8),
-                child: Image.asset('assets/images/$image.png', width: 32),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(title,
-                      style: AppStyles.font14.copyWith(
-                          color: AppColors.c212121,
-                          fontWeight: FontWeight.bold)),
-                  Text(time,
-                      style:
-                          AppStyles.font14.copyWith(color: AppColors.c131113)),
-                ],
-              )
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              amount1 != ''
-                  ? Text(amount1,
-                      style: AppStyles.font14.copyWith(
-                          color: AppColors.c24E343,
-                          fontWeight: FontWeight.bold))
-                  : Container(),
-              amount2 != ''
-                  ? Text(amount2,
-                      style: amount1 == ''
-                          ? AppStyles.font14.copyWith(color: AppColors.c131113)
-                          : AppStyles.font12.copyWith(color: AppColors.c131113))
-                  : Container(),
-            ],
-          )
-        ],
+    return GestureDetector(
+      onTap: (){ 
+        if (type == "person") {
+          Navigator.of(context).pushNamed('Payment_Receipt_person',arguments: <String,String>{
+            'amount1':amount1,
+            'amount2':amount2,
+            'time':time,
+            'paymenttype':'Regular'
+          });
+        } else if (type == "company")    
+        {
+          //Payment_Receipt_Company
+          Navigator.of(context).pushNamed('Payment_Receipt_Company',arguments: <String,String>{
+            'amount1':amount1,
+            'amount2':amount2,
+            'time':time,
+            'name':title,
+            'image':image,
+            'paymenttype':'Regular',
+          });
+        }
+      },
+          child: Container(
+        margin: EdgeInsets.only(top: 8, bottom: 8),
+        padding: EdgeInsets.all(8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(right: 8),
+                  child: Center(child: Image.asset('assets/images/$image.png', width: 32)),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(title,
+                        style: AppStyles.font14.copyWith(
+                            color: AppColors.c212121,
+                            fontWeight: FontWeight.bold)),
+                    Text(time,
+                        style:
+                            AppStyles.font14.copyWith(color: AppColors.c131113)),
+                  ],
+                )
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                amount1 != ''
+                    ? Text(amount1,
+                        style: AppStyles.font14.copyWith(
+                            color: AppColors.c24E343,
+                            fontWeight: FontWeight.bold))
+                    : Container(),
+                amount2 != ''
+                    ? Text(amount2,
+                        style: amount1 == ''
+                            ? AppStyles.font14.copyWith(color: AppColors.c131113)
+                            : AppStyles.font12.copyWith(color: AppColors.c131113))
+                    : Container(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

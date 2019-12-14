@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -13,12 +13,27 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
 
   Timer _timer;
-
+  String _defaultHome = 'home';
   _SplashState() {
     _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       timer.cancel();
-      Navigator.of(context).pushNamed('home');
+      Navigator.of(context).pushNamed('$_defaultHome');
     });
+  }
+  Future checkLogin() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+  //Return bool
+  bool boolValue = prefs.getBool('CheckLogin');
+  if (boolValue == true) {
+    setState(() {
+      _defaultHome = 'dashboard';
+    });
+  }
+  } 
+  @override
+  void initState() { 
+    super.initState();
+    checkLogin();
   }
 
   @override
@@ -26,7 +41,6 @@ class _SplashState extends State<Splash> {
     _timer.cancel();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -50,7 +64,8 @@ class _SplashState extends State<Splash> {
                         child: Image.asset(
                           "assets/images/bg1.png",
                           width: size.width,
-                          fit: BoxFit.fitWidth,
+                          height:size.height,
+                          fit: BoxFit.fitHeight,
                         ),
                       ),
                       Center(

@@ -25,6 +25,9 @@ class _Buy_BTCState extends State<Buy_BTC> {
   bool canContinueModel = false;
   bool canContinue = false;
   bool obscurePasscode = true;
+  Widget from ;
+  Widget to;
+  bool exchange = false;
 
   void validator() {
     var currencyfrominserted = currencyfromController.text;
@@ -66,6 +69,14 @@ class _Buy_BTCState extends State<Buy_BTC> {
 
   @override
   Widget build(BuildContext context) {
+    if (exchange == false) {
+      from = gbpWidget();
+      to = btcWidget();
+      
+    } else {
+      to = gbpWidget();
+      from = btcWidget();
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -102,86 +113,7 @@ class _Buy_BTCState extends State<Buy_BTC> {
                     style: AppStyles.font18.copyWith(color: Colors.grey[600]),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Expanded(
-                          child: TextField(
-                            onChanged: (value) {
-                              validator();
-                            },
-                            controller: currencyfromController,
-                            keyboardType:
-                                TextInputType.numberWithOptions(decimal: true),
-                            style: AppStyles.font32,
-                            cursorWidth: 1,
-                            cursorColor: AppColors.c212121,
-                            decoration: InputDecoration(
-                                hintText: "£0",
-                                hintStyle: TextStyle(
-                                    color: Colors.grey[600], fontSize: 35.0)),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 10.0),
-                            child: Container(
-                              height: 60.0,
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      height: 30.0,
-                                      width: 30.0,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          image: DecorationImage(
-                                              image: ExactAssetImage(
-                                                  "assets/images/eng.png"))),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      padding: EdgeInsets.only(top: 8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        //mainAxisAlignment:
-                                        //MainAxisAlignment.spaceAround,
-                                        children: <Widget>[
-                                          Text("GBP",
-                                              style: AppStyles.font20.copyWith(
-                                                  fontWeight: FontWeight.w600)),
-                                          Text(
-                                            "£1,000.00",
-                                            style: TextStyle(
-                                                color: Colors.grey[500],
-                                                fontSize: 16.0,
-                                                fontFamily: 'Gilroy'),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Icon(Icons.keyboard_arrow_down,
-                                      color: Colors.black)
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[100],
-                                  borderRadius: BorderRadius.circular(10.0)),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                from,
 
                 //Echnage
 
@@ -195,9 +127,16 @@ class _Buy_BTCState extends State<Buy_BTC> {
                         Spacer(),
                         Padding(
                           padding: const EdgeInsets.only(left: 30.0),
-                          child: Container(
-                            height: 45,
-                            child: Image.asset("assets/images/change.png"),
+                          child: GestureDetector(
+                            onTap: (){
+                              setState(() {
+                                exchange = !exchange;
+                              });
+                            },
+                             child: Container(
+                              height: 45,
+                              child: Image.asset("assets/images/change.png"),
+                            ),
                           ),
                         ),
                         Spacer(),
@@ -232,94 +171,7 @@ class _Buy_BTCState extends State<Buy_BTC> {
                     style: AppStyles.font18.copyWith(color: Colors.grey[600]),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Expanded(
-                          child: TextField(
-                            controller: currencytoController,
-                            onChanged: (value) {
-                              validator();
-                            },
-                            keyboardType:
-                                TextInputType.numberWithOptions(decimal: true),
-                            style: AppStyles.font32,
-                            cursorWidth: 1,
-                            cursorColor: AppColors.c212121,
-                            decoration: InputDecoration(
-                                hintText: "£0",
-                                hintStyle: TextStyle(
-                                    color: Colors.grey[600], fontSize: 35.0)),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 10.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                // Navigator.of(context)
-                                //     .pushNamed('Buy_BTCCurrencyTOoptions');
-                              },
-                              child: Container(
-                                height: 60.0,
-                                child: Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        height: 30.0,
-                                        width: 30.0,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            color:
-                                                Color.fromRGBO(247, 147, 26, 1),
-                                            image: DecorationImage(
-                                                image: ExactAssetImage(
-                                                    "assets/images/BTC.png"))),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        padding: EdgeInsets.only(top: 8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text("BTC",
-                                                style: AppStyles.font20
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w600)),
-                                            Text(
-                                              "₿0.00",
-                                              style: TextStyle(
-                                                  color: Colors.grey[500],
-                                                  fontSize: 16.0,
-                                                  fontFamily: 'Gilroy'),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Icon(Icons.keyboard_arrow_down,
-                                        color: Colors.black)
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(10.0)),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                to,
 
                 Expanded(
                   child: Align(
@@ -520,5 +372,180 @@ class _Buy_BTCState extends State<Buy_BTC> {
             );
           });
         });
+  }
+
+  Widget btcWidget()
+  {
+   return Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Expanded(
+                          child: TextField(
+                            controller: currencytoController,
+                            onChanged: (value) {
+                              validator();
+                            },
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
+                            style: AppStyles.font32,
+                            cursorWidth: 1,
+                            cursorColor: AppColors.c212121,
+                            decoration: InputDecoration(
+                                hintText: "£0",
+                                hintStyle: TextStyle(
+                                    color: Colors.grey[600], fontSize: 35.0)),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                // Navigator.of(context)
+                                //     .pushNamed('Buy_BTCCurrencyTOoptions');
+                              },
+                              child: Container(
+                                height: 60.0,
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        height: 30.0,
+                                        width: 30.0,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            color:
+                                                Color.fromRGBO(247, 147, 26, 1),
+                                            image: DecorationImage(
+                                                image: ExactAssetImage(
+                                                    "assets/images/BTC.png"))),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        padding: EdgeInsets.only(top: 8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("BTC",
+                                                style: AppStyles.font20
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w600)),
+                                            Text(
+                                              "₿0.00",
+                                              style: TextStyle(
+                                                  color: Colors.grey[500],
+                                                  fontSize: 16.0,
+                                                  fontFamily: 'Gilroy'),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Icon(Icons.keyboard_arrow_down,
+                                        color: Colors.black)
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey[100],
+                                    borderRadius: BorderRadius.circular(10.0)),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+  }
+  Widget gbpWidget()
+  {
+     return Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Expanded(
+                          child: TextField(
+                            onChanged: (value) {
+                              validator();
+                            },
+                            controller: currencyfromController,
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
+                            style: AppStyles.font32,
+                            cursorWidth: 1,
+                            cursorColor: AppColors.c212121,
+                            decoration: InputDecoration(
+                                hintText: "£0",
+                                hintStyle: TextStyle(
+                                    color: Colors.grey[600], fontSize: 35.0)),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 10.0),
+                            child: Container(
+                              height: 60.0,
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      height: 30.0,
+                                      width: 30.0,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  "assets/images/eng.png"))),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        //mainAxisAlignment:
+                                        //MainAxisAlignment.spaceAround,
+                                        children: <Widget>[
+                                          Text("GBP",
+                                              style: AppStyles.font20.copyWith(
+                                                  fontWeight: FontWeight.w600)),
+                                          Text(
+                                            "£1,000.00",
+                                            style: TextStyle(
+                                                color: Colors.grey[500],
+                                                fontSize: 16.0,
+                                                fontFamily: 'Gilroy'),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(Icons.keyboard_arrow_down,
+                                      color: Colors.black)
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[100],
+                                  borderRadius: BorderRadius.circular(10.0)),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
   }
 }

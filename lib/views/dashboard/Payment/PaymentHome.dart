@@ -323,14 +323,17 @@ class _PaymenthomeState extends State<Paymenthome> {
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
-          shape: RoundedRectangleBorder(),
+          shape: RoundedRectangleBorder(
+            
+          ),
           title: new Text("Choose Currency"),
           content: Padding(
               padding: EdgeInsets.only(top: 10.0),
               child: Container(
+                  
                   child: ListView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                //physics: const NeverScrollableScrollPhysics(),
                 itemCount: currency.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(

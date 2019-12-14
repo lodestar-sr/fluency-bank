@@ -5,6 +5,8 @@ import 'package:fluencybank/views/dashboard/Accounts/Buy_BTC.dart';
 import 'package:fluencybank/views/dashboard/Accounts/Buy_Crypto.dart';
 import 'package:fluencybank/views/dashboard/Accounts/Crypto_TransSuccess.dart';
 import 'package:fluencybank/views/dashboard/Accounts/Crypto_Transfer.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Payment_Receipt_Company.dart';
+import 'package:fluencybank/views/dashboard/Accounts/Payment_Receipt_Person.dart';
 import 'package:fluencybank/views/dashboard/Accounts/SearchScreen.dart';
 import 'package:fluencybank/views/dashboard/Accounts/SeeallLastAction.dart';
 import 'package:fluencybank/views/dashboard/Accounts/Sell_BTC.dart';
@@ -66,9 +68,6 @@ import 'dashboard/More/PersonalDetails/PersonalDetails.dart';
 import 'dashboard/More/PersonalDetails/PersonaldetailschangeSucess.dart';
 
 class App extends StatelessWidget {
-   Widget home;
-   //loginComplte
-   App(this.home);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -78,7 +77,7 @@ class App extends StatelessWidget {
         buttonTheme: ButtonThemeData(minWidth: 10,),
         textTheme: TextTheme(button: TextStyle(fontSize: 10)),
 ),
-      home: Dashboard(),
+      home: Splash(),
       routes: {
         'splash': (_) => Splash(),
         'home': (_) => Home(),
@@ -106,7 +105,7 @@ class App extends StatelessWidget {
         'delivery_option': (_) => DeliveryOption(),
         'delivery_done': (_) => DeliveryDone(),
         'delivery_payment': (_) => DeliveryPayment(),
-
+        
         'dashboard': (_) => Dashboard(),
         'accounts' : (_) => Accounts(),
         'SearchScreen' : (_) => SearchScreen(),
@@ -130,7 +129,8 @@ class App extends StatelessWidget {
         'Sell_BTC': (_) => Sell_BTC(),
         'Crypto_Transfer' : (_) => Crypto_Transfer(),
         'Crypto_TransSuccess': (_) => Crypto_TransSuccess(),
-
+        'Payment_Receipt_person': (_) => Payment_Receipt_person(),
+        'Payment_Receipt_Company': (_) => Payment_Receipt_Company(),
  
         //card 
         'InviteFriends': (_) => InviteFriends(),

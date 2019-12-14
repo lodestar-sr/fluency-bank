@@ -53,7 +53,7 @@ class _AccountManagementState extends State<AccountManagement> {
   prefs.setStringList("crypinactive", cryp);
   prefs.setStringList("cryptypeinactive", cryptype);
   }
-
+  
   
   var t = false;
   @override
@@ -64,12 +64,7 @@ class _AccountManagementState extends State<AccountManagement> {
   }
   @override
   Widget build(BuildContext context) {
-     
-    //   setState(() {
-    //   getValuesSF();
-    // getValuesSFInactive();
-    // });
-    
+ 
     if (retrivedCryptoCurrency?.isNotEmpty ?? false) {
       
       if (checklistpopulated == false) {
@@ -92,8 +87,7 @@ class _AccountManagementState extends State<AccountManagement> {
       isSelectedInactive.add(false);
     }
      checklistpopulatedInactive = true;   
-      }
-      
+      }  
     }
     
     

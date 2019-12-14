@@ -81,6 +81,7 @@ class _Signup1State extends State<Signup1> {
 
   onCountryCodeChange(CountryCode countryCode) {
     setState(() {
+      print(countryCode);
       Globals.countryInfo = countryCode;
       phoneCode = countryCode.dialCode;
     });
