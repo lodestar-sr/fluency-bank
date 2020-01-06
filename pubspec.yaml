@@ -34,7 +34,7 @@ dependencies:
   timeline_list:
   qr_flutter:
   path_provider: 
-  barcode_scan:
+  barcode_scan: ^0.0.3
   charts_flutter:
   
 

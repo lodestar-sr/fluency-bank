@@ -14,29 +14,94 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - barcode_scan (0.0.1):
+    - Flutter
+    - MTBBarcodeScanner
+  - contacts_service (0.2.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - geolocator (5.1.5):
+    - Flutter
+  - google_api_availability (2.0.1):
+    - Flutter
+  - location_permissions (2.0.3):
+    - Flutter
   - MBProgressHUD (1.1.0)
-  - Onfido (13.0.0)
-  - Onfido-Release (13.0.0)
+  - MTBBarcodeScanner (5.0.11)
+  - Onfido (13.2.0)
+  - Onfido-Release (13.2.0)
+  - path_provider (0.0.1):
+    - Flutter
+  - permission_handler (3.3.0):
+    - Flutter
+  - share (0.5.2):
+    - Flutter
+  - shared_preferences (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1)
+  - barcode_scan (from `.symlinks/plugins/barcode_scan/ios`)
+  - contacts_service (from `.symlinks/plugins/contacts_service/ios`)
+  - Flutter (from `Flutter`)
+  - geolocator (from `.symlinks/plugins/geolocator/ios`)
+  - google_api_availability (from `.symlinks/plugins/google_api_availability/ios`)
+  - location_permissions (from `.symlinks/plugins/location_permissions/ios`)
   - MBProgressHUD
   - Onfido
   - Onfido-Release
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - share (from `.symlinks/plugins/share/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - AFNetworking
     - MBProgressHUD
+    - MTBBarcodeScanner
     - Onfido
     - Onfido-Release
 
+EXTERNAL SOURCES:
+  barcode_scan:
+    :path: ".symlinks/plugins/barcode_scan/ios"
+  contacts_service:
+    :path: ".symlinks/plugins/contacts_service/ios"
+  Flutter:
+    :path: Flutter
+  geolocator:
+    :path: ".symlinks/plugins/geolocator/ios"
+  google_api_availability:
+    :path: ".symlinks/plugins/google_api_availability/ios"
+  location_permissions:
+    :path: ".symlinks/plugins/location_permissions/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
+  share:
+    :path: ".symlinks/plugins/share/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  barcode_scan: 33f586d02270046fc6559135038b34b5754eaa4f
+  contacts_service: d212985196c101372bb55c42f41dae7be59ab811
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  geolocator: 80aba2bb48f8c7dfc5a8b70b9d13fc3edc8399c4
+  google_api_availability: 163b30f802e6148c67f092aa4501c90ddd8eec8d
+  location_permissions: 195ff2a1182fa9029ef3f2653156961ee5a1e40b
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  Onfido: 1ae4d2260ac81331be91fb0bba32af3b080cd378
-  Onfido-Release: 832a0da9ffe3a371646845f46b286fb00a6d33e7
+  MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
+  Onfido: 00352714aa11b4c598e73532b9a90e58b935602d
+  Onfido-Release: fafa584e5f11a72c2b823e5f62b46b23c2527545
+  path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
+  permission_handler: 67637977b227d62d46bfbf524f335f8568de5a73
+  share: bae0a282aab4483288913fc4dc0b935d4b491f2e
+  shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
 
-PODFILE CHECKSUM: 99f62078d2550df4240ffa27935cbaa8dac0d2de
+PODFILE CHECKSUM: 67098aa89eb91bffae4f84e8e5be37b632bd20b4
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4
